@@ -1,5 +1,15 @@
+[build]
+  command = "python3 build_netlify.py"
+  publish = "dist"
+
 [[redirects]]
   from = "/api/*"
   to = "https://vinayak-superstore-api.onrender.com/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/assets/uploads/*"
+  to = "https://vinayak-superstore-api.onrender.com/assets/uploads/:splat"
   status = 200
   force = true
