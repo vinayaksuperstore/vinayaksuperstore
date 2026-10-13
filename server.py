@@ -30,6 +30,7 @@ from urllib.parse import parse_qs, unquote, urlparse
 
 
 ROOT = Path(__file__).resolve().parent
+DATABASE_URL = os.environ.get("DATABASE_URL", "").strip()
 DB_PATH = Path(os.environ.get("VINAYAK_DB_PATH", ROOT / "data" / "vinayak.sqlite3"))
 UPLOAD_DIR = Path(os.environ.get("VINAYAK_UPLOAD_DIR", ROOT / "assets" / "uploads"))
 HOST = os.environ.get("HOST", "127.0.0.1")
@@ -58,6 +59,90 @@ class ClosingConnection(sqlite3.Connection):
             self.close()
 
 
+class HybridRow(dict):
+    """Mapping row that also preserves SQLite's row[0] access pattern."""
+
+    def __getitem__(self, key):
+        if isinstance(key, int):
+            return tuple(self.values())[key]
+        return super().__getitem__(key)
+
+
+def postgres_enabled() -> bool:
+    return bool(DATABASE_URL)
+
+
+def db():
+    if not postgres_enabled():
+        DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+        connection = sqlite3.connect(DB_PATH, timeout=10, factory=ClosingConnection)
+        connection.row_factory = sqlite3.Row
+        connection.execute("PRAGMA foreign_keys = ON")
+        connection.execute("PRAGMA journal_mode = WAL")
+        return connection
+
+    try:
+        import psycopg
+    except ImportError as error:
+        raise RuntimeError("DATABASE_URL is set, but psycopg is missing. Install requirements.txt.") from error
+
+    def row_factory(cursor):
+        # Psycopg invokes the row factory for DDL too, where there is no result description.
+        columns = [column.name for column in (cursor.description or ())]
+        return lambda values: HybridRow(zip(columns, values))
+
+    class PostgresConnection:
+        def __init__(self):
+            try:
+                self.connection = psycopg.connect(DATABASE_URL, row_factory=row_factory, connect_timeout=10)
+            except psycopg.Error as error:
+                raise sqlite3.OperationalError(str(error)) from error
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc_value, traceback):
+            try:
+                if exc_type:
+                    self.connection.rollback()
+                else:
+                    self.connection.commit()
+            finally:
+                self.connection.close()
+            return False
+
+        def _sql(self, statement):
+            statement = statement.replace("BEGIN IMMEDIATE", "BEGIN")
+            statement = re.sub(r"INSERT\s+OR\s+IGNORE\s+INTO", "INSERT INTO", statement, flags=re.I)
+            statement = re.sub(r"ORDER BY\s+(\w+)\s+COLLATE\s+NOCASE", r"ORDER BY lower(\1)", statement, flags=re.I)
+            statement = re.sub(r"(\w+)\s*=\s*\?\s+COLLATE\s+NOCASE", r"lower(\1)=lower(?)", statement, flags=re.I)
+            if re.match(r"\s*INSERT INTO", statement, re.I) and "OR IGNORE" not in statement.upper():
+                if "ON CONFLICT" not in statement.upper():
+                    statement = statement.rstrip().rstrip(";") + " ON CONFLICT DO NOTHING"
+            return statement.replace("?", "%s")
+
+        def execute(self, statement, parameters=()):
+            cursor = self.connection.cursor()
+            try:
+                cursor.execute(self._sql(statement), parameters)
+            except psycopg.IntegrityError as error:
+                raise sqlite3.IntegrityError(str(error)) from error
+            except psycopg.Error as error:
+                raise sqlite3.OperationalError(str(error)) from error
+            return cursor
+
+        def executescript(self, statements):
+            for statement in statements.split(";"):
+                statement = statement.strip()
+                if not statement:
+                    continue
+                statement = re.sub(r"INTEGER\s+PRIMARY\s+KEY\s+AUTOINCREMENT", "BIGSERIAL PRIMARY KEY", statement, flags=re.I)
+                statement = re.sub(r"\bBLOB\b", "BYTEA", statement, flags=re.I)
+                self.execute(statement)
+
+    return PostgresConnection()
+
+
 def now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
@@ -74,16 +159,7 @@ def request_origin_allowed(origin: str | None, host: str) -> bool:
     return normalized in ALLOWED_ORIGINS or parsed.netloc.lower() == host.lower()
 
 
-def db() -> sqlite3.Connection:
-    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-    connection = sqlite3.connect(DB_PATH, timeout=10, factory=ClosingConnection)
-    connection.row_factory = sqlite3.Row
-    connection.execute("PRAGMA foreign_keys = ON")
-    connection.execute("PRAGMA journal_mode = WAL")
-    return connection
-
-
-def init_db() -> None:
+def init_db(seed_legacy: bool = True) -> None:
     with db() as con:
         con.executescript("""
             CREATE TABLE IF NOT EXISTS products (
@@ -123,12 +199,18 @@ def init_db() -> None:
                 username TEXT NOT NULL,
                 expires_at REAL NOT NULL
             );
+            CREATE TABLE IF NOT EXISTS product_images (
+                filename TEXT PRIMARY KEY,
+                image_data BLOB NOT NULL,
+                content_type TEXT NOT NULL,
+                created_at TEXT NOT NULL
+            );
             CREATE TABLE IF NOT EXISTS catalog_sequence (
                 singleton INTEGER PRIMARY KEY CHECK(singleton=1),
                 next_id INTEGER NOT NULL
             );
         """)
-        if con.execute("SELECT COUNT(*) FROM products").fetchone()[0] == 0:
+        if seed_legacy and con.execute("SELECT COUNT(*) FROM products").fetchone()[0] == 0:
             backup = ROOT / "data" / "products.legacy-backup.json"
             if backup.exists():
                 records = json.loads(backup.read_text(encoding="utf-8"))
@@ -290,6 +372,23 @@ class Handler(BaseHTTPRequestHandler):
                 return self.send_json(200, {"authenticated": True, "username": session["username"], "csrfToken": session["csrf_token"]})
             if path == "/":
                 return self.send_file(ROOT / "index.html")
+            if path.startswith("/assets/uploads/") and postgres_enabled():
+                filename = Path(path).name
+                if not re.fullmatch(r"[a-f0-9]{32}\.(png|jpg|webp)", filename):
+                    return self.send_error(404)
+                with db() as con:
+                    image = con.execute("SELECT image_data,content_type FROM product_images WHERE filename=?", (filename,)).fetchone()
+                if not image:
+                    return self.send_error(404)
+                body = bytes(image["image_data"])
+                self.send_response(200)
+                self.send_header("Content-Type", image["content_type"])
+                self.send_header("Content-Length", str(len(body)))
+                self.send_header("Cache-Control", "public, max-age=31536000, immutable")
+                self.send_header("X-Content-Type-Options", "nosniff")
+                self.end_headers()
+                self.wfile.write(body)
+                return
             if path.startswith("/api/admin/"):
                 session = self.require_admin()
                 if not session:
@@ -447,9 +546,14 @@ class Handler(BaseHTTPRequestHandler):
                         if blob.startswith(signature) and (ext != ".webp" or blob[8:12] == b"WEBP"):
                             extension = ext; break
                     if not extension: return self.send_json(400, {"error": "Use a PNG, JPEG, or WebP image."})
-                    UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
                     filename = f"{uuid.uuid4().hex}{extension}"
-                    (UPLOAD_DIR / filename).write_bytes(blob)
+                    content_type = {".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp"}[extension]
+                    if postgres_enabled():
+                        with db() as con:
+                            con.execute("INSERT INTO product_images(filename,image_data,content_type,created_at) VALUES(?,?,?,?)", (filename, blob, content_type, now()))
+                    else:
+                        UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+                        (UPLOAD_DIR / filename).write_bytes(blob)
                     return self.send_json(201, {"image": f"assets/uploads/{filename}"})
                 if path == "/api/admin/products":
                     product = self.validate_product(data)
@@ -630,10 +734,6 @@ def main() -> None:
         pass
     finally:
         server.server_close()
-
-
-if __name__ == "__main__":
-    main()
 
 
 if __name__ == "__main__":
