@@ -1,5 +1,22 @@
 # Changelog
 
+## v2.0 — Vinayak AI Shopping Assistant
+
+### Added
+
+- Added Vinayak AI, a personal shopping assistant that recommends products from the live store catalogue.
+- Added context-aware follow-ups for occasions, categories, budgets, quantities, alternatives and basket changes.
+- Added product cards, proposed basket totals, remaining-budget details and quantity controls.
+- Added an explicit add-to-cart action that checks the store's current price before changing the cart.
+- Added session-scoped conversation history and a responsive, keyboard-accessible chat interface.
+
+### Reliability
+
+- Recommendations exclude unavailable products and products without a valid current price.
+- Budget changes recalculate the proposed basket while preserving existing constraints.
+- Dietary and serving details are only used where the catalogue provides supporting information; missing attributes are disclosed.
+- Added 14 automated conversation and catalogue tests, exercised against the current 193-product catalogue.
+
 ## v1.1 — Stabilization
 
 ### Fixed

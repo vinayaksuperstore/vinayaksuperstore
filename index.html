@@ -46,6 +46,7 @@
 <link rel="stylesheet" href="styles/animations.css">
 <link rel="stylesheet" href="styles/responsive.css">
 <link rel="stylesheet" href="styles/popup.css">
+<link rel="stylesheet" href="styles/vinayak-ai.css">
 <link rel="stylesheet" href="styles/cart-drawer.css">
 <link rel="stylesheet" href="styles/toast.css">
 <link rel="stylesheet" href="styles/fly.css">
@@ -164,7 +165,7 @@ aria-label="Open wishlist">
 
     <div class="update-box">
 
-        <h2>🎉 Welcome to Vinayak Superstore v1.0</h2>
+        <h2>🎉 Welcome to Vinayak Superstore v2.0</h2>
 
         <p>
             Thank you for visiting!
@@ -172,19 +173,17 @@ aria-label="Open wishlist">
 
         <ul>
             
-            <li>🛒 Brand new shopping experience</li>
+            <li>🛍️ Meet Vinayak AI, your personal shopping assistant</li>
 
-            <li>❤️ Wishlist added</li>
+            <li>🧠 Context-aware recommendations from the current store catalogue</li>
 
-            <li>🔍 Smart Search</li>
+            <li>💰 Update budgets and refine a proposed basket in conversation</li>
 
-            <li>📦 200+ Products</li>
+            <li>📊 See product prices, basket totals and remaining budget</li>
 
-            <li>⚡ Faster product browsing</li>
+            <li>🛒 Add products to your cart only when you choose</li>
 
-            <li>📱 Fully Responsive Design</li>
-
-            <li>Ongoing Issues: Images not loading and Incorrect pricing. </li>
+            <li>📱 Accessible, responsive shopping help on mobile and desktop</li>
 
         </ul>
 
@@ -885,25 +884,49 @@ aria-label="Open wishlist">
 
 <div class="floating-buttons">
 
-    <a href="https://wa.me/919779562555" target="_blank">
+    <button class="vinayak-ai-launch" id="vinayakAiLaunch" type="button" aria-label="Open Vinayak AI shopping assistant" aria-controls="vinayakAi" aria-expanded="false">
+        <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+    </button>
+
+    <a href="https://wa.me/919779562555" target="_blank" rel="noopener noreferrer" aria-label="Contact Vinayak Superstore on WhatsApp">
 
         <i class="fa-brands fa-whatsapp"></i>
 
     </a>
 
-    <a href="tel:+919779562555">
+    <a href="tel:+919779562555" aria-label="Call Vinayak Superstore">
 
         <i class="fa-solid fa-phone"></i>
 
     </a>
 
-    <a href="https://maps.google.com" target="_blank">
+    <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" aria-label="Find Vinayak Superstore on the map">
 
         <i class="fa-solid fa-location-dot"></i>
 
     </a>
 
 </div>
+
+<section class="vinayak-ai" id="vinayakAi" role="dialog" aria-labelledby="vinayakAiTitle" aria-hidden="true" aria-modal="false">
+    <header class="vinayak-ai__header">
+        <div class="vinayak-ai__brand">
+            <span class="vinayak-ai__mark"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i></span>
+            <span><strong id="vinayakAiTitle">Vinayak AI</strong><small>Shopping help from our current catalogue</small></span>
+        </div>
+        <div class="vinayak-ai__header-actions">
+            <button class="vinayak-ai__new" id="vinayakAiNew" type="button" aria-label="Start a new conversation">New</button>
+            <button id="vinayakAiClose" type="button" aria-label="Close Vinayak AI"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+        </div>
+    </header>
+    <div class="vinayak-ai__messages" id="vinayakAiMessages" aria-live="polite" aria-relevant="additions text" aria-label="Conversation"></div>
+    <div class="vinayak-ai__suggestions" id="vinayakAiSuggestions" aria-label="Suggested follow-up questions"></div>
+    <form class="vinayak-ai__composer" id="vinayakAiForm">
+        <label class="vinayak-ai__sr-only" for="vinayakAiInput">Ask Vinayak AI about products</label>
+        <input id="vinayakAiInput" type="text" maxlength="400" autocomplete="off" enterkeyhint="send" placeholder="What are you shopping for?">
+        <button type="submit" aria-label="Send message"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+    </form>
+</section>
 
 <!-- PRODUCT POPUP -->
 
@@ -1279,6 +1302,8 @@ Wishlist
 <script src="scripts/products.js"></script>
 <script src="scripts/cart.js"></script>
 <script src="scripts/wishlist.js"></script>
+<script src="scripts/vinayak-ai-engine.js"></script>
+<script src="scripts/vinayak-ai.js"></script>
 <script src="scripts/script.js"></script>
 
 </body>
