@@ -1,0 +1,566 @@
+/* =====================================================
+                    PRODUCT CARDS
+===================================================== */
+
+.product-card{
+
+    position:relative;
+
+    background:var(--card);
+
+    border-radius:26px;
+
+    overflow:hidden;
+
+    transition:.45s;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+
+}
+
+/* ========================================= */
+
+.product-card img{
+
+    width:100%;
+
+    height:270px;
+
+    object-fit:cover;
+
+    transition:.5s;
+
+}
+
+.product-card:hover img{
+
+    transform:scale(1.08);
+
+}
+
+/* ========================================= */
+
+.product-card h3{
+
+    font-size:24px;
+
+    margin:25px 25px 10px;
+
+}
+
+.product-card p{
+
+    color:var(--muted);
+
+    margin:0 25px 20px;
+
+    line-height:1.7;
+
+}
+
+/* ========================================= */
+
+.product-card a{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin:0 25px 30px;
+
+    padding:14px 26px;
+
+    border-radius:50px;
+
+    background:linear-gradient(
+        135deg,
+        var(--gold),
+        var(--gold-light)
+    );
+
+    color:#111;
+
+    font-weight:700;
+
+    transition:.35s;
+
+}
+
+.product-card a:hover{
+
+    transform:translateY(-3px);
+
+}
+
+/* ========================================= */
+
+.badge{
+
+    position:absolute;
+
+    top:18px;
+
+    left:18px;
+
+    background:linear-gradient(
+        135deg,
+        var(--gold),
+        var(--gold-light)
+    );
+
+    color:#111;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    z-index:5;
+
+}
+
+/* ========================================= */
+
+.product-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(
+
+        transparent,
+
+        rgba(0,0,0,.15)
+
+    );
+
+    pointer-events:none;
+
+}
+
+/* ========================================= */
+
+.product-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:26px;
+
+    border:1px solid transparent;
+
+    transition:.4s;
+
+}
+
+.product-card:hover::after{
+
+    border-color:rgba(212,175,55,.25);
+
+}
+
+/* =====================================================
+                CATEGORY CARD ICON
+===================================================== */
+
+.category-card i{
+
+    transition:.4s;
+
+}
+
+.category-card:hover i{
+
+    transform:scale(1.15) rotate(-8deg);
+
+}
+
+/* =====================================================
+                WHY CARD ICON
+===================================================== */
+
+.why-grid article i{
+
+    transition:.4s;
+
+}
+
+.why-grid article:hover i{
+
+    transform:translateY(-8px);
+
+}
+
+/* =====================================================
+                STAT CARD
+===================================================== */
+
+.stat-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.stat-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:60%;
+
+    height:100%;
+
+    background:linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        rgba(255,255,255,.08),
+
+        transparent
+
+    );
+
+    transition:.8s;
+
+}
+
+.stat-card:hover::before{
+
+    left:140%;
+
+}
+
+/* =====================================================
+            REVIEW CTA CARD
+===================================================== */
+
+.review-card{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:40px;
+
+    background:linear-gradient(
+        135deg,
+        #111827,
+        #1A2437
+    );
+
+    padding:55px;
+
+    border-radius:28px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.review-btn{
+
+    padding:18px 36px;
+
+    background:linear-gradient(
+        135deg,
+        var(--gold),
+        var(--gold-light)
+    );
+
+    color:#111;
+
+    border-radius:999px;
+
+    font-weight:700;
+
+    transition:.35s;
+
+}
+
+.review-btn:hover{
+
+    transform:translateY(-5px);
+
+}
+
+/* =====================================================
+                GALLERY
+===================================================== */
+
+.gallery-grid{
+
+    overflow:hidden;
+
+}
+
+/* =====================================================
+                CONTACT CARDS
+===================================================== */
+
+.contact-grid div{
+
+    transition:.35s;
+
+}
+
+.contact-grid div:hover{
+
+    transform:translateY(-10px);
+
+    border:1px solid rgba(212,175,55,.25);
+
+}
+
+.product-card button{
+
+width:calc(100% - 50px);
+
+margin:0 25px 25px;
+
+padding:15px;
+
+border:none;
+
+border-radius:999px;
+
+background:linear-gradient(
+
+135deg,
+
+var(--gold),
+
+var(--gold-light)
+
+);
+
+font-size:16px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.35s;
+
+}
+
+.product-card:hover{
+
+transform:
+
+translateY(-18px)
+
+scale(1.02);
+
+border-color:
+
+rgba(212,175,55,.4);
+
+box-shadow:
+
+0 35px 80px rgba(0,0,0,.45),
+
+0 0 45px rgba(212,175,55,.18);
+
+}
+
+/*=============================
+        CARD HEADER
+=============================*/
+
+.card-top{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:18px;
+
+position:absolute;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+z-index:5;
+
+}
+
+/*=============================
+        RATING
+=============================*/
+
+.rating{
+
+margin:18px 25px 0;
+
+font-size:15px;
+
+color:#FFD34E;
+
+}
+
+.rating span{
+
+color:#8a94a6;
+
+font-size:14px;
+
+margin-left:8px;
+
+}
+
+/*=============================
+        PRICE + STOCK
+=============================*/
+
+.price-stock{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin:20px 25px;
+
+}
+
+.price-stock h4{
+
+font-size:30px;
+
+color:var(--gold);
+
+}
+
+.stock{
+
+font-size:14px;
+
+padding:7px 12px;
+
+border-radius:999px;
+
+background:rgba(76,175,80,.12);
+
+color:#66ff99;
+
+}
+
+.offer-pill{
+    display:inline-flex;
+    align-items:center;
+    width:max-content;
+    border-radius:999px;
+    padding:7px 12px;
+    background:#b3261e;
+    color:#fff;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.03em;
+}
+
+.product-card > .offer-pill{
+    position:absolute;
+    z-index:4;
+    top:18px;
+    left:18px;
+}
+
+.popup-offer{
+    margin:0 0 14px;
+}
+
+.stock.unavailable{
+
+background:rgba(255,90,90,.13);
+color:#ff9b9b;
+
+}
+
+/*=============================
+        QUICK VIEW
+=============================*/
+
+.view-btn{
+
+width:calc(100% - 50px);
+
+margin:0 25px 25px;
+
+padding:15px;
+
+border:none;
+
+border-radius:50px;
+
+font-weight:700;
+
+font-size:16px;
+
+cursor:pointer;
+
+background:
+
+linear-gradient(
+
+135deg,
+
+var(--gold),
+
+var(--gold-light)
+
+);
+
+transition:.35s;
+
+}
+
+.view-btn:hover{
+
+transform:translateY(-5px);
+
+box-shadow:
+
+0 20px 40px
+
+rgba(212,175,55,.25);
+
+}
+
+.view-btn:disabled,
+.buy-btn:disabled{
+
+opacity:.55;
+cursor:not-allowed;
+transform:none;
+box-shadow:none;
+
+}

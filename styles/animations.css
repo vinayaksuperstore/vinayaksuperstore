@@ -1,0 +1,360 @@
+/* ============================================
+                LOADER
+============================================ */
+
+.loader{
+
+    animation:loaderFade .9s ease forwards;
+    animation-delay:2.1s;
+
+}
+
+.loader-line{
+
+    width:0;
+
+    height:3px;
+
+    background:linear-gradient(
+        90deg,
+        var(--gold),
+        var(--gold-light)
+    );
+
+    animation:loaderLine 1.8s ease forwards;
+
+}
+
+/* ============================================
+            HERO FLOAT
+============================================ */
+
+.hero-right img{
+
+    animation:
+        floatImage 6s ease-in-out infinite,
+        heroAppear 1.2s ease;
+
+}
+
+/* ============================================
+            HERO TEXT
+============================================ */
+
+.hero-left>*{
+
+    opacity:0;
+
+    transform:translateY(30px);
+
+    animation:heroText .9s forwards;
+
+}
+
+.hero-left>*:nth-child(1){
+
+animation-delay:.4s;
+
+}
+
+.hero-left>*:nth-child(2){
+
+animation-delay:.7s;
+
+}
+
+.hero-left>*:nth-child(3){
+
+animation-delay:1s;
+
+}
+
+.hero-left>*:nth-child(4){
+
+animation-delay:1.3s;
+
+}
+
+.hero-left>*:nth-child(5){
+
+animation-delay:1.6s;
+
+}
+
+/* ============================================
+        BUTTON SHIMMER
+============================================ */
+
+.primary-btn{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.primary-btn::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+
+left:-120%;
+
+width:60%;
+
+height:100%;
+
+background:rgba(255,255,255,.25);
+
+transform:skewX(-30deg);
+
+transition:.6s;
+
+}
+
+.primary-btn:hover::before{
+
+left:150%;
+
+}
+
+/* ============================================
+            CATEGORY
+============================================ */
+
+.category-card{
+
+transition:.4s;
+
+}
+
+.category-card:hover{
+
+transform:
+translateY(-12px)
+rotateX(6deg);
+
+}
+
+/* ============================================
+        STORE IMAGE
+============================================ */
+
+.store-image{
+
+overflow:hidden;
+
+border-radius:28px;
+
+}
+
+.store-image img{
+
+transition:1s;
+
+}
+
+.store-image:hover img{
+
+transform:scale(1.08);
+
+}
+
+/* ============================================
+        GALLERY
+============================================ */
+
+.gallery-grid img{
+
+cursor:pointer;
+
+}
+
+/* ============================================
+        FLOATING BUTTONS
+============================================ */
+
+.floating-buttons a{
+
+animation:floatingButtons 3s infinite;
+
+}
+
+.floating-buttons a:nth-child(2){
+
+animation-delay:.3s;
+
+}
+
+.floating-buttons a:nth-child(3){
+
+animation-delay:.6s;
+
+}
+
+/* ============================================
+        CURSOR GLOW
+============================================ */
+
+.cursor-glow{
+
+position:fixed;
+
+width:250px;
+
+height:250px;
+
+border-radius:50%;
+
+background:
+
+radial-gradient(circle,
+
+rgba(212,175,55,.10),
+
+transparent 70%
+
+);
+
+pointer-events:none;
+
+left:0;
+
+top:0;
+
+transform:translate(-50%,-50%);
+
+filter:blur(55px);
+
+z-index:-1;
+
+transition:
+
+left .08s linear,
+
+top .08s linear;
+
+}
+
+/* ============================================
+        SCROLLBAR
+============================================ */
+
+::-webkit-scrollbar{
+
+width:12px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#07111F;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:linear-gradient(
+
+var(--gold),
+
+var(--gold-light)
+
+);
+
+border-radius:999px;
+
+}
+
+/* ============================================
+            KEYFRAMES
+============================================ */
+
+@keyframes loaderFade{
+
+to{
+
+opacity:0;
+
+visibility:hidden;
+
+}
+
+}
+
+@keyframes loaderLine{
+
+to{
+
+width:260px;
+
+}
+
+}
+
+@keyframes heroAppear{
+
+from{
+
+opacity:0;
+
+transform:translateY(60px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:none;
+
+}
+
+}
+
+@keyframes heroText{
+
+to{
+
+opacity:1;
+
+transform:none;
+
+}
+
+}
+
+@keyframes floatImage{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-18px);
+
+}
+
+}
+
+@keyframes floatingButtons{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-8px);
+
+}
+
+}

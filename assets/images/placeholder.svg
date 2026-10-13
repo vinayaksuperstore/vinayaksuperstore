@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480">
+  <rect width="640" height="480" rx="36" fill="#111827"/>
+  <rect x="48" y="48" width="544" height="384" rx="28" fill="#0B1423" stroke="#D4AF37" stroke-width="6"/>
+  <circle cx="320" cy="190" r="72" fill="#D4AF37" opacity=".18"/>
+  <path d="M235 286h170l-27 64H262z" fill="#D4AF37"/>
+  <path d="M260 250h120c18 0 32 14 32 32v4H228v-4c0-18 14-32 32-32z" fill="#F5D97E"/>
+  <text x="320" y="394" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#F5D97E">VINAYAK SUPERSTORE</text>
+</svg>

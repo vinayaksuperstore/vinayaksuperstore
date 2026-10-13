@@ -1,0 +1,44 @@
+/* ==========================================================
+                    NAVBAR CART
+========================================================== */
+
+.cart-button{
+    position:relative;
+    width:56px;
+    height:56px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:50%;
+    background:#151d2d;
+    color:white;
+    cursor:pointer;
+    transition:.3s;
+    font-size:22px;
+}
+
+.cart-button:hover{
+    transform:translateY(-4px);
+    background:#202b41;
+}
+
+#cartCount{
+    position:absolute;
+    top:-6px;
+    right:-6px;
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    background:#D4AF37;
+    color:#000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:12px;
+    font-weight:700;
+    transition:.3s;
+}
+
+#cartCount.bump{
+    transform:scale(1.25);
+}

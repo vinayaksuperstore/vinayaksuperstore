@@ -1,0 +1,3876 @@
+[
+  {
+    "id": 1,
+    "name": "Monster Energy Original",
+    "brand": "Monster",
+    "category": "Energy Drinks",
+    "subcategory": "Energy Drinks",
+    "keywords": [
+      "monster",
+      "energy",
+      "drink",
+      "can"
+    ],
+    "price": 250,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 24,
+    "badge": "Trending",
+    "image": "assets/images/energy/monster-original.png",
+    "description": "Original Monster Energy Drink."
+  },
+  {
+    "id": 2,
+    "name": "Monster Energy Ultra",
+    "brand": "Monster",
+    "category": "Energy Drinks",
+    "subcategory": "Energy Drinks",
+    "keywords": [
+      "monster",
+      "ultra",
+      "zero sugar",
+      "white",
+      "energy"
+    ],
+    "price": 250,
+    "stock": 25,
+    "featured": true,
+    "rating": 4.8,
+    "reviews": 126,
+    "badge": "Popular",
+    "image": "assets/images/energy/monster-ultra.png",
+    "description": "Zero Sugar Monster Energy Ultra."
+  },
+  {
+    "id": 3,
+    "name": "Monster Energy Ultra Paradise",
+    "brand": "Monster",
+    "category": "Energy Drinks",
+    "subcategory": "Energy Drinks",
+    "keywords": [
+      "monster",
+      "paradise",
+      "kiwi",
+      "lime",
+      "ultra"
+    ],
+    "price": 250,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 89,
+    "badge": "Imported",
+    "image": "assets/images/energy/monster-ultra-paradise.png",
+    "description": "Monster Ultra Paradise Energy Drink."
+  },
+  {
+    "id": 4,
+    "name": "Monster Energy Peachy Keen",
+    "brand": "Monster",
+    "category": "Energy Drinks",
+    "subcategory": "Energy Drinks",
+    "keywords": [
+      "monster",
+      "peach",
+      "energy",
+      "drink"
+    ],
+    "price": 250,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 72,
+    "badge": "New",
+    "image": "assets/images/energy/monster-peachy-keen.png",
+    "description": "Monster Peachy Keen Energy Drink."
+  },
+  {
+    "id": 5,
+    "name": "Monster Energy Pipeline Punch 300ml",
+    "brand": "Monster",
+    "category": "Energy Drinks",
+    "subcategory": "Energy Drinks",
+    "keywords": [
+      "monster",
+      "pipeline",
+      "punch",
+      "energy"
+    ],
+    "price": 125,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 181,
+    "badge": "Best Seller",
+    "image": "assets/images/energy/monster-pipeline-punch.png",
+    "description": "Monster Pipeline Punch Energy Drink."
+  },
+  {
+    "id": 6,
+    "name": "Monster Energy Mango Loco",
+    "brand": "Monster",
+    "category": "Energy Drinks",
+    "subcategory": "Energy Drinks",
+    "keywords": [
+      "monster",
+      "mango",
+      "loco",
+      "juice"
+    ],
+    "price": 250,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 210,
+    "badge": "Trending",
+    "image": "assets/images/energy/monster-mango-loco.png",
+    "description": "Monster Mango Loco Energy Drink."
+  },
+  {
+    "id": 7,
+    "name": "Monster Energy Nitro",
+    "brand": "Monster",
+    "category": "Energy Drinks",
+    "subcategory": "Energy Drinks",
+    "keywords": [
+      "monster",
+      "nitro",
+      "energy"
+    ],
+    "price": 250,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 58,
+    "badge": "Imported",
+    "image": "assets/images/energy/monster-nitro.png",
+    "description": "Monster Nitro Super Dry Energy Drink."
+  },
+  {
+    "id": 8,
+    "name": "Monster Energy Lewis Hamilton",
+    "brand": "Monster",
+    "category": "Energy Drinks",
+    "subcategory": "Energy Drinks",
+    "keywords": [
+      "monster",
+      "hamilton",
+      "formula 1",
+      "energy"
+    ],
+    "price": 250,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 95,
+    "badge": "Limited",
+    "image": "assets/images/energy/monster-lewis-hamilton.png",
+    "description": "Lewis Hamilton Special Edition Monster."
+  },
+  {
+    "id": 9,
+    "name": "Monster Energy Ultra Rosa",
+    "brand": "Monster",
+    "category": "Energy Drinks",
+    "subcategory": "Energy Drinks",
+    "keywords": [
+      "monster",
+      "rosa",
+      "pink",
+      "ultra"
+    ],
+    "price": 250,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 83,
+    "badge": "Imported",
+    "image": "assets/images/energy/monster-ultra-rosa.png",
+    "description": "Monster Ultra Rosa Zero Sugar."
+  },
+  {
+    "id": 10,
+    "name": "Red Bull Original",
+    "brand": "Red Bull",
+    "category": "Energy Drinks",
+    "subcategory": "Energy Drinks",
+    "keywords": [
+      "red bull",
+      "energy",
+      "drink"
+    ],
+    "price": 125,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 340,
+    "badge": "Classic",
+    "image": "assets/images/energy/redbull-original.png",
+    "description": "The original Red Bull Energy Drink."
+  },
+  {
+    "id": 11,
+    "name": "Red Bull Pink Edition",
+    "brand": "Red Bull",
+    "category": "Energy Drinks",
+    "subcategory": "Energy Drinks",
+    "keywords": [
+      "red bull",
+      "pink",
+      "edition"
+    ],
+    "price": 125,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 112,
+    "badge": "Limited",
+    "image": "assets/images/energy/redbull-pink-edition.png",
+    "description": "Red Bull Pink Edition."
+  },
+  {
+    "id": 12,
+    "name": "Red Bull Red Edition",
+    "brand": "Red Bull",
+    "category": "Energy Drinks",
+    "subcategory": "Energy Drinks",
+    "keywords": [
+      "red bull",
+      "red",
+      "edition"
+    ],
+    "price": 125,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 98,
+    "badge": "Popular",
+    "image": "assets/images/energy/redbull-red-edition.png",
+    "description": "Red Bull Red Edition."
+  },
+  {
+    "id": 13,
+    "name": "Hell Energy Classic",
+    "brand": "Hell",
+    "category": "Energy Drinks",
+    "subcategory": "Energy Drinks",
+    "keywords": [
+      "hell",
+      "classic",
+      "energy"
+    ],
+    "price": 60,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 94,
+    "badge": "Popular",
+    "image": "assets/images/energy/hell-classic.png",
+    "description": "Hell Classic Energy Drink."
+  },
+  {
+    "id": 14,
+    "name": "Hell Apple",
+    "brand": "Hell",
+    "category": "Energy Drinks",
+    "subcategory": "Energy Drinks",
+    "keywords": [
+      "hell",
+      "apple",
+      "energy"
+    ],
+    "price": 60,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.6,
+    "reviews": 52,
+    "badge": "New",
+    "image": "assets/images/energy/hell-apple.png",
+    "description": "Hell Apple Energy Drink."
+  },
+  {
+    "id": 15,
+    "name": "Hell Black Cherry",
+    "brand": "Hell",
+    "category": "Energy Drinks",
+    "subcategory": "Energy Drinks",
+    "keywords": [
+      "hell",
+      "black cherry",
+      "energy"
+    ],
+    "price": 60,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 49,
+    "badge": "Imported",
+    "image": "assets/images/energy/hell-black-cherry.png",
+    "description": "Hell Black Cherry Energy Drink."
+  },
+  {
+    "id": 16,
+    "name": "Charged Energy Drink",
+    "brand": "Charged",
+    "category": "Energy Drinks",
+    "subcategory": "Energy Drinks",
+    "keywords": [
+      "charged",
+      "energy",
+      "drink"
+    ],
+    "price": 50,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.5,
+    "reviews": 39,
+    "badge": "Budget",
+    "image": "assets/images/energy/charged.png",
+    "description": "Charged Energy Drink."
+  },
+  {
+    "id": 17,
+    "name": "Predator Energy",
+    "brand": "Predator",
+    "category": "Energy Drinks",
+    "subcategory": "Energy Drinks",
+    "keywords": [
+      "predator",
+      "energy",
+      "drink"
+    ],
+    "price": 50,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.6,
+    "reviews": 44,
+    "badge": "Budget",
+    "image": "assets/images/energy/predator.png",
+    "description": "Predator Energy Drink."
+  },
+  {
+    "id": 18,
+    "name": "Prime Hydration Lemon Lime",
+    "brand": "Prime",
+    "category": "Energy Drinks",
+    "subcategory": "Hydration",
+    "keywords": [
+      "prime",
+      "hydration",
+      "lemon lime"
+    ],
+    "price": 250,
+    "stock": 25,
+    "featured": true,
+    "rating": 4.8,
+    "reviews": 153,
+    "badge": "Trending",
+    "image": "assets/images/energy/prime-lemon-lime.png",
+    "description": "Prime Hydration Lemon Lime."
+  },
+  {
+    "id": 19,
+    "name": "Prime Hydration Ice Pop",
+    "brand": "Prime",
+    "category": "Energy Drinks",
+    "subcategory": "Hydration",
+    "keywords": [
+      "prime",
+      "ice pop",
+      "hydration"
+    ],
+    "price": 250,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 118,
+    "badge": "Imported",
+    "image": "assets/images/energy/prime-ice-pop.png",
+    "description": "Prime Hydration Ice Pop."
+  },
+  {
+    "id": 20,
+    "name": "Non Stop Jungle",
+    "brand": "Non Stop",
+    "category": "Energy Drinks",
+    "subcategory": "Energy Drinks",
+    "keywords": [
+      "non stop",
+      "jungle",
+      "energy"
+    ],
+    "price": 60,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.5,
+    "reviews": 21,
+    "badge": "New",
+    "image": "assets/images/energy/non-stop-jungle.png",
+    "description": "Non Stop Jungle Energy Drink."
+  },
+  {
+    "id": 21,
+    "name": "Cadbury Dairy Milk",
+    "brand": "Cadbury",
+    "category": "Chocolates",
+    "subcategory": "Milk Chocolate",
+    "keywords": [
+      "cadbury",
+      "dairy milk",
+      "chocolate"
+    ],
+    "price": 50,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 268,
+    "badge": "Best Seller",
+    "image": "assets/images/chocolates/dairy-milk.png",
+    "description": "Smooth and creamy Cadbury Dairy Milk."
+  },
+  {
+    "id": 22,
+    "name": "Cadbury Dairy Milk Silk",
+    "brand": "Cadbury",
+    "category": "Chocolates",
+    "subcategory": "Premium Chocolate",
+    "keywords": [
+      "cadbury",
+      "silk",
+      "milk chocolate"
+    ],
+    "price": 95,
+    "stock": 25,
+    "featured": true,
+    "rating": 4.9,
+    "reviews": 391,
+    "badge": "Trending",
+    "image": "assets/images/chocolates/dairy-milk-silk.png",
+    "description": "Smooth, rich and creamy Dairy Milk Silk."
+  },
+  {
+    "id": 23,
+    "name": "Cadbury Dairy Milk Silk Fruit & Nut",
+    "brand": "Cadbury",
+    "category": "Chocolates",
+    "subcategory": "Premium Chocolate",
+    "keywords": [
+      "silk",
+      "fruit",
+      "nut"
+    ],
+    "price": 100,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 147,
+    "badge": "Premium",
+    "image": "assets/images/chocolates/silk-fruit-nut.png",
+    "description": "Silky chocolate with raisins and almonds."
+  },
+  {
+    "id": 24,
+    "name": "Cadbury Dairy Milk Silk Hazelnut",
+    "brand": "Cadbury",
+    "category": "Chocolates",
+    "subcategory": "Premium Chocolate",
+    "keywords": [
+      "hazelnut",
+      "silk",
+      "cadbury"
+    ],
+    "price": 100,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 133,
+    "badge": "Imported",
+    "image": "assets/images/chocolates/silk-hazelnut.png",
+    "description": "Silk chocolate filled with roasted hazelnuts."
+  },
+  {
+    "id": 25,
+    "name": "Cadbury Dairy Milk Silk Mousse",
+    "brand": "Cadbury",
+    "category": "Chocolates",
+    "subcategory": "Premium Chocolate",
+    "keywords": [
+      "mousse",
+      "silk",
+      "cadbury"
+    ],
+    "price": 110,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 84,
+    "badge": "New",
+    "image": "assets/images/chocolates/silk-mousse.png",
+    "description": "Smooth mousse-filled Dairy Milk Silk."
+  },
+  {
+    "id": 26,
+    "name": "Cadbury Bournville",
+    "brand": "Cadbury",
+    "category": "Chocolates",
+    "subcategory": "Dark Chocolate",
+    "keywords": [
+      "dark",
+      "bournville",
+      "cadbury"
+    ],
+    "price": 120,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 118,
+    "badge": "Dark",
+    "image": "assets/images/chocolates/bournville.png",
+    "description": "Premium dark chocolate by Cadbury."
+  },
+  {
+    "id": 27,
+    "name": "KitKat 4 Finger",
+    "brand": "Nestlé",
+    "category": "Chocolates",
+    "subcategory": "Wafer Chocolate",
+    "keywords": [
+      "kitkat",
+      "wafer",
+      "nestle"
+    ],
+    "price": 40,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 284,
+    "badge": "Popular",
+    "image": "assets/images/chocolates/kitkat.png",
+    "description": "Crispy wafer coated in milk chocolate."
+  },
+  {
+    "id": 28,
+    "name": "KitKat Dessert Delight",
+    "brand": "Nestlé",
+    "category": "Chocolates",
+    "subcategory": "Wafer Chocolate",
+    "keywords": [
+      "kitkat",
+      "dessert",
+      "delight"
+    ],
+    "price": 60,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 88,
+    "badge": "New",
+    "image": "assets/images/chocolates/kitkat-dessert-delight.png",
+    "description": "Rich dessert-inspired KitKat."
+  },
+  {
+    "id": 29,
+    "name": "Snickers",
+    "brand": "Mars",
+    "category": "Chocolates",
+    "subcategory": "Chocolate Bar",
+    "keywords": [
+      "snickers",
+      "peanut",
+      "caramel"
+    ],
+    "price": 50,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 311,
+    "badge": "Classic",
+    "image": "assets/images/chocolates/snickers.png",
+    "description": "Chocolate bar with peanuts, caramel and nougat."
+  },
+  {
+    "id": 30,
+    "name": "Mars Chocolate",
+    "brand": "Mars",
+    "category": "Chocolates",
+    "subcategory": "Chocolate Bar",
+    "keywords": [
+      "mars",
+      "chocolate"
+    ],
+    "price": 50,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 101,
+    "badge": "Popular",
+    "image": "assets/images/chocolates/mars.png",
+    "description": "Classic Mars chocolate bar."
+  },
+  {
+    "id": 31,
+    "name": "Galaxy Smooth Milk",
+    "brand": "Galaxy",
+    "category": "Chocolates",
+    "subcategory": "Milk Chocolate",
+    "keywords": [
+      "galaxy",
+      "smooth",
+      "milk"
+    ],
+    "price": 80,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 172,
+    "badge": "Premium",
+    "image": "assets/images/chocolates/galaxy.png",
+    "description": "Smooth Galaxy milk chocolate."
+  },
+  {
+    "id": 32,
+    "name": "Galaxy Fusions",
+    "brand": "Galaxy",
+    "category": "Chocolates",
+    "subcategory": "Premium Chocolate",
+    "keywords": [
+      "galaxy",
+      "fusion"
+    ],
+    "price": 100,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 76,
+    "badge": "Imported",
+    "image": "assets/images/chocolates/galaxy-fusions.png",
+    "description": "Galaxy Fusions premium chocolate."
+  },
+  {
+    "id": 33,
+    "name": "Ferrero Rocher 3 Pack",
+    "brand": "Ferrero",
+    "category": "Chocolates",
+    "subcategory": "Premium Chocolate",
+    "keywords": [
+      "ferrero",
+      "rocher"
+    ],
+    "price": 150,
+    "stock": 25,
+    "featured": false,
+    "rating": 5,
+    "reviews": 492,
+    "badge": "Luxury",
+    "image": "assets/images/chocolates/ferrero-rocher.png",
+    "description": "Premium Ferrero Rocher hazelnut chocolates."
+  },
+  {
+    "id": 34,
+    "name": "M&M's Peanut",
+    "brand": "Mars",
+    "category": "Chocolates",
+    "subcategory": "Chocolate Candy",
+    "keywords": [
+      "m&m",
+      "peanut"
+    ],
+    "price": 90,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 124,
+    "badge": "Imported",
+    "image": "assets/images/chocolates/mms-peanut.png",
+    "description": "Crunchy peanuts coated with milk chocolate."
+  },
+  {
+    "id": 35,
+    "name": "Skittles Fruits",
+    "brand": "Skittles",
+    "category": "Chocolates",
+    "subcategory": "Candy",
+    "keywords": [
+      "skittles",
+      "fruits",
+      "candy"
+    ],
+    "price": 60,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 98,
+    "badge": "Imported",
+    "image": "assets/images/chocolates/skittles.png",
+    "description": "Fruit flavoured chewy candy."
+  },
+  {
+    "id": 36,
+    "name": "Parle-G Original",
+    "brand": "Parle",
+    "category": "Biscuits",
+    "subcategory": "Glucose Biscuits",
+    "keywords": [
+      "parle",
+      "glucose",
+      "biscuit"
+    ],
+    "price": 10,
+    "stock": 40,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 524,
+    "badge": "Best Seller",
+    "image": "assets/images/biscuits/parle-g.png",
+    "description": "India's favourite glucose biscuits."
+  },
+  {
+    "id": 37,
+    "name": "Britannia Good Day Butter",
+    "brand": "Britannia",
+    "category": "Biscuits",
+    "subcategory": "Cookies",
+    "keywords": [
+      "good day",
+      "butter",
+      "cookies"
+    ],
+    "price": 30,
+    "stock": 35,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 298,
+    "badge": "Popular",
+    "image": "assets/images/biscuits/good-day-butter.png",
+    "description": "Crunchy butter cookies."
+  },
+  {
+    "id": 38,
+    "name": "Britannia Good Day Cashew",
+    "brand": "Britannia",
+    "category": "Biscuits",
+    "subcategory": "Cookies",
+    "keywords": [
+      "good day",
+      "cashew",
+      "cookies"
+    ],
+    "price": 35,
+    "stock": 35,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 212,
+    "badge": "Popular",
+    "image": "assets/images/biscuits/good-day-cashew.png",
+    "description": "Rich cashew cookies."
+  },
+  {
+    "id": 39,
+    "name": "Britannia Bourbon",
+    "brand": "Britannia",
+    "category": "Biscuits",
+    "subcategory": "Chocolate Biscuits",
+    "keywords": [
+      "bourbon",
+      "chocolate",
+      "cream"
+    ],
+    "price": 35,
+    "stock": 30,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 327,
+    "badge": "Classic",
+    "image": "assets/images/biscuits/bourbon.png",
+    "description": "Chocolate cream sandwich biscuits."
+  },
+  {
+    "id": 40,
+    "name": "Britannia Marie Gold",
+    "brand": "Britannia",
+    "category": "Biscuits",
+    "subcategory": "Tea Biscuits",
+    "keywords": [
+      "marie",
+      "gold",
+      "tea"
+    ],
+    "price": 35,
+    "stock": 35,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 181,
+    "badge": "Healthy",
+    "image": "assets/images/biscuits/marie-gold.png",
+    "description": "Light and crispy tea biscuits."
+  },
+  {
+    "id": 41,
+    "name": "Britannia 50-50 Maska Chaska",
+    "brand": "Britannia",
+    "category": "Biscuits",
+    "subcategory": "Salted Biscuits",
+    "keywords": [
+      "50-50",
+      "maska",
+      "salt"
+    ],
+    "price": 25,
+    "stock": 30,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 149,
+    "badge": "Popular",
+    "image": "assets/images/biscuits/50-50-maska.png",
+    "description": "Sweet and salty crunchy biscuits."
+  },
+  {
+    "id": 42,
+    "name": "Britannia NutriChoice Digestive",
+    "brand": "Britannia",
+    "category": "Biscuits",
+    "subcategory": "Healthy Biscuits",
+    "keywords": [
+      "nutrichoice",
+      "digestive",
+      "healthy"
+    ],
+    "price": 45,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 109,
+    "badge": "Healthy",
+    "image": "assets/images/biscuits/nutrichoice-digestive.png",
+    "description": "High fibre digestive biscuits."
+  },
+  {
+    "id": 43,
+    "name": "Britannia NutriChoice Oats",
+    "brand": "Britannia",
+    "category": "Biscuits",
+    "subcategory": "Healthy Biscuits",
+    "keywords": [
+      "nutrichoice",
+      "oats"
+    ],
+    "price": 45,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.6,
+    "reviews": 88,
+    "badge": "Healthy",
+    "image": "assets/images/biscuits/nutrichoice-oats.png",
+    "description": "Healthy oats biscuits."
+  },
+  {
+    "id": 44,
+    "name": "Sunfeast Dark Fantasy Choco Fills",
+    "brand": "Sunfeast",
+    "category": "Biscuits",
+    "subcategory": "Premium Cookies",
+    "keywords": [
+      "dark fantasy",
+      "choco",
+      "fills"
+    ],
+    "price": 40,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 472,
+    "badge": "Premium",
+    "image": "assets/images/biscuits/dark-fantasy.png",
+    "description": "Chocolate filled premium cookies."
+  },
+  {
+    "id": 45,
+    "name": "Sunfeast Mom's Magic Butter",
+    "brand": "Sunfeast",
+    "category": "Biscuits",
+    "subcategory": "Cookies",
+    "keywords": [
+      "moms magic",
+      "butter"
+    ],
+    "price": 35,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 167,
+    "badge": "Popular",
+    "image": "assets/images/biscuits/moms-magic-butter.png",
+    "description": "Crunchy butter cookies."
+  },
+  {
+    "id": 46,
+    "name": "Sunfeast Mom's Magic Cashew",
+    "brand": "Sunfeast",
+    "category": "Biscuits",
+    "subcategory": "Cookies",
+    "keywords": [
+      "moms magic",
+      "cashew"
+    ],
+    "price": 35,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 153,
+    "badge": "Popular",
+    "image": "assets/images/biscuits/moms-magic-cashew.png",
+    "description": "Crunchy cashew cookies."
+  },
+  {
+    "id": 47,
+    "name": "Sunfeast Happy Happy",
+    "brand": "Sunfeast",
+    "category": "Biscuits",
+    "subcategory": "Cream Biscuits",
+    "keywords": [
+      "happy happy",
+      "cream"
+    ],
+    "price": 20,
+    "stock": 35,
+    "featured": false,
+    "rating": 4.6,
+    "reviews": 97,
+    "badge": "Kids",
+    "image": "assets/images/biscuits/happy-happy.png",
+    "description": "Cream filled Happy Happy biscuits."
+  },
+  {
+    "id": 48,
+    "name": "Parle Monaco",
+    "brand": "Parle",
+    "category": "Biscuits",
+    "subcategory": "Salted Biscuits",
+    "keywords": [
+      "monaco",
+      "salted"
+    ],
+    "price": 25,
+    "stock": 35,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 287,
+    "badge": "Classic",
+    "image": "assets/images/biscuits/monaco.png",
+    "description": "Classic salted Monaco crackers."
+  },
+  {
+    "id": 49,
+    "name": "Parle Krackjack",
+    "brand": "Parle",
+    "category": "Biscuits",
+    "subcategory": "Sweet & Salty",
+    "keywords": [
+      "krackjack",
+      "biscuits"
+    ],
+    "price": 25,
+    "stock": 35,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 176,
+    "badge": "Popular",
+    "image": "assets/images/biscuits/krackjack.png",
+    "description": "Sweet and salty Krackjack biscuits."
+  },
+  {
+    "id": 50,
+    "name": "Oreo Original",
+    "brand": "Oreo",
+    "category": "Biscuits",
+    "subcategory": "Cream Biscuits",
+    "keywords": [
+      "oreo",
+      "cream",
+      "cookies"
+    ],
+    "price": 30,
+    "stock": 35,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 515,
+    "badge": "Best Seller",
+    "image": "assets/images/biscuits/oreo-original.png",
+    "description": "World famous Oreo cookies."
+  },
+  {
+    "id": 51,
+    "name": "Nutella Hazelnut Spread",
+    "brand": "Nutella",
+    "category": "Spreads",
+    "subcategory": "Chocolate Spread",
+    "keywords": [
+      "nutella",
+      "hazelnut",
+      "spread",
+      "chocolate"
+    ],
+    "price": 650,
+    "stock": 15,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 541,
+    "badge": "Imported",
+    "image": "assets/images/spreads/nutella-hazelnut-spread.png",
+    "description": "Original Nutella hazelnut cocoa spread."
+  },
+  {
+    "id": 52,
+    "name": "Lotus Biscoff Spread",
+    "brand": "Lotus",
+    "category": "Spreads",
+    "subcategory": "Cookie Butter",
+    "keywords": [
+      "biscoff",
+      "spread",
+      "lotus"
+    ],
+    "price": 550,
+    "stock": 12,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 283,
+    "badge": "Imported",
+    "image": "assets/images/spreads/lotus-biscoff-spread.png",
+    "description": "Creamy Lotus Biscoff cookie butter spread."
+  },
+  {
+    "id": 53,
+    "name": "Pintola All Natural Peanut Butter",
+    "brand": "Pintola",
+    "category": "Health Foods",
+    "subcategory": "Peanut Butter",
+    "keywords": [
+      "pintola",
+      "peanut",
+      "butter"
+    ],
+    "price": 375,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 167,
+    "badge": "Healthy",
+    "image": "assets/images/health/pintola-peanut-butter.png",
+    "description": "High protein all-natural peanut butter."
+  },
+  {
+    "id": 54,
+    "name": "MyFitness Peanut Butter",
+    "brand": "MyFitness",
+    "category": "Health Foods",
+    "subcategory": "Peanut Butter",
+    "keywords": [
+      "myfitness",
+      "peanut",
+      "butter"
+    ],
+    "price": 399,
+    "stock": 15,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 121,
+    "badge": "Fitness",
+    "image": "assets/images/health/myfitness-peanut-butter.png",
+    "description": "Creamy peanut butter for fitness enthusiasts."
+  },
+  {
+    "id": 55,
+    "name": "Hershey's Chocolate Syrup",
+    "brand": "Hershey's",
+    "category": "Spreads",
+    "subcategory": "Syrup",
+    "keywords": [
+      "hersheys",
+      "chocolate",
+      "syrup"
+    ],
+    "price": 275,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 213,
+    "badge": "Popular",
+    "image": "assets/images/spreads/hersheys-syrup.png",
+    "description": "Rich Hershey's chocolate flavoured syrup."
+  },
+  {
+    "id": 56,
+    "name": "Davidoff Rich Aroma Coffee",
+    "brand": "Davidoff",
+    "category": "Coffee",
+    "subcategory": "Instant Coffee",
+    "keywords": [
+      "davidoff",
+      "coffee"
+    ],
+    "price": 899,
+    "stock": 10,
+    "featured": true,
+    "rating": 5,
+    "reviews": 118,
+    "badge": "Premium",
+    "image": "assets/images/coffee/davidoff-rich-aroma.png",
+    "description": "Premium Davidoff Rich Aroma instant coffee."
+  },
+  {
+    "id": 57,
+    "name": "Nescafé Gold",
+    "brand": "Nescafé",
+    "category": "Coffee",
+    "subcategory": "Instant Coffee",
+    "keywords": [
+      "nescafe",
+      "gold",
+      "coffee"
+    ],
+    "price": 650,
+    "stock": 14,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 334,
+    "badge": "Premium",
+    "image": "assets/images/coffee/nescafe-gold.png",
+    "description": "Smooth premium instant coffee."
+  },
+  {
+    "id": 58,
+    "name": "Nescafé Classic",
+    "brand": "Nescafé",
+    "category": "Coffee",
+    "subcategory": "Instant Coffee",
+    "keywords": [
+      "nescafe",
+      "classic"
+    ],
+    "price": 340,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 281,
+    "badge": "Popular",
+    "image": "assets/images/coffee/nescafe-classic.png",
+    "description": "Classic instant coffee."
+  },
+  {
+    "id": 59,
+    "name": "Georgia Coffee",
+    "brand": "Georgia",
+    "category": "Coffee",
+    "subcategory": "Ready To Drink",
+    "keywords": [
+      "georgia",
+      "coffee"
+    ],
+    "price": 150,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 88,
+    "badge": "Imported",
+    "image": "assets/images/coffee/georgia-coffee.png",
+    "description": "Ready-to-drink premium coffee."
+  },
+  {
+    "id": 60,
+    "name": "Cornitos Nacho Crisps",
+    "brand": "Cornitos",
+    "category": "Snacks",
+    "subcategory": "Nachos",
+    "keywords": [
+      "cornitos",
+      "nachos"
+    ],
+    "price": 125,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 214,
+    "badge": "Trending",
+    "image": "assets/images/snacks/cornitos-nachos.png",
+    "description": "Crunchy Cornitos nacho crisps."
+  },
+  {
+    "id": 61,
+    "name": "Doritos Nacho Cheese",
+    "brand": "Doritos",
+    "category": "Snacks",
+    "subcategory": "Chips",
+    "keywords": [
+      "doritos",
+      "nacho"
+    ],
+    "price": 50,
+    "stock": 35,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 402,
+    "badge": "Best Seller",
+    "image": "assets/images/snacks/doritos-nacho-cheese.png",
+    "description": "Classic Nacho Cheese Doritos."
+  },
+  {
+    "id": 62,
+    "name": "Lay's Magic Masala",
+    "brand": "Lay's",
+    "category": "Snacks",
+    "subcategory": "Chips",
+    "keywords": [
+      "lays",
+      "magic",
+      "masala"
+    ],
+    "price": 20,
+    "stock": 50,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 401,
+    "badge": "Popular",
+    "image": "assets/images/snacks/lays-magic-masala.png",
+    "description": "Lay's Magic Masala potato chips."
+  },
+  {
+    "id": 63,
+    "name": "Lay's American Style Cream & Onion",
+    "brand": "Lay's",
+    "category": "Snacks",
+    "subcategory": "Chips",
+    "keywords": [
+      "lays",
+      "cream",
+      "onion"
+    ],
+    "price": 20,
+    "stock": 50,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 356,
+    "badge": "Classic",
+    "image": "assets/images/snacks/lays-cream-onion.png",
+    "description": "Cream & Onion flavoured potato chips."
+  },
+  {
+    "id": 64,
+    "name": "Bingo Mad Angles",
+    "brand": "Bingo",
+    "category": "Snacks",
+    "subcategory": "Chips",
+    "keywords": [
+      "bingo",
+      "mad angles"
+    ],
+    "price": 20,
+    "stock": 35,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 209,
+    "badge": "Popular",
+    "image": "assets/images/snacks/bingo-mad-angles.png",
+    "description": "Crunchy triangle corn chips."
+  },
+  {
+    "id": 65,
+    "name": "Uncle Chipps",
+    "brand": "Uncle Chipps",
+    "category": "Snacks",
+    "subcategory": "Chips",
+    "keywords": [
+      "uncle chipps"
+    ],
+    "price": 20,
+    "stock": 30,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 165,
+    "badge": "Classic",
+    "image": "assets/images/snacks/uncle-chipps.png",
+    "description": "Classic Uncle Chipps potato chips."
+  },
+  {
+    "id": 66,
+    "name": "Fun Flips",
+    "brand": "Fun Flips",
+    "category": "Snacks",
+    "subcategory": "Puffs",
+    "keywords": [
+      "fun flips"
+    ],
+    "price": 10,
+    "stock": 60,
+    "featured": false,
+    "rating": 4.5,
+    "reviews": 84,
+    "badge": "Kids",
+    "image": "assets/images/snacks/fun-flips.png",
+    "description": "Light and crispy corn puffs."
+  },
+  {
+    "id": 67,
+    "name": "Kurkure Masala Munch",
+    "brand": "Kurkure",
+    "category": "Snacks",
+    "subcategory": "Namkeen",
+    "keywords": [
+      "kurkure",
+      "masala"
+    ],
+    "price": 20,
+    "stock": 40,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 332,
+    "badge": "Popular",
+    "image": "assets/images/snacks/kurkure-masala-munch.png",
+    "description": "Crunchy Kurkure Masala Munch."
+  },
+  {
+    "id": 68,
+    "name": "Pringles Original",
+    "brand": "Pringles",
+    "category": "Snacks",
+    "subcategory": "Chips",
+    "keywords": [
+      "pringles",
+      "original"
+    ],
+    "price": 199,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 473,
+    "badge": "Imported",
+    "image": "assets/images/snacks/pringles-original.png",
+    "description": "Original Pringles potato crisps."
+  },
+  {
+    "id": 69,
+    "name": "Pringles Sour Cream & Onion",
+    "brand": "Pringles",
+    "category": "Snacks",
+    "subcategory": "Chips",
+    "keywords": [
+      "pringles",
+      "sour cream"
+    ],
+    "price": 199,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 251,
+    "badge": "Imported",
+    "image": "assets/images/snacks/pringles-sour-cream-onion.png",
+    "description": "Pringles Sour Cream & Onion."
+  },
+  {
+    "id": 70,
+    "name": "Haldiram's Aloo Bhujia",
+    "brand": "Haldiram's",
+    "category": "Namkeen",
+    "subcategory": "Traditional Snacks",
+    "keywords": [
+      "haldirams",
+      "aloo",
+      "bhujia"
+    ],
+    "price": 65,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 291,
+    "badge": "Popular",
+    "image": "assets/images/namkeen/haldirams-aloo-bhujia.png",
+    "description": "Classic Haldiram's Aloo Bhujia."
+  },
+  {
+    "id": 71,
+    "name": "Haldiram's Bhujia Sev",
+    "brand": "Haldiram's",
+    "category": "Namkeen",
+    "subcategory": "Traditional Snacks",
+    "keywords": [
+      "haldirams",
+      "bhujia",
+      "sev"
+    ],
+    "price": 65,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 248,
+    "badge": "Popular",
+    "image": "assets/images/namkeen/haldirams-bhujia-sev.png",
+    "description": "Crispy traditional bhujia sev."
+  },
+  {
+    "id": 72,
+    "name": "Haldiram's Moong Dal",
+    "brand": "Haldiram's",
+    "category": "Namkeen",
+    "subcategory": "Traditional Snacks",
+    "keywords": [
+      "haldirams",
+      "moong dal"
+    ],
+    "price": 70,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 186,
+    "badge": "Classic",
+    "image": "assets/images/namkeen/haldirams-moong-dal.png",
+    "description": "Crunchy salted moong dal."
+  },
+  {
+    "id": 73,
+    "name": "Haldiram's Khatta Meetha",
+    "brand": "Haldiram's",
+    "category": "Namkeen",
+    "subcategory": "Traditional Snacks",
+    "keywords": [
+      "haldirams",
+      "khatta",
+      "meetha"
+    ],
+    "price": 70,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 201,
+    "badge": "Popular",
+    "image": "assets/images/namkeen/haldirams-khatta-meetha.png",
+    "description": "Sweet and tangy namkeen mix."
+  },
+  {
+    "id": 74,
+    "name": "Haldiram's Navratan Mix",
+    "brand": "Haldiram's",
+    "category": "Namkeen",
+    "subcategory": "Traditional Snacks",
+    "keywords": [
+      "haldirams",
+      "navratan",
+      "mix"
+    ],
+    "price": 75,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 165,
+    "badge": "Popular",
+    "image": "assets/images/namkeen/haldirams-navratan-mix.png",
+    "description": "Premium navratan namkeen."
+  },
+  {
+    "id": 75,
+    "name": "Haldiram's Punjabi Tadka",
+    "brand": "Haldiram's",
+    "category": "Namkeen",
+    "subcategory": "Traditional Snacks",
+    "keywords": [
+      "haldirams",
+      "punjabi",
+      "tadka"
+    ],
+    "price": 75,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 151,
+    "badge": "New",
+    "image": "assets/images/namkeen/haldirams-punjabi-tadka.png",
+    "description": "Spicy Punjabi style namkeen."
+  },
+  {
+    "id": 76,
+    "name": "Haldiram's Lite Chiwda",
+    "brand": "Haldiram's",
+    "category": "Namkeen",
+    "subcategory": "Traditional Snacks",
+    "keywords": [
+      "haldirams",
+      "lite",
+      "chiwda"
+    ],
+    "price": 75,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 133,
+    "badge": "Healthy",
+    "image": "assets/images/namkeen/haldirams-lite-chiwda.png",
+    "description": "Light crispy chiwda mixture."
+  },
+  {
+    "id": 77,
+    "name": "Haldiram's Ratlami Sev",
+    "brand": "Haldiram's",
+    "category": "Namkeen",
+    "subcategory": "Traditional Snacks",
+    "keywords": [
+      "haldirams",
+      "ratlami"
+    ],
+    "price": 70,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 191,
+    "badge": "Classic",
+    "image": "assets/images/namkeen/haldirams-ratlami-sev.png",
+    "description": "Authentic Ratlami Sev."
+  },
+  {
+    "id": 78,
+    "name": "Haldiram's Nut Cracker",
+    "brand": "Haldiram's",
+    "category": "Namkeen",
+    "subcategory": "Traditional Snacks",
+    "keywords": [
+      "haldirams",
+      "nut cracker"
+    ],
+    "price": 80,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 116,
+    "badge": "Crunchy",
+    "image": "assets/images/namkeen/haldirams-nut-cracker.png",
+    "description": "Crunchy spiced nut crackers."
+  },
+  {
+    "id": 79,
+    "name": "Haldiram's Salted Peanuts",
+    "brand": "Haldiram's",
+    "category": "Namkeen",
+    "subcategory": "Peanuts",
+    "keywords": [
+      "haldirams",
+      "peanuts"
+    ],
+    "price": 70,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 147,
+    "badge": "Popular",
+    "image": "assets/images/namkeen/haldirams-salted-peanuts.png",
+    "description": "Roasted salted peanuts."
+  },
+  {
+    "id": 80,
+    "name": "Haldiram's Masala Peanuts",
+    "brand": "Haldiram's",
+    "category": "Namkeen",
+    "subcategory": "Peanuts",
+    "keywords": [
+      "haldirams",
+      "masala",
+      "peanuts"
+    ],
+    "price": 75,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 173,
+    "badge": "Spicy",
+    "image": "assets/images/namkeen/haldirams-masala-peanuts.png",
+    "description": "Spicy crunchy masala peanuts."
+  },
+  {
+    "id": 81,
+    "name": "Maggi 2-Minute Noodles",
+    "brand": "Maggi",
+    "category": "Instant Food",
+    "subcategory": "Noodles",
+    "keywords": [
+      "maggi",
+      "noodles"
+    ],
+    "price": 15,
+    "stock": 80,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 612,
+    "badge": "Best Seller",
+    "image": "assets/images/instant/maggi.png",
+    "description": "India's favourite instant noodles."
+  },
+  {
+    "id": 82,
+    "name": "Maggi Masala Oats",
+    "brand": "Maggi",
+    "category": "Instant Food",
+    "subcategory": "Healthy Meals",
+    "keywords": [
+      "maggi",
+      "oats"
+    ],
+    "price": 35,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.6,
+    "reviews": 104,
+    "badge": "Healthy",
+    "image": "assets/images/instant/maggi-oats.png",
+    "description": "Healthy masala oats."
+  },
+  {
+    "id": 83,
+    "name": "Sunfeast YiPPee Noodles",
+    "brand": "Sunfeast",
+    "category": "Instant Food",
+    "subcategory": "Noodles",
+    "keywords": [
+      "yippee",
+      "noodles"
+    ],
+    "price": 15,
+    "stock": 60,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 302,
+    "badge": "Popular",
+    "image": "assets/images/instant/yippee.png",
+    "description": "Long non-sticky noodles."
+  },
+  {
+    "id": 84,
+    "name": "Cup Noodles Masala",
+    "brand": "Nissin",
+    "category": "Instant Food",
+    "subcategory": "Cup Noodles",
+    "keywords": [
+      "cup noodles",
+      "nissin"
+    ],
+    "price": 50,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 226,
+    "badge": "Ready To Eat",
+    "image": "assets/images/instant/cup-noodles-masala.png",
+    "description": "Ready in just a few minutes."
+  },
+  {
+    "id": 85,
+    "name": "Cup Noodles Spicy",
+    "brand": "Nissin",
+    "category": "Instant Food",
+    "subcategory": "Cup Noodles",
+    "keywords": [
+      "cup noodles",
+      "spicy"
+    ],
+    "price": 55,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 131,
+    "badge": "Hot",
+    "image": "assets/images/instant/cup-noodles-spicy.png",
+    "description": "Spicy cup noodles."
+  },
+  {
+    "id": 86,
+    "name": "Korean Ramen",
+    "brand": "Samyang",
+    "category": "Instant Food",
+    "subcategory": "Noodles",
+    "keywords": [
+      "korean",
+      "ramen"
+    ],
+    "price": 180,
+    "stock": 15,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 289,
+    "badge": "Imported",
+    "image": "assets/images/instant/korean-ramen.png",
+    "description": "Authentic Korean instant ramen."
+  },
+  {
+    "id": 87,
+    "name": "Sunfeast Pasta Treat",
+    "brand": "Sunfeast",
+    "category": "Instant Food",
+    "subcategory": "Pasta",
+    "keywords": [
+      "pasta",
+      "sunfeast"
+    ],
+    "price": 35,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.6,
+    "reviews": 88,
+    "badge": "Quick Meal",
+    "image": "assets/images/instant/pasta-treat.png",
+    "description": "Creamy instant pasta."
+  },
+  {
+    "id": 88,
+    "name": "Kissan Fresh Tomato Ketchup",
+    "brand": "Kissan",
+    "category": "Sauces",
+    "subcategory": "Tomato Ketchup",
+    "keywords": [
+      "kissan",
+      "ketchup"
+    ],
+    "price": 140,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 331,
+    "badge": "Classic",
+    "image": "assets/images/sauces/kissan-ketchup.png",
+    "description": "Rich tomato ketchup."
+  },
+  {
+    "id": 89,
+    "name": "Veeba Pizza & Pasta Sauce",
+    "brand": "Veeba",
+    "category": "Sauces",
+    "subcategory": "Cooking Sauce",
+    "keywords": [
+      "veeba",
+      "pizza",
+      "pasta"
+    ],
+    "price": 180,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 145,
+    "badge": "Chef's Choice",
+    "image": "assets/images/sauces/veeba-pizza-pasta.png",
+    "description": "Perfect sauce for pizza & pasta."
+  },
+  {
+    "id": 90,
+    "name": "Tops Green Chilli Sauce",
+    "brand": "Tops",
+    "category": "Sauces",
+    "subcategory": "Chilli Sauce",
+    "keywords": [
+      "tops",
+      "green chilli"
+    ],
+    "price": 120,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 91,
+    "badge": "Spicy",
+    "image": "assets/images/sauces/tops-green-chilli.png",
+    "description": "Spicy green chilli sauce."
+  },
+  {
+    "id": 91,
+    "name": "Heinz Tomato Ketchup",
+    "brand": "Heinz",
+    "category": "Sauces",
+    "subcategory": "Tomato Ketchup",
+    "keywords": [
+      "heinz",
+      "ketchup",
+      "tomato"
+    ],
+    "price": 180,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 412,
+    "badge": "Premium",
+    "image": "assets/images/sauces/heinz-tomato-ketchup.png",
+    "description": "Classic Heinz Tomato Ketchup."
+  },
+  {
+    "id": 92,
+    "name": "Veeba Mayonnaise",
+    "brand": "Veeba",
+    "category": "Sauces",
+    "subcategory": "Mayonnaise",
+    "keywords": [
+      "veeba",
+      "mayo",
+      "mayonnaise"
+    ],
+    "price": 199,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 181,
+    "badge": "Popular",
+    "image": "assets/images/sauces/veeba-mayonnaise.png",
+    "description": "Creamy Veeba mayonnaise."
+  },
+  {
+    "id": 93,
+    "name": "Veeba Schezwan Chutney",
+    "brand": "Veeba",
+    "category": "Sauces",
+    "subcategory": "Cooking Sauce",
+    "keywords": [
+      "schezwan",
+      "veeba"
+    ],
+    "price": 165,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 104,
+    "badge": "Spicy",
+    "image": "assets/images/sauces/veeba-schezwan.png",
+    "description": "Hot & spicy Schezwan chutney."
+  },
+  {
+    "id": 94,
+    "name": "Tastecraft Mojito Mint Syrup",
+    "brand": "Tastecraft",
+    "category": "Beverages",
+    "subcategory": "Syrups",
+    "keywords": [
+      "tastecraft",
+      "mojito",
+      "syrup"
+    ],
+    "price": 325,
+    "stock": 15,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 76,
+    "badge": "Imported",
+    "image": "assets/images/beverages/tastecraft-mojito.png",
+    "description": "Refreshing mojito mint syrup."
+  },
+  {
+    "id": 95,
+    "name": "Tastecraft Blue Curacao Syrup",
+    "brand": "Tastecraft",
+    "category": "Beverages",
+    "subcategory": "Syrups",
+    "keywords": [
+      "blue",
+      "curacao",
+      "syrup"
+    ],
+    "price": 350,
+    "stock": 15,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 58,
+    "badge": "Imported",
+    "image": "assets/images/beverages/tastecraft-blue-curacao.png",
+    "description": "Blue Curacao mocktail syrup."
+  },
+  {
+    "id": 96,
+    "name": "Tastecraft Strawberry Syrup",
+    "brand": "Tastecraft",
+    "category": "Beverages",
+    "subcategory": "Syrups",
+    "keywords": [
+      "strawberry",
+      "syrup"
+    ],
+    "price": 325,
+    "stock": 15,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 64,
+    "badge": "Popular",
+    "image": "assets/images/beverages/tastecraft-strawberry.png",
+    "description": "Premium strawberry syrup."
+  },
+  {
+    "id": 97,
+    "name": "Georgia Latte",
+    "brand": "Georgia",
+    "category": "Coffee",
+    "subcategory": "Ready To Drink",
+    "keywords": [
+      "georgia",
+      "latte"
+    ],
+    "price": 150,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 71,
+    "badge": "Imported",
+    "image": "assets/images/coffee/georgia-latte.png",
+    "description": "Ready-to-drink Georgia Latte."
+  },
+  {
+    "id": 98,
+    "name": "Lipton Green Tea",
+    "brand": "Lipton",
+    "category": "Tea",
+    "subcategory": "Green Tea",
+    "keywords": [
+      "green",
+      "tea",
+      "lipton"
+    ],
+    "price": 260,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 192,
+    "badge": "Healthy",
+    "image": "assets/images/tea/lipton-green-tea.png",
+    "description": "Refreshing Lipton Green Tea."
+  },
+  {
+    "id": 99,
+    "name": "Tetley Green Tea",
+    "brand": "Tetley",
+    "category": "Tea",
+    "subcategory": "Green Tea",
+    "keywords": [
+      "tetley",
+      "green",
+      "tea"
+    ],
+    "price": 290,
+    "stock": 15,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 174,
+    "badge": "Healthy",
+    "image": "assets/images/tea/tetley-green-tea.png",
+    "description": "Premium Tetley Green Tea."
+  },
+  {
+    "id": 100,
+    "name": "Pintola Almond Butter",
+    "brand": "Pintola",
+    "category": "Health Foods",
+    "subcategory": "Nut Butter",
+    "keywords": [
+      "almond",
+      "butter",
+      "pintola"
+    ],
+    "price": 699,
+    "stock": 10,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 123,
+    "badge": "Fitness",
+    "image": "assets/images/health/pintola-almond-butter.png",
+    "description": "Premium almond butter."
+  },
+  {
+    "id": 101,
+    "name": "Happilo California Almonds",
+    "brand": "Happilo",
+    "category": "Dry Fruits",
+    "subcategory": "Almonds",
+    "keywords": [
+      "almonds",
+      "happilo"
+    ],
+    "price": 425,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 153,
+    "badge": "Healthy",
+    "image": "assets/images/dryfruits/happilo-almonds.png",
+    "description": "Premium California almonds."
+  },
+  {
+    "id": 102,
+    "name": "Happilo Cashews",
+    "brand": "Happilo",
+    "category": "Dry Fruits",
+    "subcategory": "Cashews",
+    "keywords": [
+      "cashews",
+      "happilo"
+    ],
+    "price": 525,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 147,
+    "badge": "Healthy",
+    "image": "assets/images/dryfruits/happilo-cashews.png",
+    "description": "Premium roasted cashews."
+  },
+  {
+    "id": 103,
+    "name": "Happilo Pistachios",
+    "brand": "Happilo",
+    "category": "Dry Fruits",
+    "subcategory": "Pistachios",
+    "keywords": [
+      "pistachios",
+      "happilo"
+    ],
+    "price": 650,
+    "stock": 15,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 132,
+    "badge": "Premium",
+    "image": "assets/images/dryfruits/happilo-pistachios.png",
+    "description": "Premium roasted pistachios."
+  },
+  {
+    "id": 104,
+    "name": "Fox Nuts (Makhana)",
+    "brand": "Happilo",
+    "category": "Healthy Snacks",
+    "subcategory": "Makhana",
+    "keywords": [
+      "makhana",
+      "fox nuts"
+    ],
+    "price": 180,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 88,
+    "badge": "Healthy",
+    "image": "assets/images/health/makhana.png",
+    "description": "Roasted fox nuts."
+  },
+  {
+    "id": 105,
+    "name": "Nutella B-Ready",
+    "brand": "Nutella",
+    "category": "Chocolates",
+    "subcategory": "Wafer",
+    "keywords": [
+      "nutella",
+      "b-ready"
+    ],
+    "price": 75,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 205,
+    "badge": "Imported",
+    "image": "assets/images/chocolates/nutella-b-ready.png",
+    "description": "Crunchy wafer filled with Nutella."
+  },
+  {
+    "id": 106,
+    "name": "Kinder Bueno",
+    "brand": "Kinder",
+    "category": "Chocolates",
+    "subcategory": "Wafer Chocolate",
+    "keywords": [
+      "kinder",
+      "bueno"
+    ],
+    "price": 120,
+    "stock": 18,
+    "featured": false,
+    "rating": 5,
+    "reviews": 487,
+    "badge": "Imported",
+    "image": "assets/images/chocolates/kinder-bueno.png",
+    "description": "Crispy wafer with hazelnut filling."
+  },
+  {
+    "id": 107,
+    "name": "Kinder Joy",
+    "brand": "Kinder",
+    "category": "Chocolates",
+    "subcategory": "Chocolate Egg",
+    "keywords": [
+      "kinder",
+      "joy"
+    ],
+    "price": 60,
+    "stock": 30,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 298,
+    "badge": "Kids",
+    "image": "assets/images/chocolates/kinder-joy.png",
+    "description": "Chocolate treat with surprise toy."
+  },
+  {
+    "id": 108,
+    "name": "Bounty",
+    "brand": "Mars",
+    "category": "Chocolates",
+    "subcategory": "Chocolate Bar",
+    "keywords": [
+      "bounty",
+      "coconut"
+    ],
+    "price": 65,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 126,
+    "badge": "Imported",
+    "image": "assets/images/chocolates/bounty.png",
+    "description": "Milk chocolate with coconut filling."
+  },
+  {
+    "id": 109,
+    "name": "Twix",
+    "brand": "Mars",
+    "category": "Chocolates",
+    "subcategory": "Chocolate Bar",
+    "keywords": [
+      "twix",
+      "caramel"
+    ],
+    "price": 65,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 214,
+    "badge": "Popular",
+    "image": "assets/images/chocolates/twix.png",
+    "description": "Crunchy biscuit with caramel."
+  },
+  {
+    "id": 110,
+    "name": "Toblerone",
+    "brand": "Toblerone",
+    "category": "Chocolates",
+    "subcategory": "Premium Chocolate",
+    "keywords": [
+      "toblerone",
+      "swiss"
+    ],
+    "price": 220,
+    "stock": 12,
+    "featured": false,
+    "rating": 5,
+    "reviews": 563,
+    "badge": "Luxury",
+    "image": "assets/images/chocolates/toblerone.png",
+    "description": "Famous Swiss milk chocolate."
+  },
+  {
+    "id": 111,
+    "name": "Dove Intense Repair Shampoo",
+    "brand": "Dove",
+    "category": "Hair Care",
+    "subcategory": "Shampoo",
+    "keywords": [
+      "dove",
+      "shampoo",
+      "repair"
+    ],
+    "price": 340,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 387,
+    "badge": "Best Seller",
+    "image": "assets/images/haircare/dove-intense-repair-shampoo.png",
+    "description": "Dove Intense Repair nourishing shampoo."
+  },
+  {
+    "id": 112,
+    "name": "Dove Hair Fall Rescue Shampoo",
+    "brand": "Dove",
+    "category": "Hair Care",
+    "subcategory": "Shampoo",
+    "keywords": [
+      "dove",
+      "hair fall"
+    ],
+    "price": 340,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 212,
+    "badge": "Popular",
+    "image": "assets/images/haircare/dove-hairfall-rescue.png",
+    "description": "Strengthens weak hair."
+  },
+  {
+    "id": 113,
+    "name": "Tresemmé Keratin Smooth Shampoo",
+    "brand": "Tresemmé",
+    "category": "Hair Care",
+    "subcategory": "Shampoo",
+    "keywords": [
+      "tresemme",
+      "keratin"
+    ],
+    "price": 525,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 326,
+    "badge": "Premium",
+    "image": "assets/images/haircare/tresemme-keratin-smooth.png",
+    "description": "Professional keratin smooth shampoo."
+  },
+  {
+    "id": 114,
+    "name": "Tresemmé Hair Fall Defense",
+    "brand": "Tresemmé",
+    "category": "Hair Care",
+    "subcategory": "Shampoo",
+    "keywords": [
+      "tresemme",
+      "hair fall"
+    ],
+    "price": 525,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 181,
+    "badge": "Professional",
+    "image": "assets/images/haircare/tresemme-hairfall-defense.png",
+    "description": "Hair Fall Defense shampoo."
+  },
+  {
+    "id": 115,
+    "name": "Head & Shoulders Cool Menthol",
+    "brand": "Head & Shoulders",
+    "category": "Hair Care",
+    "subcategory": "Anti-Dandruff Shampoo",
+    "keywords": [
+      "head",
+      "shoulders",
+      "menthol"
+    ],
+    "price": 365,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 451,
+    "badge": "Best Seller",
+    "image": "assets/images/haircare/head-shoulders-cool-menthol.png",
+    "description": "Cooling anti-dandruff shampoo."
+  },
+  {
+    "id": 116,
+    "name": "Head & Shoulders Anti Hairfall",
+    "brand": "Head & Shoulders",
+    "category": "Hair Care",
+    "subcategory": "Anti-Dandruff Shampoo",
+    "keywords": [
+      "head",
+      "shoulders",
+      "hairfall"
+    ],
+    "price": 365,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 237,
+    "badge": "Popular",
+    "image": "assets/images/haircare/head-shoulders-hairfall.png",
+    "description": "Reduces dandruff and hair fall."
+  },
+  {
+    "id": 117,
+    "name": "Clinic Plus Strong & Long",
+    "brand": "Clinic Plus",
+    "category": "Hair Care",
+    "subcategory": "Shampoo",
+    "keywords": [
+      "clinic plus"
+    ],
+    "price": 210,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 202,
+    "badge": "Classic",
+    "image": "assets/images/haircare/clinic-plus.png",
+    "description": "Strong & Long shampoo."
+  },
+  {
+    "id": 118,
+    "name": "Sunsilk Black Shine",
+    "brand": "Sunsilk",
+    "category": "Hair Care",
+    "subcategory": "Shampoo",
+    "keywords": [
+      "sunsilk",
+      "black shine"
+    ],
+    "price": 230,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 184,
+    "badge": "Popular",
+    "image": "assets/images/haircare/sunsilk-black-shine.png",
+    "description": "Black Shine shampoo."
+  },
+  {
+    "id": 119,
+    "name": "Pantene Hair Fall Control",
+    "brand": "Pantene",
+    "category": "Hair Care",
+    "subcategory": "Shampoo",
+    "keywords": [
+      "pantene",
+      "hair fall"
+    ],
+    "price": 325,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 261,
+    "badge": "Popular",
+    "image": "assets/images/haircare/pantene-hairfall-control.png",
+    "description": "Pantene Hair Fall Control."
+  },
+  {
+    "id": 120,
+    "name": "L'Oréal Paris Total Repair 5",
+    "brand": "L'Oréal Paris",
+    "category": "Hair Care",
+    "subcategory": "Shampoo",
+    "keywords": [
+      "loreal",
+      "repair"
+    ],
+    "price": 420,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 279,
+    "badge": "Premium",
+    "image": "assets/images/haircare/loreal-total-repair.png",
+    "description": "Total Repair 5 shampoo."
+  },
+  {
+    "id": 121,
+    "name": "Mamaearth Onion Shampoo",
+    "brand": "Mamaearth",
+    "category": "Hair Care",
+    "subcategory": "Shampoo",
+    "keywords": [
+      "mamaearth",
+      "onion"
+    ],
+    "price": 399,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 312,
+    "badge": "Natural",
+    "image": "assets/images/haircare/mamaearth-onion-shampoo.png",
+    "description": "Onion shampoo with plant keratin."
+  },
+  {
+    "id": 122,
+    "name": "Dove Beauty Bar",
+    "brand": "Dove",
+    "category": "Bath & Body",
+    "subcategory": "Soap",
+    "keywords": [
+      "dove",
+      "soap"
+    ],
+    "price": 60,
+    "stock": 40,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 398,
+    "badge": "Classic",
+    "image": "assets/images/bath/dove-soap.png",
+    "description": "Moisturising beauty bar."
+  },
+  {
+    "id": 123,
+    "name": "Lux Jasmine Soap",
+    "brand": "Lux",
+    "category": "Bath & Body",
+    "subcategory": "Soap",
+    "keywords": [
+      "lux",
+      "soap"
+    ],
+    "price": 45,
+    "stock": 45,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 181,
+    "badge": "Popular",
+    "image": "assets/images/bath/lux-jasmine.png",
+    "description": "Lux Jasmine beauty soap."
+  },
+  {
+    "id": 124,
+    "name": "Pears Pure & Gentle",
+    "brand": "Pears",
+    "category": "Bath & Body",
+    "subcategory": "Soap",
+    "keywords": [
+      "pears",
+      "soap"
+    ],
+    "price": 65,
+    "stock": 35,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 271,
+    "badge": "Gentle",
+    "image": "assets/images/bath/pears.png",
+    "description": "Transparent glycerine soap."
+  },
+  {
+    "id": 125,
+    "name": "Santoor Sandal & Turmeric",
+    "brand": "Santoor",
+    "category": "Bath & Body",
+    "subcategory": "Soap",
+    "keywords": [
+      "santoor",
+      "soap"
+    ],
+    "price": 40,
+    "stock": 40,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 195,
+    "badge": "Classic",
+    "image": "assets/images/bath/santoor.png",
+    "description": "Sandal & turmeric soap."
+  },
+  {
+    "id": 126,
+    "name": "Dettol Original Soap",
+    "brand": "Dettol",
+    "category": "Bath & Body",
+    "subcategory": "Soap",
+    "keywords": [
+      "dettol",
+      "soap"
+    ],
+    "price": 45,
+    "stock": 40,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 304,
+    "badge": "Protection",
+    "image": "assets/images/bath/dettol-soap.png",
+    "description": "Trusted germ protection."
+  },
+  {
+    "id": 127,
+    "name": "Fiama Gel Bar Peach",
+    "brand": "Fiama",
+    "category": "Bath & Body",
+    "subcategory": "Soap",
+    "keywords": [
+      "fiama",
+      "gel bar"
+    ],
+    "price": 55,
+    "stock": 35,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 171,
+    "badge": "Refreshing",
+    "image": "assets/images/bath/fiama-peach.png",
+    "description": "Refreshing gel bathing bar."
+  },
+  {
+    "id": 128,
+    "name": "Lifebuoy Total Soap",
+    "brand": "Lifebuoy",
+    "category": "Bath & Body",
+    "subcategory": "Soap",
+    "keywords": [
+      "lifebuoy"
+    ],
+    "price": 38,
+    "stock": 45,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 298,
+    "badge": "Trusted",
+    "image": "assets/images/bath/lifebuoy.png",
+    "description": "Total germ protection soap."
+  },
+  {
+    "id": 129,
+    "name": "Cinthol Lime Soap",
+    "brand": "Cinthol",
+    "category": "Bath & Body",
+    "subcategory": "Soap",
+    "keywords": [
+      "cinthol",
+      "lime"
+    ],
+    "price": 42,
+    "stock": 35,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 142,
+    "badge": "Fresh",
+    "image": "assets/images/bath/cinthol-lime.png",
+    "description": "Fresh lime bathing soap."
+  },
+  {
+    "id": 130,
+    "name": "Johnson's Baby Powder",
+    "brand": "Johnson's",
+    "category": "Baby Care",
+    "subcategory": "Baby Powder",
+    "keywords": [
+      "johnsons",
+      "baby",
+      "powder"
+    ],
+    "price": 220,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 438,
+    "badge": "Baby Care",
+    "image": "assets/images/baby/johnsons-baby-powder.png",
+    "description": "Soft and gentle baby powder."
+  },
+  {
+    "id": 131,
+    "name": "Johnson's Baby Oil",
+    "brand": "Johnson's",
+    "category": "Baby Care",
+    "subcategory": "Baby Oil",
+    "keywords": [
+      "johnsons",
+      "baby",
+      "oil"
+    ],
+    "price": 225,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 361,
+    "badge": "Baby Care",
+    "image": "assets/images/baby/johnsons-baby-oil.png",
+    "description": "Gentle baby massage oil."
+  },
+  {
+    "id": 132,
+    "name": "Johnson's Baby Shampoo",
+    "brand": "Johnson's",
+    "category": "Baby Care",
+    "subcategory": "Baby Shampoo",
+    "keywords": [
+      "johnsons",
+      "baby",
+      "shampoo"
+    ],
+    "price": 195,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 282,
+    "badge": "Baby Care",
+    "image": "assets/images/baby/johnsons-baby-shampoo.png",
+    "description": "No tears baby shampoo."
+  },
+  {
+    "id": 133,
+    "name": "Johnson's Baby Soap",
+    "brand": "Johnson's",
+    "category": "Baby Care",
+    "subcategory": "Baby Soap",
+    "keywords": [
+      "johnsons",
+      "baby",
+      "soap"
+    ],
+    "price": 80,
+    "stock": 30,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 188,
+    "badge": "Gentle",
+    "image": "assets/images/baby/johnsons-baby-soap.png",
+    "description": "Gentle baby bathing soap."
+  },
+  {
+    "id": 134,
+    "name": "Colgate Strong Teeth",
+    "brand": "Colgate",
+    "category": "Oral Care",
+    "subcategory": "Toothpaste",
+    "keywords": [
+      "colgate",
+      "toothpaste"
+    ],
+    "price": 95,
+    "stock": 40,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 512,
+    "badge": "Trusted",
+    "image": "assets/images/oral/colgate-strong-teeth.png",
+    "description": "Daily cavity protection."
+  },
+  {
+    "id": 135,
+    "name": "Colgate MaxFresh",
+    "brand": "Colgate",
+    "category": "Oral Care",
+    "subcategory": "Toothpaste",
+    "keywords": [
+      "colgate",
+      "maxfresh"
+    ],
+    "price": 125,
+    "stock": 30,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 288,
+    "badge": "Fresh",
+    "image": "assets/images/oral/colgate-maxfresh.png",
+    "description": "Cooling freshness toothpaste."
+  },
+  {
+    "id": 136,
+    "name": "Sensodyne Fresh Gel",
+    "brand": "Sensodyne",
+    "category": "Oral Care",
+    "subcategory": "Toothpaste",
+    "keywords": [
+      "sensodyne",
+      "toothpaste"
+    ],
+    "price": 220,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 401,
+    "badge": "Premium",
+    "image": "assets/images/oral/sensodyne-fresh-gel.png",
+    "description": "Sensitive teeth protection."
+  },
+  {
+    "id": 137,
+    "name": "Oral-B Toothbrush",
+    "brand": "Oral-B",
+    "category": "Oral Care",
+    "subcategory": "Toothbrush",
+    "keywords": [
+      "oral b",
+      "toothbrush"
+    ],
+    "price": 85,
+    "stock": 40,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 154,
+    "badge": "Popular",
+    "image": "assets/images/oral/oralb-toothbrush.png",
+    "description": "Soft bristle toothbrush."
+  },
+  {
+    "id": 138,
+    "name": "Closeup Red Hot",
+    "brand": "Closeup",
+    "category": "Oral Care",
+    "subcategory": "Toothpaste",
+    "keywords": [
+      "closeup",
+      "toothpaste"
+    ],
+    "price": 120,
+    "stock": 30,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 173,
+    "badge": "Classic",
+    "image": "assets/images/oral/closeup-redhot.png",
+    "description": "Fresh breath toothpaste."
+  },
+  {
+    "id": 139,
+    "name": "Denver Hamilton",
+    "brand": "Denver",
+    "category": "Fragrances",
+    "subcategory": "Deodorant",
+    "keywords": [
+      "denver",
+      "deo"
+    ],
+    "price": 299,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 182,
+    "badge": "Men",
+    "image": "assets/images/fragrance/denver-hamilton.png",
+    "description": "Long lasting deodorant."
+  },
+  {
+    "id": 140,
+    "name": "Wild Stone Code Steel",
+    "brand": "Wild Stone",
+    "category": "Fragrances",
+    "subcategory": "Deodorant",
+    "keywords": [
+      "wild stone",
+      "steel"
+    ],
+    "price": 275,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 201,
+    "badge": "Popular",
+    "image": "assets/images/fragrance/wildstone-steel.png",
+    "description": "Fresh masculine fragrance."
+  },
+  {
+    "id": 141,
+    "name": "Axe Signature",
+    "brand": "Axe",
+    "category": "Fragrances",
+    "subcategory": "Body Spray",
+    "keywords": [
+      "axe",
+      "body spray"
+    ],
+    "price": 260,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 189,
+    "badge": "Popular",
+    "image": "assets/images/fragrance/axe-signature.png",
+    "description": "Premium body spray."
+  },
+  {
+    "id": 142,
+    "name": "Envy Black",
+    "brand": "Envy",
+    "category": "Fragrances",
+    "subcategory": "Body Spray",
+    "keywords": [
+      "envy",
+      "black"
+    ],
+    "price": 299,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 122,
+    "badge": "Premium",
+    "image": "assets/images/fragrance/envy-black.png",
+    "description": "Long lasting fragrance."
+  },
+  {
+    "id": 143,
+    "name": "Bella Vita CEO Man",
+    "brand": "Bella Vita",
+    "category": "Fragrances",
+    "subcategory": "Perfume",
+    "keywords": [
+      "bella vita",
+      "ceo"
+    ],
+    "price": 899,
+    "stock": 12,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 367,
+    "badge": "Luxury",
+    "image": "assets/images/fragrance/bellavita-ceo.png",
+    "description": "Premium perfume for men."
+  },
+  {
+    "id": 144,
+    "name": "Bella Vita Date Woman",
+    "brand": "Bella Vita",
+    "category": "Fragrances",
+    "subcategory": "Perfume",
+    "keywords": [
+      "bella vita",
+      "date"
+    ],
+    "price": 899,
+    "stock": 12,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 194,
+    "badge": "Luxury",
+    "image": "assets/images/fragrance/bellavita-date.png",
+    "description": "Elegant women's perfume."
+  },
+  {
+    "id": 145,
+    "name": "Gillette Shaving Foam",
+    "brand": "Gillette",
+    "category": "Men's Grooming",
+    "subcategory": "Shaving",
+    "keywords": [
+      "gillette",
+      "foam"
+    ],
+    "price": 299,
+    "stock": 15,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 148,
+    "badge": "Premium",
+    "image": "assets/images/grooming/gillette-foam.png",
+    "description": "Smooth shaving foam."
+  },
+  {
+    "id": 146,
+    "name": "Gillette Vector Razor",
+    "brand": "Gillette",
+    "category": "Men's Grooming",
+    "subcategory": "Razors",
+    "keywords": [
+      "gillette",
+      "vector"
+    ],
+    "price": 120,
+    "stock": 30,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 263,
+    "badge": "Classic",
+    "image": "assets/images/grooming/gillette-vector.png",
+    "description": "Twin blade shaving razor."
+  },
+  {
+    "id": 147,
+    "name": "Old Spice Original",
+    "brand": "Old Spice",
+    "category": "Fragrances",
+    "subcategory": "After Shave",
+    "keywords": [
+      "old spice"
+    ],
+    "price": 425,
+    "stock": 12,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 174,
+    "badge": "Classic",
+    "image": "assets/images/fragrance/oldspice-original.png",
+    "description": "Classic after shave lotion."
+  },
+  {
+    "id": 148,
+    "name": "Nivea Men Face Wash",
+    "brand": "Nivea",
+    "category": "Skin Care",
+    "subcategory": "Face Wash",
+    "keywords": [
+      "nivea",
+      "face wash"
+    ],
+    "price": 275,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 194,
+    "badge": "Popular",
+    "image": "assets/images/skincare/nivea-facewash.png",
+    "description": "Oil control face wash."
+  },
+  {
+    "id": 149,
+    "name": "Garnier Men Turbo Bright",
+    "brand": "Garnier",
+    "category": "Skin Care",
+    "subcategory": "Face Wash",
+    "keywords": [
+      "garnier",
+      "turbo"
+    ],
+    "price": 220,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 166,
+    "badge": "Popular",
+    "image": "assets/images/skincare/garnier-men-facewash.png",
+    "description": "Brightening face wash."
+  },
+  {
+    "id": 150,
+    "name": "Pond's Super Light Gel",
+    "brand": "Pond's",
+    "category": "Skin Care",
+    "subcategory": "Moisturizer",
+    "keywords": [
+      "ponds",
+      "gel"
+    ],
+    "price": 349,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 318,
+    "badge": "Best Seller",
+    "image": "assets/images/skincare/ponds-superlight-gel.png",
+    "description": "Hydrating gel moisturizer."
+  },
+  {
+    "id": 151,
+    "name": "Surf Excel Easy Wash",
+    "brand": "Surf Excel",
+    "category": "Household",
+    "subcategory": "Detergent Powder",
+    "keywords": [
+      "surf",
+      "excel",
+      "detergent"
+    ],
+    "price": 135,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 621,
+    "badge": "Best Seller",
+    "image": "assets/images/household/surf-excel-easy-wash.png",
+    "description": "Powerful stain removal detergent."
+  },
+  {
+    "id": 152,
+    "name": "Surf Excel Matic Front Load",
+    "brand": "Surf Excel",
+    "category": "Household",
+    "subcategory": "Detergent",
+    "keywords": [
+      "surf",
+      "matic"
+    ],
+    "price": 365,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 274,
+    "badge": "Premium",
+    "image": "assets/images/household/surf-matic-frontload.png",
+    "description": "Detergent for front-load washing machines."
+  },
+  {
+    "id": 153,
+    "name": "Ariel Complete",
+    "brand": "Ariel",
+    "category": "Household",
+    "subcategory": "Detergent Powder",
+    "keywords": [
+      "ariel",
+      "detergent"
+    ],
+    "price": 145,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 331,
+    "badge": "Popular",
+    "image": "assets/images/household/ariel-complete.png",
+    "description": "Superior cleaning detergent."
+  },
+  {
+    "id": 154,
+    "name": "Tide Plus Jasmine",
+    "brand": "Tide",
+    "category": "Household",
+    "subcategory": "Detergent Powder",
+    "keywords": [
+      "tide",
+      "jasmine"
+    ],
+    "price": 120,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 276,
+    "badge": "Classic",
+    "image": "assets/images/household/tide-plus.png",
+    "description": "Fresh jasmine fragrance detergent."
+  },
+  {
+    "id": 155,
+    "name": "Vim Dishwash Liquid",
+    "brand": "Vim",
+    "category": "Household",
+    "subcategory": "Dishwashing",
+    "keywords": [
+      "vim",
+      "dishwash"
+    ],
+    "price": 110,
+    "stock": 30,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 217,
+    "badge": "Popular",
+    "image": "assets/images/household/vim-liquid.png",
+    "description": "Cuts grease instantly."
+  },
+  {
+    "id": 156,
+    "name": "Vim Dishwash Bar",
+    "brand": "Vim",
+    "category": "Household",
+    "subcategory": "Dishwashing",
+    "keywords": [
+      "vim",
+      "bar"
+    ],
+    "price": 20,
+    "stock": 50,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 291,
+    "badge": "Trusted",
+    "image": "assets/images/household/vim-bar.png",
+    "description": "Classic dishwashing bar."
+  },
+  {
+    "id": 157,
+    "name": "Lizol Citrus Floor Cleaner",
+    "brand": "Lizol",
+    "category": "Household",
+    "subcategory": "Floor Cleaner",
+    "keywords": [
+      "lizol",
+      "floor cleaner"
+    ],
+    "price": 189,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 315,
+    "badge": "Protection",
+    "image": "assets/images/household/lizol-citrus.png",
+    "description": "Kills 99.9% germs."
+  },
+  {
+    "id": 158,
+    "name": "Harpic Power Plus",
+    "brand": "Harpic",
+    "category": "Household",
+    "subcategory": "Toilet Cleaner",
+    "keywords": [
+      "harpic",
+      "toilet"
+    ],
+    "price": 105,
+    "stock": 30,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 298,
+    "badge": "Trusted",
+    "image": "assets/images/household/harpic-powerplus.png",
+    "description": "Powerful toilet cleaner."
+  },
+  {
+    "id": 159,
+    "name": "Colin Glass Cleaner",
+    "brand": "Colin",
+    "category": "Household",
+    "subcategory": "Glass Cleaner",
+    "keywords": [
+      "colin",
+      "glass"
+    ],
+    "price": 115,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 187,
+    "badge": "Popular",
+    "image": "assets/images/household/colin-glass.png",
+    "description": "Crystal clear shine."
+  },
+  {
+    "id": 160,
+    "name": "Domex Toilet Cleaner",
+    "brand": "Domex",
+    "category": "Household",
+    "subcategory": "Toilet Cleaner",
+    "keywords": [
+      "domex",
+      "cleaner"
+    ],
+    "price": 110,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 214,
+    "badge": "Protection",
+    "image": "assets/images/household/domex.png",
+    "description": "Advanced toilet cleaning."
+  },
+  {
+    "id": 161,
+    "name": "Comfort Fabric Conditioner",
+    "brand": "Comfort",
+    "category": "Household",
+    "subcategory": "Fabric Conditioner",
+    "keywords": [
+      "comfort",
+      "fabric"
+    ],
+    "price": 230,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 145,
+    "badge": "Premium",
+    "image": "assets/images/household/comfort.png",
+    "description": "Long-lasting freshness."
+  },
+  {
+    "id": 162,
+    "name": "Wheel Active Detergent",
+    "brand": "Wheel",
+    "category": "Household",
+    "subcategory": "Detergent Powder",
+    "keywords": [
+      "wheel",
+      "detergent"
+    ],
+    "price": 95,
+    "stock": 35,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 189,
+    "badge": "Budget",
+    "image": "assets/images/household/wheel.png",
+    "description": "Affordable cleaning power."
+  },
+  {
+    "id": 163,
+    "name": "Godrej Aer Fresh Lush Green",
+    "brand": "Godrej",
+    "category": "Household",
+    "subcategory": "Air Freshener",
+    "keywords": [
+      "godrej",
+      "aer"
+    ],
+    "price": 149,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 137,
+    "badge": "Fresh",
+    "image": "assets/images/household/godrej-aer.png",
+    "description": "Automatic air freshener."
+  },
+  {
+    "id": 164,
+    "name": "Odonil Room Freshener",
+    "brand": "Odonil",
+    "category": "Household",
+    "subcategory": "Air Freshener",
+    "keywords": [
+      "odonil"
+    ],
+    "price": 89,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 148,
+    "badge": "Classic",
+    "image": "assets/images/household/odonil.png",
+    "description": "Long lasting room fragrance."
+  },
+  {
+    "id": 165,
+    "name": "Scotch-Brite Scrub Pad",
+    "brand": "Scotch-Brite",
+    "category": "Household",
+    "subcategory": "Cleaning Tools",
+    "keywords": [
+      "scotch",
+      "brite"
+    ],
+    "price": 35,
+    "stock": 40,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 122,
+    "badge": "Popular",
+    "image": "assets/images/household/scotch-brite.png",
+    "description": "Heavy duty scrub pad."
+  },
+  {
+    "id": 166,
+    "name": "Hit Anti Roach Spray",
+    "brand": "Hit",
+    "category": "Household",
+    "subcategory": "Pest Control",
+    "keywords": [
+      "hit",
+      "roach"
+    ],
+    "price": 225,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 164,
+    "badge": "Protection",
+    "image": "assets/images/household/hit-roach.png",
+    "description": "Kills cockroaches instantly."
+  },
+  {
+    "id": 167,
+    "name": "Hit Mosquito Spray",
+    "brand": "Hit",
+    "category": "Household",
+    "subcategory": "Pest Control",
+    "keywords": [
+      "hit",
+      "mosquito"
+    ],
+    "price": 215,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 171,
+    "badge": "Protection",
+    "image": "assets/images/household/hit-mosquito.png",
+    "description": "Fast mosquito protection."
+  },
+  {
+    "id": 168,
+    "name": "Good Knight Gold Flash",
+    "brand": "Good Knight",
+    "category": "Household",
+    "subcategory": "Mosquito Repellent",
+    "keywords": [
+      "good knight"
+    ],
+    "price": 99,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 188,
+    "badge": "Trusted",
+    "image": "assets/images/household/good-knight.png",
+    "description": "Mosquito repellent refill."
+  },
+  {
+    "id": 169,
+    "name": "All Out Liquid Vaporizer",
+    "brand": "All Out",
+    "category": "Household",
+    "subcategory": "Mosquito Repellent",
+    "keywords": [
+      "all out"
+    ],
+    "price": 95,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 165,
+    "badge": "Trusted",
+    "image": "assets/images/household/allout.png",
+    "description": "Effective mosquito protection."
+  },
+  {
+    "id": 170,
+    "name": "Exo Dishwash Bar",
+    "brand": "Exo",
+    "category": "Household",
+    "subcategory": "Dishwashing",
+    "keywords": [
+      "exo",
+      "dishwash"
+    ],
+    "price": 20,
+    "stock": 45,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 146,
+    "badge": "Classic",
+    "image": "assets/images/household/exo-bar.png",
+    "description": "Powerful grease cleaning bar."
+  },
+  {
+    "id": 171,
+    "name": "Aashirvaad Whole Wheat Atta",
+    "brand": "Aashirvaad",
+    "category": "Grocery",
+    "subcategory": "Flour",
+    "keywords": [
+      "aashirvaad",
+      "atta",
+      "wheat"
+    ],
+    "price": 560,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 581,
+    "badge": "Best Seller",
+    "image": "assets/images/grocery/aashirvaad-atta.png",
+    "description": "Premium whole wheat flour."
+  },
+  {
+    "id": 172,
+    "name": "Fortune Chakki Fresh Atta",
+    "brand": "Fortune",
+    "category": "Grocery",
+    "subcategory": "Flour",
+    "keywords": [
+      "fortune",
+      "atta"
+    ],
+    "price": 545,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 248,
+    "badge": "Popular",
+    "image": "assets/images/grocery/fortune-atta.png",
+    "description": "Fresh chakki ground wheat flour."
+  },
+  {
+    "id": 173,
+    "name": "Tata Sampann Besan",
+    "brand": "Tata Sampann",
+    "category": "Grocery",
+    "subcategory": "Flour",
+    "keywords": [
+      "besan",
+      "tata"
+    ],
+    "price": 145,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 201,
+    "badge": "Pure",
+    "image": "assets/images/grocery/tata-besan.png",
+    "description": "Premium gram flour."
+  },
+  {
+    "id": 174,
+    "name": "Fortune Sunlite Refined Oil",
+    "brand": "Fortune",
+    "category": "Grocery",
+    "subcategory": "Cooking Oil",
+    "keywords": [
+      "fortune",
+      "oil"
+    ],
+    "price": 190,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 274,
+    "badge": "Trusted",
+    "image": "assets/images/grocery/fortune-sunlite.png",
+    "description": "Light refined cooking oil."
+  },
+  {
+    "id": 175,
+    "name": "Fortune Mustard Oil",
+    "brand": "Fortune",
+    "category": "Grocery",
+    "subcategory": "Cooking Oil",
+    "keywords": [
+      "mustard",
+      "oil"
+    ],
+    "price": 245,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 191,
+    "badge": "Classic",
+    "image": "assets/images/grocery/fortune-mustard.png",
+    "description": "Pure mustard cooking oil."
+  },
+  {
+    "id": 176,
+    "name": "Figaro Olive Oil",
+    "brand": "Figaro",
+    "category": "Grocery",
+    "subcategory": "Olive Oil",
+    "keywords": [
+      "figaro",
+      "olive"
+    ],
+    "price": 699,
+    "stock": 12,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 328,
+    "badge": "Premium",
+    "image": "assets/images/grocery/figaro-olive-oil.png",
+    "description": "Extra virgin olive oil."
+  },
+  {
+    "id": 177,
+    "name": "Saffola Gold Oil",
+    "brand": "Saffola",
+    "category": "Grocery",
+    "subcategory": "Cooking Oil",
+    "keywords": [
+      "saffola",
+      "gold"
+    ],
+    "price": 245,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 265,
+    "badge": "Healthy",
+    "image": "assets/images/grocery/saffola-gold.png",
+    "description": "Blended cooking oil."
+  },
+  {
+    "id": 178,
+    "name": "Tata Salt",
+    "brand": "Tata",
+    "category": "Grocery",
+    "subcategory": "Salt",
+    "keywords": [
+      "salt",
+      "tata"
+    ],
+    "price": 30,
+    "stock": 50,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 642,
+    "badge": "Trusted",
+    "image": "assets/images/grocery/tata-salt.png",
+    "description": "India's trusted iodized salt."
+  },
+  {
+    "id": 179,
+    "name": "Catch Black Pepper",
+    "brand": "Catch",
+    "category": "Grocery",
+    "subcategory": "Spices",
+    "keywords": [
+      "catch",
+      "pepper"
+    ],
+    "price": 95,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 139,
+    "badge": "Premium",
+    "image": "assets/images/grocery/catch-pepper.png",
+    "description": "Freshly ground black pepper."
+  },
+  {
+    "id": 180,
+    "name": "Everest Garam Masala",
+    "brand": "Everest",
+    "category": "Grocery",
+    "subcategory": "Spices",
+    "keywords": [
+      "everest",
+      "garam"
+    ],
+    "price": 92,
+    "stock": 25,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 254,
+    "badge": "Popular",
+    "image": "assets/images/grocery/everest-garam-masala.png",
+    "description": "Authentic garam masala."
+  },
+  {
+    "id": 181,
+    "name": "MDH Kitchen King",
+    "brand": "MDH",
+    "category": "Grocery",
+    "subcategory": "Spices",
+    "keywords": [
+      "mdh",
+      "kitchen king"
+    ],
+    "price": 95,
+    "stock": 22,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 187,
+    "badge": "Classic",
+    "image": "assets/images/grocery/mdh-kitchen-king.png",
+    "description": "All-purpose spice blend."
+  },
+  {
+    "id": 182,
+    "name": "Tata Tea Gold",
+    "brand": "Tata Tea",
+    "category": "Tea",
+    "subcategory": "Black Tea",
+    "keywords": [
+      "tata",
+      "tea"
+    ],
+    "price": 340,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 384,
+    "badge": "Premium",
+    "image": "assets/images/tea/tata-tea-gold.png",
+    "description": "Rich premium tea leaves."
+  },
+  {
+    "id": 183,
+    "name": "Brooke Bond Red Label",
+    "brand": "Red Label",
+    "category": "Tea",
+    "subcategory": "Black Tea",
+    "keywords": [
+      "red label",
+      "tea"
+    ],
+    "price": 310,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 329,
+    "badge": "Popular",
+    "image": "assets/images/tea/red-label.png",
+    "description": "Classic everyday tea."
+  },
+  {
+    "id": 184,
+    "name": "Bru Instant Coffee",
+    "brand": "Bru",
+    "category": "Coffee",
+    "subcategory": "Instant Coffee",
+    "keywords": [
+      "bru",
+      "coffee"
+    ],
+    "price": 195,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 198,
+    "badge": "Classic",
+    "image": "assets/images/coffee/bru.png",
+    "description": "Rich instant coffee."
+  },
+  {
+    "id": 185,
+    "name": "Tata Sampann Chana Dal",
+    "brand": "Tata Sampann",
+    "category": "Grocery",
+    "subcategory": "Pulses",
+    "keywords": [
+      "chana",
+      "dal"
+    ],
+    "price": 145,
+    "stock": 22,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 145,
+    "badge": "Healthy",
+    "image": "assets/images/grocery/chana-dal.png",
+    "description": "Premium quality chana dal."
+  },
+  {
+    "id": 186,
+    "name": "Tata Sampann Toor Dal",
+    "brand": "Tata Sampann",
+    "category": "Grocery",
+    "subcategory": "Pulses",
+    "keywords": [
+      "toor",
+      "dal"
+    ],
+    "price": 185,
+    "stock": 22,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 164,
+    "badge": "Healthy",
+    "image": "assets/images/grocery/toor-dal.png",
+    "description": "Premium toor dal."
+  },
+  {
+    "id": 187,
+    "name": "India Gate Basmati Rice",
+    "brand": "India Gate",
+    "category": "Grocery",
+    "subcategory": "Rice",
+    "keywords": [
+      "india gate",
+      "rice"
+    ],
+    "price": 245,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 427,
+    "badge": "Premium",
+    "image": "assets/images/grocery/india-gate-rice.png",
+    "description": "Premium basmati rice."
+  },
+  {
+    "id": 188,
+    "name": "Daawat Basmati Rice",
+    "brand": "Daawat",
+    "category": "Grocery",
+    "subcategory": "Rice",
+    "keywords": [
+      "daawat",
+      "rice"
+    ],
+    "price": 255,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 242,
+    "badge": "Popular",
+    "image": "assets/images/grocery/daawat-rice.png",
+    "description": "Long grain basmati rice."
+  },
+  {
+    "id": 189,
+    "name": "Sugar Free Natura",
+    "brand": "Sugar Free",
+    "category": "Health Foods",
+    "subcategory": "Sweetener",
+    "keywords": [
+      "sugar free"
+    ],
+    "price": 175,
+    "stock": 15,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 131,
+    "badge": "Healthy",
+    "image": "assets/images/health/sugar-free.png",
+    "description": "Low-calorie sugar substitute."
+  },
+  {
+    "id": 190,
+    "name": "Patanjali Honey",
+    "brand": "Patanjali",
+    "category": "Health Foods",
+    "subcategory": "Honey",
+    "keywords": [
+      "honey",
+      "patanjali"
+    ],
+    "price": 225,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.7,
+    "reviews": 201,
+    "badge": "Natural",
+    "image": "assets/images/health/patanjali-honey.png",
+    "description": "Pure natural honey."
+  },
+  {
+    "id": 191,
+    "name": "Quaker Oats",
+    "brand": "Quaker",
+    "category": "Breakfast",
+    "subcategory": "Oats",
+    "keywords": [
+      "quaker",
+      "oats"
+    ],
+    "price": 210,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 314,
+    "badge": "Healthy",
+    "image": "assets/images/breakfast/quaker-oats.png",
+    "description": "100% wholegrain oats."
+  },
+  {
+    "id": 192,
+    "name": "Kellogg's Corn Flakes",
+    "brand": "Kellogg's",
+    "category": "Breakfast",
+    "subcategory": "Cereal",
+    "keywords": [
+      "kelloggs",
+      "corn flakes"
+    ],
+    "price": 195,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 261,
+    "badge": "Popular",
+    "image": "assets/images/breakfast/kelloggs-cornflakes.png",
+    "description": "Classic breakfast cereal."
+  },
+  {
+    "id": 193,
+    "name": "Kellogg's Chocos",
+    "brand": "Kellogg's",
+    "category": "Breakfast",
+    "subcategory": "Cereal",
+    "keywords": [
+      "chocos",
+      "kelloggs"
+    ],
+    "price": 235,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 219,
+    "badge": "Kids",
+    "image": "assets/images/breakfast/kelloggs-chocos.png",
+    "description": "Chocolate flavoured breakfast cereal."
+  },
+  {
+    "id": 194,
+    "name": "GAIA Muesli",
+    "brand": "GAIA",
+    "category": "Breakfast",
+    "subcategory": "Muesli",
+    "keywords": [
+      "gaia",
+      "muesli"
+    ],
+    "price": 375,
+    "stock": 15,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 146,
+    "badge": "Healthy",
+    "image": "assets/images/breakfast/gaia-muesli.png",
+    "description": "Healthy fruit & nut muesli."
+  },
+  {
+    "id": 195,
+    "name": "Nutella B-Ready Pack",
+    "brand": "Nutella",
+    "category": "Imported",
+    "subcategory": "Snacks",
+    "keywords": [
+      "nutella",
+      "b-ready"
+    ],
+    "price": 295,
+    "stock": 12,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 172,
+    "badge": "Imported",
+    "image": "assets/images/imported/nutella-bready-pack.png",
+    "description": "Crunchy Nutella filled snack bars."
+  },
+  {
+    "id": 196,
+    "name": "Lotus Biscoff Biscuits",
+    "brand": "Lotus",
+    "category": "Imported",
+    "subcategory": "Biscuits",
+    "keywords": [
+      "lotus",
+      "biscoff"
+    ],
+    "price": 350,
+    "stock": 15,
+    "featured": false,
+    "rating": 5,
+    "reviews": 298,
+    "badge": "Imported",
+    "image": "assets/images/imported/lotus-biscoff-biscuits.png",
+    "description": "World-famous caramelised biscuits."
+  },
+  {
+    "id": 197,
+    "name": "Hershey's Cookies 'n' Creme",
+    "brand": "Hershey's",
+    "category": "Chocolates",
+    "subcategory": "Premium Chocolate",
+    "keywords": [
+      "hershey",
+      "cookies"
+    ],
+    "price": 150,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 214,
+    "badge": "Imported",
+    "image": "assets/images/chocolates/hersheys-cookies-creme.png",
+    "description": "White chocolate with cookie pieces."
+  },
+  {
+    "id": 198,
+    "name": "M&M's Chocolate",
+    "brand": "Mars",
+    "category": "Chocolates",
+    "subcategory": "Chocolate Candy",
+    "keywords": [
+      "m&m",
+      "chocolate"
+    ],
+    "price": 120,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 203,
+    "badge": "Imported",
+    "image": "assets/images/chocolates/mms-chocolate.png",
+    "description": "Colourful chocolate candies."
+  },
+  {
+    "id": 199,
+    "name": "Orion Choco Pie",
+    "brand": "Orion",
+    "category": "Bakery",
+    "subcategory": "Cake",
+    "keywords": [
+      "orion",
+      "choco pie"
+    ],
+    "price": 180,
+    "stock": 18,
+    "featured": false,
+    "rating": 4.9,
+    "reviews": 193,
+    "badge": "Imported",
+    "image": "assets/images/bakery/orion-choco-pie.png",
+    "description": "Soft marshmallow chocolate pies."
+  },
+  {
+    "id": 200,
+    "name": "Bauli Moonfils",
+    "brand": "Bauli",
+    "category": "Bakery",
+    "subcategory": "Cake",
+    "keywords": [
+      "bauli",
+      "moonfils"
+    ],
+    "price": 99,
+    "stock": 20,
+    "featured": false,
+    "rating": 4.8,
+    "reviews": 126,
+    "badge": "Imported",
+    "image": "assets/images/bakery/bauli-moonfils.png",
+    "description": "Soft filled sponge cake."
+  }
+]

@@ -1,0 +1,307 @@
+/* ============================================
+                LARGE LAPTOPS
+============================================ */
+
+@media (max-width:1400px){
+
+.hero h1{
+    font-size:64px;
+}
+
+.hero-wrapper{
+    gap:50px;
+}
+
+.container{
+    width:94%;
+}
+
+}
+
+/* ============================================
+                TABLETS
+============================================ */
+
+@media (max-width:1100px){
+
+.hero-wrapper{
+    grid-template-columns:1fr;
+    text-align:center;
+}
+
+.hero-left{
+    order:2;
+}
+
+.hero-right{
+    order:1;
+    display:flex;
+    justify-content:center;
+}
+
+.hero-right img{
+    max-width:650px;
+}
+
+.hero-buttons,
+.hero-features,
+.store-buttons,
+.footer-social{
+    justify-content:center;
+}
+
+.store-showcase .container,
+.contact-grid,
+.footer-grid{
+    grid-template-columns:1fr;
+}
+
+.footer-grid{
+    text-align:center;
+    gap:50px;
+}
+
+.stats-grid{
+    grid-template-columns:repeat(2,1fr);
+}
+
+.product-grid{
+    grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+/* ============================================
+                MOBILE
+============================================ */
+
+@media (max-width:800px){
+
+.nav-links{
+    display:none;
+}
+
+.menu-btn{
+    display:block;
+}
+
+.hero{
+    padding-top:120px;
+}
+
+.hero h1{
+    font-size:48px;
+}
+
+.hero-description{
+    font-size:18px;
+}
+
+.hero-buttons{
+    flex-direction:column;
+    align-items:center;
+}
+
+.primary-btn,
+.secondary-btn{
+    width:100%;
+    max-width:320px;
+}
+
+.product-grid,
+.category-grid,
+.gallery-grid,
+.stats-grid{
+    grid-template-columns:1fr;
+}
+
+.review-card,
+.banner-content{
+    flex-direction:column;
+    text-align:center;
+}
+
+/* ---------- PRODUCT DRAWER ---------- */
+
+.category-drawer{
+    width:100%;
+    max-width:100%;
+    right:0;
+    left:0;
+    border-radius:20px 20px 0 0;
+}
+
+.drawer-header{
+    padding:20px;
+}
+
+.drawer-content{
+    padding:20px;
+}
+
+.drawer-item{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.drawer-item img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    border-radius:14px;
+}
+
+.drawer-info{
+    width:100%;
+}
+
+.drawer-info h2,
+.drawer-info h3{
+    font-size:22px;
+    line-height:1.3;
+    word-break:break-word;
+}
+
+.drawer-info p{
+    font-size:15px;
+}
+
+.drawer-buttons{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.drawer-buttons button{
+    width:100%;
+}
+
+/* ---------- PRODUCT MODAL ---------- */
+
+.product-modal{
+    width:95%;
+    max-height:90vh;
+    overflow-y:auto;
+}
+
+.product-modal img{
+    width:100%;
+    height:240px;
+    object-fit:cover;
+}
+
+.product-modal-content{
+    padding:20px;
+}
+
+/* ---------- CART ---------- */
+
+.cart-drawer{
+    width:100%;
+    max-width:100%;
+}
+
+.cart-item{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.cart-item img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+}
+
+.cart-footer button{
+    width:100%;
+}
+
+/* ---------- SEARCH ---------- */
+
+.search-container{
+    width:100%;
+}
+
+.search-input{
+    width:100%;
+}
+
+/* ---------- GALLERY ---------- */
+
+.gallery-grid img{
+    height:250px;
+    object-fit:cover;
+}
+
+}
+
+/* ============================================
+            SMALL PHONES
+============================================ */
+
+@media (max-width:500px){
+
+.hero h1{
+    font-size:36px;
+}
+
+.hero-description{
+    font-size:16px;
+}
+
+section{
+    padding:80px 0;
+}
+
+section h2{
+    font-size:34px;
+}
+
+.category-card{
+    padding:35px 20px;
+}
+
+.product-card img{
+    height:220px;
+}
+
+.store-image img{
+    border-radius:18px;
+}
+
+.footer-grid h2{
+    font-size:28px;
+}
+
+.floating-buttons{
+    right:15px;
+    bottom:15px;
+}
+
+.floating-buttons a{
+    width:52px;
+    height:52px;
+    font-size:22px;
+}
+
+/* Extra fixes */
+
+.product-drawer{
+    border-radius:0;
+}
+
+.drawer-item img{
+    height:190px;
+}
+
+.drawer-info h2,
+.drawer-info h3{
+    font-size:20px;
+}
+
+.product-modal img{
+    height:200px;
+}
+
+}

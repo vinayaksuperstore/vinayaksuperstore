@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Admin · Vinayak Superstore</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+  <script src="/admin/admin.js" defer></script>
+</head>
+<body>
+  <main id="loginView" class="login-wrap">
+    <form id="loginForm" class="login-card">
+      <div class="brand-mark" aria-hidden="true">V</div>
+      <p class="eyebrow">VINAYAK SUPERSTORE</p>
+      <h1>Admin sign in</h1>
+      <p class="muted">Sign in to manage your product catalogue.</p>
+      <label for="loginUsername">Username</label>
+      <input id="loginUsername" name="username" autocomplete="username" required maxlength="48">
+      <label for="loginPassword">Password</label>
+      <input id="loginPassword" name="password" type="password" autocomplete="current-password" required>
+      <p id="loginError" class="form-error" role="alert" hidden></p>
+      <button class="button primary full" type="submit">Sign in</button>
+      <a class="back-link" href="/">← Back to storefront</a>
+    </form>
+  </main>
+
+  <div id="adminShell" class="admin-shell" hidden>
+    <aside id="sidebar" class="sidebar">
+      <a class="brand" href="/admin" aria-label="Vinayak Superstore admin">
+        <span class="brand-mark">V</span><span><strong>VINAYAK</strong><small>SUPERSTORE</small></span>
+      </a>
+      <p class="side-label">MANAGEMENT</p>
+      <nav id="navLinks" class="nav-links" aria-label="Admin navigation">
+        <button type="button" data-view="dashboard" class="nav-link active"><span>▦</span>Dashboard</button>
+        <button type="button" data-view="products" class="nav-link"><span>▤</span>Products</button>
+        <button type="button" data-view="prices" class="nav-link"><span>₹</span>Price management</button>
+        <button type="button" data-view="categories" class="nav-link"><span>◫</span>Categories</button>
+        <button type="button" data-view="settings" class="nav-link"><span>⚙</span>Settings</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <a class="store-link" href="/">↗ View storefront</a>
+        <button type="button" id="logoutButton" class="nav-link logout"><span>⇥</span>Log out</button>
+      </div>
+    </aside>
+
+    <main class="main-panel">
+      <header class="topbar">
+        <button id="menuToggle" class="icon-button menu-toggle" type="button" aria-label="Open navigation">☰</button>
+        <div><p class="eyebrow">VINAYAK SUPERSTORE / ADMIN</p><h1 id="viewTitle">Dashboard</h1></div>
+        <div class="user-chip"><span class="user-dot"></span><span id="usernameLabel">Admin</span></div>
+      </header>
+      <section id="content" class="content" aria-live="polite"></section>
+    </main>
+  </div>
+
+  <dialog id="productDialog" class="product-dialog">
+    <form id="productForm" method="dialog">
+      <div class="dialog-head">
+        <div><p class="eyebrow">PRODUCT CATALOGUE</p><h2 id="productDialogTitle">Add product</h2></div>
+        <button type="button" class="icon-button" data-close-dialog aria-label="Close">×</button>
+      </div>
+      <input id="productId" type="hidden">
+      <div class="form-grid">
+        <label class="field wide">Product name<input id="productName" required maxlength="120"></label>
+        <label class="field">Brand <span class="optional">optional</span><input id="productBrand" maxlength="80"></label>
+        <label class="field">Category<select id="productCategory" required></select></label>
+        <label class="field">Subcategory <span class="optional">optional</span><input id="productSubcategory" maxlength="80"></label>
+        <label class="field">Price (₹)<input id="productPrice" type="number" min="0" step="0.01" required inputmode="decimal"></label>
+        <label class="field wide">Offer label <span class="optional">optional</span><input id="productOffer" maxlength="80" placeholder="e.g. BUY ONE GET ONE FREE"><span class="help">Shown on the product card and details.</span></label>
+        <label class="field wide">Description<textarea id="productDescription" rows="3" maxlength="1200"></textarea></label>
+        <div class="field wide image-field">
+          <label for="productImageFile">Product image</label>
+          <div class="image-picker"><img id="imagePreview" src="/assets/images/placeholder.svg" alt="Product preview"><div><input id="productImageFile" type="file" accept="image/png,image/jpeg,image/webp"><p class="help">PNG, JPEG, or WebP · up to 5 MB</p></div></div>
+          <label class="sub-label" for="productImagePath">Or use an existing project image path</label>
+          <input id="productImagePath" placeholder="assets/images/…" maxlength="300">
+        </div>
+        <label class="availability-field"><input id="productAvailable" type="checkbox" checked><span><strong>Available for customers</strong><small>Unavailable products stay visible but cannot be ordered.</small></span></label>
+      </div>
+      <p id="productFormError" class="form-error" role="alert" hidden></p>
+      <div class="dialog-actions"><button type="button" class="button secondary" data-close-dialog>Cancel</button><button id="productSaveButton" type="submit" class="button primary">Save product</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="historyDialog" class="history-dialog">
+    <div class="dialog-head"><div><p class="eyebrow">AUDIT LOG</p><h2 id="historyTitle">Price history</h2></div><button type="button" class="icon-button" data-close-history aria-label="Close">×</button></div>
+    <div id="historyContent"></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

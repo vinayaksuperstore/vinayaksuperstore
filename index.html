@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Vinayak Superstore | Hoshiarpur's Premium Grocery Destination</title>
+
+    <meta name="description"
+        content="Vinayak Superstore - Grocery, Dairy, Imported Products, Gourmet Foods & Daily Essentials in Hoshiarpur.">
+
+    <meta name="theme-color" content="#07111F">
+
+    <link rel="icon" href="assets/favicon.png" type="image/png">
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="manifest" href="manifest.json">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vinayak Superstore | Premium Grocery Destination">
+<meta property="og:description" content="Grocery, dairy, imported products, gourmet foods and daily essentials in Hoshiarpur.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="styles/reset.css">
+<link rel="stylesheet" href="styles/navbar.css">
+<link rel="stylesheet" href="styles/hero.css">
+<link rel="stylesheet" href="styles/drawer.css">
+<link rel="stylesheet" href="styles/sections.css">
+<link rel="stylesheet" href="styles/cards.css">
+<link rel="stylesheet" href="styles/cart.css">
+<link rel="stylesheet" href="styles/footer.css">
+<link rel="stylesheet" href="styles/animations.css">
+<link rel="stylesheet" href="styles/responsive.css">
+<link rel="stylesheet" href="styles/popup.css">
+<link rel="stylesheet" href="styles/cart-drawer.css">
+<link rel="stylesheet" href="styles/toast.css">
+<link rel="stylesheet" href="styles/fly.css">
+<link rel="stylesheet" href="styles/wishlist.css">
+<link rel="stylesheet" href="styles/accessibility.css">
+<link rel="stylesheet" href="styles/progress.css">
+
+</head>
+
+<body>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<!-- ===================== LOADER ===================== -->
+
+<div class="loader">
+
+    <div class="loader-line"></div>
+
+    <h1>VINAYAK</h1>
+
+    <span>SUPERSTORE</span>
+
+</div>
+
+<!-- ===================== HEADER ===================== -->
+
+<header id="header">
+
+    <div class="container">
+
+        <nav>
+
+            <a href="#" class="brand">
+
+                <div class="brand-logo">
+
+                    VS
+
+                </div>
+
+                <div class="brand-text">
+
+                    <h2>VINAYAK</h2>
+
+                    <span>SUPERSTORE</span>
+
+                </div>
+
+            </a>
+
+            <ul class="nav-links">
+
+                <li><a href="#home">Home</a></li>
+
+                <li><a href="#categories">Categories</a></li>
+
+                <li><a href="#store">Store</a></li>
+
+                <li><a href="#contact">Contact</a></li>
+
+            </ul>
+
+           <div class="nav-actions">
+
+<button
+class="wishlist-button"
+onclick="openWishlist()"
+aria-label="Open wishlist">
+
+<i class="fa-solid fa-heart"></i>
+
+<span id="wishlistCount">
+
+0
+
+</span>
+
+</button>
+
+    <button class="cart-button" onclick="openCart()">
+
+        <i class="fa-solid fa-cart-shopping"></i>
+
+        <span id="cartCount">0</span>
+
+    </button>
+
+    <a href="https://wa.me/919779562555?text=Hi%20Vinayak%20Superstore,%20I%20want%20to%20order."
+        target="_blank"
+        class="order-btn">
+
+        Order Now
+
+    </a>
+
+</div>
+
+            <button class="menu-btn">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+        </nav>
+
+    </div>
+
+</header>
+
+<!-- ===========================================
+                UPDATE LOG
+=========================================== -->
+
+<div class="update-overlay" id="updateOverlay">
+
+    <div class="update-box">
+
+        <h2>🎉 Welcome to Vinayak Superstore v1.0</h2>
+
+        <p>
+            Thank you for visiting!
+        </p>
+
+        <ul>
+            
+            <li>🛒 Brand new shopping experience</li>
+
+            <li>❤️ Wishlist added</li>
+
+            <li>🔍 Smart Search</li>
+
+            <li>📦 200+ Products</li>
+
+            <li>⚡ Faster product browsing</li>
+
+            <li>📱 Fully Responsive Design</li>
+
+            <li>Ongoing Issues: Images not loading and Incorrect pricing. </li>
+
+        </ul>
+
+        
+<button id="startShoppingBtn">
+    Start Shopping
+</button>
+
+    </div>
+
+</div>
+<!-- ===================== MAIN ===================== -->
+
+<main id="main-content">
+
+<!-- ===================== HERO ===================== -->
+
+<section class="hero" id="home">
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-gradient"></div>
+
+    <div class="container hero-wrapper">
+
+        <div class="hero-left">
+
+            <p class="hero-tag">
+
+                HOSHIARPUR'S PREMIUM GROCERY DESTINATION
+
+            </p>
+
+            <h1>
+
+                Everything You Need.
+
+                <br>
+
+                One Trusted Store.
+
+            </h1>
+
+            <p class="hero-description">
+
+                Grocery • Dairy • Imported Products • Gourmet Foods • Confectionery
+
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#categories" class="primary-btn">
+
+                    Explore Store
+
+                </a>
+
+                <a href="https://wa.me/919779562555"
+                    target="_blank"
+                    class="secondary-btn">
+
+                    WhatsApp Us
+
+                </a>
+
+            </div>
+
+            <div class="hero-features">
+
+                <div>
+
+                    <i class="fa-solid fa-truck-fast"></i>
+
+                    Free Delivery ₹500+
+
+                </div>
+
+                <div>
+
+                    <i class="fa-solid fa-store"></i>
+
+                    Open Daily
+
+                </div>
+
+                <div>
+
+                    <i class="fa-solid fa-star"></i>
+
+                    Premium Products
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="hero-right">
+
+            <img src="assets/exterior1.png"
+                alt="Vinayak Superstore Exterior">
+
+        </div>
+
+    </div>
+
+    <div class="scroll-indicator">
+
+        <span></span>
+
+        <p>SCROLL</p>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+                    SHOP BY CATEGORY
+======================================================= -->
+
+<section class="categories" id="categories">
+
+    <div class="container">
+
+        <p class="section-tag">
+            EXPLORE
+        </p>
+
+        <h2>
+            Shop by Category
+        </h2>
+
+        <p class="section-description">
+            Everything from daily essentials to premium imported products.
+        </p>
+
+       <div class="category-grid">
+
+<article class="category-card" data-category="Energy Drinks">
+    <i class="fa-solid fa-bolt"></i>
+    <h3>Energy Drinks</h3>
+    <p class="category-count"></p>
+    <span>View Collection →</span>
+</article>
+
+<article class="category-card" data-category="Chocolates">
+    <i class="fa-solid fa-cookie-bite"></i>
+    <h3>Chocolates</h3>
+    <p class="category-count"></p>
+    <span>View Collection →</span>
+</article>
+
+<article class="category-card" data-category="Biscuits">
+    <i class="fa-solid fa-wheat-awn"></i>
+    <h3>Biscuits</h3>
+    <p class="category-count"></p>
+    <span>View Collection →</span>
+</article>
+
+<article class="category-card" data-category="Snacks">
+    <i class="fa-solid fa-bowl-food"></i>
+    <h3>Chips & Snacks</h3>
+    <p class="category-count"></p>
+    <span>View Collection →</span>
+</article>
+
+<article class="category-card" data-category="Instant Food">
+    <i class="fa-solid fa-utensils"></i>
+    <h3>Instant Food</h3>
+    <p class="category-count"></p>
+    <span>View Collection →</span>
+</article>
+
+<article class="category-card" data-category="Beverages">
+    <i class="fa-solid fa-bottle-water"></i>
+    <h3>Beverages</h3>
+    <p class="category-count"></p>
+    <span>View Collection →</span>
+</article>
+
+<article class="category-card" data-category="Coffee">
+    <i class="fa-solid fa-mug-hot"></i>
+    <h3>Coffee</h3>
+    <p class="category-count"></p>
+    <span>View Collection →</span>
+</article>
+
+<article class="category-card" data-category="Tea">
+    <i class="fa-solid fa-mug-saucer"></i>
+    <h3>Tea</h3>
+    <p class="category-count"></p>
+    <span>View Collection →</span>
+</article>
+
+<article class="category-card" data-category="Grocery">
+    <i class="fa-solid fa-basket-shopping"></i>
+    <h3>Groceries</h3>
+    <p class="category-count"></p>
+    <span>View Collection →</span>
+</article>
+
+<article class="category-card" data-category="Personal Care">
+    <i class="fa-solid fa-pump-soap"></i>
+    <h3>Personal Care</h3>
+    <p class="category-count"></p>
+    <span>View Collection →</span>
+</article>
+
+<article class="category-card" data-category="Household">
+    <i class="fa-solid fa-house"></i>
+    <h3>Household</h3>
+    <p class="category-count"></p>
+    <span>View Collection →</span>
+</article>
+
+<article class="category-card" data-category="Imported">
+    <i class="fa-solid fa-earth-asia"></i>
+    <h3>Imported</h3>
+    <p class="category-count"></p>
+    <span>View Collection →</span>
+</article>
+
+        </div>
+    
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+                        WHY US
+======================================================= -->
+
+<section class="why-us">
+
+    <div class="container">
+
+        <p class="section-tag">
+
+            WHY CHOOSE US
+
+        </p>
+
+        <h2>
+
+            More Than Just A Grocery Store
+
+        </h2>
+
+        <div class="why-grid">
+
+            <article>
+
+                <i class="fa-solid fa-truck-fast"></i>
+
+                <h3>Fast Delivery</h3>
+
+                <p>
+
+                    Free delivery above ₹500 within our service area.
+
+                </p>
+
+            </article>
+
+            <article>
+
+                <i class="fa-solid fa-box-open"></i>
+
+                <h3>Huge Variety</h3>
+
+                <p>
+
+                    Grocery, dairy, gourmet and imported products under one roof.
+
+                </p>
+
+            </article>
+
+            <article>
+
+                <i class="fa-solid fa-medal"></i>
+
+                <h3>Premium Quality</h3>
+
+                <p>
+
+                    Carefully selected brands and trusted daily essentials.
+
+                </p>
+
+            </article>
+
+            <article>
+
+                <i class="fa-solid fa-wallet"></i>
+
+                <h3>Easy Payments</h3>
+
+                <p>
+
+                    UPI, Cards and Cash accepted.
+
+                </p>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+                        STATS
+======================================================= -->
+
+<section class="stats">
+
+    <div class="container">
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <h2 class="counter" data-target="1000">0</h2>
+
+                <p>Products</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h2 class="counter" data-target="500">0</h2>
+
+                <p>Happy Customers</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h2 class="counter" data-target="7">0</h2>
+
+                <p>Days Open</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h2 class="counter" data-target="2025">0</h2>
+
+                <p>Established</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+                    FEATURED PRODUCTS
+======================================================= -->
+
+<section class="featured-products">
+<div class="product-toolbar">
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔍 Search for products..."
+            onkeyup="searchProducts(this.value)"
+        >
+
+    </div>
+
+    <div class="filters">
+
+        <button onclick="filterProducts('All', this)" class="active-filter">
+            All
+        </button>
+
+        <button onclick="filterProducts('Energy Drinks', this)">
+            Energy
+        </button>
+
+        <button onclick="filterProducts('Grocery', this)">
+            Grocery
+        </button>
+
+        <button onclick="filterProducts('Tea', this)">
+            Tea
+        </button>
+
+        <button onclick="filterProducts('Atta', this)">
+            Atta
+        </button>
+
+    </div>
+
+</div>
+
+    <div class="container">
+
+        <p class="section-tag">
+
+            CUSTOMER FAVOURITES
+
+        </p>
+
+        <h2>
+
+            Trending Products
+
+        </h2>
+
+        <p class="section-description">
+
+            Some of our most popular picks.
+
+        </p>
+
+        <div class="product-grid">
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+                    VISIT OUR STORE
+======================================================= -->
+
+<section class="store-showcase" id="store">
+
+    <div class="container">
+
+        <div class="store-image">
+
+            <img src="assets/interior1.png" alt="Vinayak Superstore Interior">
+
+        </div>
+
+        <div class="store-content">
+
+            <p class="section-tag">
+                VISIT US
+            </p>
+
+            <h2>
+                Experience Vinayak Superstore
+            </h2>
+
+            <p>
+
+                Step inside and discover thousands of products ranging from
+                everyday groceries to premium imported treats.
+
+                We believe shopping should be easy, affordable and enjoyable.
+
+            </p>
+
+            <ul>
+
+                <li>✔ Grocery & Daily Essentials</li>
+
+                <li>✔ Imported Foods & Drinks</li>
+
+                <li>✔ Dairy & Frozen Products</li>
+
+                <li>✔ Confectionery & Gourmet Items</li>
+
+                <li>✔ Friendly Service</li>
+
+            </ul>
+
+            <div class="store-buttons">
+
+                <a href="https://maps.app.goo.gl/sR4Fc8QLYAwYj3Mn9" target="_blank">
+
+                    Get Directions
+
+                </a>
+
+                <a href="tel:+919779562555">
+
+                    Call Now
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+                        GALLERY
+======================================================= -->
+
+<section class="gallery">
+
+    <div class="container">
+
+        <p class="section-tag">
+
+            OUR STORE
+
+        </p>
+
+        <h2>
+
+            A Glimpse Inside
+
+        </h2>
+
+        <div class="gallery-grid">
+
+            <img src="assets/exterior1.png" alt="Exterior">
+
+            <img src="assets/interior1.png" alt="Interior">
+
+            <img src="assets/exterior2.png" alt="Exterior">
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+                        GOOGLE REVIEW CTA
+======================================================= -->
+
+<section class="review-section">
+
+    <div class="container review-card">
+
+        <div>
+
+            <p class="section-tag">
+
+                GOOGLE REVIEWS
+
+            </p>
+
+            <h2>
+
+                Loved your visit?
+
+            </h2>
+
+            <p>
+
+                Your review helps more people discover Vinayak Superstore.
+
+            </p>
+
+        </div>
+
+        <a href="https://g.page/r/Ccgs-r-XIo9SEBI/review"
+
+            target="_blank"
+
+            class="review-btn">
+
+            Leave a Review
+
+        </a>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+                        CONTACT
+======================================================= -->
+
+<section class="contact" id="contact">
+
+    <div class="container">
+
+        <div class="contact-grid">
+
+            <div>
+
+                <h3>
+
+                    📍 Address
+
+                </h3>
+
+                <p>
+
+                    Vakilan Bazar Road
+
+                    <br>
+
+                    Opp. BSNL Telephone Exchange
+
+                    <br>
+
+                    Hoshiarpur, Punjab
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    📞 Phone
+
+                </h3>
+
+                <p>
+
+                    +91 97804 14300
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    🕒 Opening Hours
+
+                </h3>
+
+                <p>
+
+                    Monday – Sunday
+
+                    <br>
+
+                    8:00 AM – 11:00 PM
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+                    WHATSAPP CTA
+======================================================= -->
+
+<section class="whatsapp-banner">
+
+    <div class="container banner-content">
+
+        <div>
+
+            <h2>
+
+                Can't Visit?
+
+            </h2>
+
+            <p>
+
+                Order directly on WhatsApp and we'll confirm your order instantly.
+
+            </p>
+
+        </div>
+
+        <a href="https://wa.me/919779562555"
+
+            target="_blank">
+
+            Order on WhatsApp
+
+        </a>
+
+    </div>
+
+</section>
+
+</main>
+
+<!-- =======================================================
+                    FLOATING BUTTONS
+======================================================= -->
+
+<div class="floating-buttons">
+
+    <a href="https://wa.me/919779562555" target="_blank">
+
+        <i class="fa-brands fa-whatsapp"></i>
+
+    </a>
+
+    <a href="tel:+919779562555">
+
+        <i class="fa-solid fa-phone"></i>
+
+    </a>
+
+    <a href="https://maps.google.com" target="_blank">
+
+        <i class="fa-solid fa-location-dot"></i>
+
+    </a>
+
+</div>
+
+<!-- PRODUCT POPUP -->
+
+<div class="popup-overlay" id="popupOverlay" onclick="closePopup()" role="presentation">
+
+    <div class="product-popup" onclick="event.stopPropagation()" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+
+        <button class="popup-close" onclick="closePopup()">
+
+            ✕
+
+        </button>
+
+        <div class="popup-left">
+
+            <img id="popupImage" src="" alt="">
+
+        </div>
+
+        <div class="popup-right">
+
+            <span class="popup-category">
+
+                Featured Product
+
+            </span>
+
+            <h2 id="popupTitle">
+
+                Product Name
+
+            </h2>
+
+            <div class="popup-rating">
+
+                ⭐⭐⭐⭐⭐
+
+                <span>(126 Reviews)</span>
+
+            </div>
+
+            <p id="popupDescription">
+
+                Description
+
+            </p>
+
+            <span id="popupOffer" class="offer-pill popup-offer" hidden></span>
+
+            <div class="popup-price">
+
+                <span id="popupPrice">
+
+                    ₹0
+
+                </span>
+
+                <span id="popupStock">
+
+                    In Stock
+
+                </span>
+
+            </div>
+
+            <div class="quantity-box">
+
+                <button onclick="changeQuantity(-1)">−</button>
+
+                <input
+                    id="quantity"
+                    type="number"
+                    value="1"
+                    min="1"
+                >
+
+                <button onclick="changeQuantity(1)">+</button>
+
+            </div>
+
+            <div class="popup-buttons">
+
+    <button class="buy-btn"
+        onclick="addCurrentProductToCart()">
+
+        🛒 Add to Cart
+
+    </button>
+
+    <button class="wishlist-popup" id="popupWishlist" type="button">
+
+        ❤ Save
+
+    </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="categoryDrawer" class="category-drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
+
+    <div class="drawer-header">
+
+        <h2 id="drawerTitle"></h2>
+
+        <button onclick="closeDrawer()">
+
+            ✕
+
+        </button>
+
+    </div>
+
+    <div id="drawerContent"
+
+         class="drawer-content">
+
+    </div>
+
+</div>
+
+<div
+
+class="drawer-overlay"
+
+id="drawerOverlay"
+
+onclick="closeDrawer()">
+
+</div>
+
+<!-- =======================================================
+                        FOOTER
+======================================================= -->
+
+<footer>
+
+    <div class="container footer-grid">
+
+        <div>
+
+            <h2>
+
+                VINAYAK SUPERSTORE
+
+            </h2>
+
+            <p>
+
+                Everything Cheaper.
+
+                <br>
+
+                Everything Cleaner.
+
+            </p>
+
+        </div>
+
+        <div>
+
+            <h4>
+
+                Quick Links
+
+            </h4>
+
+            <a href="#home">Home</a>
+
+            <a href="#categories">Categories</a>
+
+            <a href="#store">Store</a>
+
+            <a href="#contact">Contact</a>
+
+        </div>
+
+        <div>
+
+            <h4>
+
+                Contact
+
+            </h4>
+
+            <p>
+
+                +91 97804 14300
+
+            </p>
+
+            <p>
+
+                Hoshiarpur, Punjab
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="copyright">
+
+        © 2026 Vinayak Superstore
+
+        <br>
+
+        Website designed & developed by Vinayak Sharma
+
+        <br>
+
+        Contact on instagram at @vinayakwow
+
+    </div>
+
+</footer>
+<!-- ===========================================
+                SHOPPING CART
+=========================================== -->
+
+<div class="cart-overlay"
+     id="cartOverlay"
+     onclick="closeCart()">
+</div>
+
+<div class="cart-drawer"
+     id="cartDrawer"
+     role="dialog"
+     aria-modal="true"
+     aria-label="Shopping cart"
+     aria-hidden="true">
+
+    <div class="cart-header">
+
+        <h2>
+
+            🛒 Shopping Cart
+
+        </h2>
+
+        <button onclick="closeCart()">
+
+            ✕
+
+        </button>
+
+    </div>
+
+    <div
+        class="cart-items"
+        id="cartItems">
+
+    </div>
+
+    <div class="cart-footer">
+
+        <div class="cart-summary">
+
+<div>
+
+<span>Subtotal</span>
+
+<strong id="cartTotal">
+
+₹0
+
+</strong>
+
+</div>
+
+<div>
+
+<span>Delivery</span>
+
+<strong style="color:#22C55E;">
+
+FREE
+
+</strong>
+
+</div>
+
+</div>
+
+        <button
+            class="checkout-btn"
+            onclick="checkoutWhatsApp()">
+
+            Checkout
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ===========================================
+                WISHLIST
+=========================================== -->
+
+<div class="wishlist-overlay"
+     id="wishlistOverlay"
+     onclick="closeWishlist()">
+</div>
+
+<div class="wishlist-drawer"
+     id="wishlistDrawer"
+     role="dialog"
+     aria-modal="true"
+     aria-label="Wishlist"
+     aria-hidden="true">
+
+    <div class="wishlist-header">
+
+       <h2>
+
+<i class="fa-solid fa-heart"></i>
+
+Wishlist
+
+<span id="wishlistDrawerCount"></span>
+
+</h2>
+
+        <button onclick="closeWishlist()">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+    </div>
+
+    <div class="wishlist-items"
+         id="wishlistItems">
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+            TOAST NOTIFICATION
+========================================== -->
+
+<div id="toast" class="toast">
+
+    <div class="toast-icon">
+        ✓
+    </div>
+
+    <div class="toast-content">
+
+        <h4 id="toastTitle">
+            Added to Cart
+        </h4>
+
+        <p id="toastMessage">
+            Product added successfully.
+        </p>
+
+    </div>
+
+</div>
+
+<div class="cursor-glow"></div>
+<img id="flyingProduct" src="" alt="">
+
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<script src="scripts/products.js"></script>
+<script src="scripts/cart.js"></script>
+<script src="scripts/wishlist.js"></script>
+<script src="scripts/script.js"></script>
+
+</body>
+
+</html>

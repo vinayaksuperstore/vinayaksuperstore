@@ -1,0 +1,1167 @@
+/* =========================================================
+   VINAYAK SUPERSTORE V2
+   PHASE 1 - PART 1
+   Reset • Variables • Loader • Navbar • Hero
+========================================================= */
+
+/* =======================
+   GOOGLE VARIABLES
+======================= */
+
+:root{
+
+    --bg:#07111F;
+    --bg2:#0D182A;
+
+    --card:#121D30;
+
+    --gold:#D4AF37;
+
+    --gold-light:#F2D67C;
+
+    --white:#ffffff;
+
+    --text:#D6D9E0;
+
+    --muted:#94A3B8;
+
+    --radius:18px;
+
+    --transition:.35s ease;
+
+    --max-width:1300px;
+
+}
+
+/* =======================
+   RESET
+======================= */
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    font-family:"Poppins",sans-serif;
+
+    background:var(--bg);
+
+    color:var(--white);
+
+    overflow-x:hidden;
+
+}
+
+/* =======================
+   CONTAINER
+======================= */
+
+.container{
+
+    width:min(92%,1300px);
+
+    margin:auto;
+
+}
+
+/* =======================
+   LINKS
+======================= */
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+img{
+
+    display:block;
+
+    max-width:100%;
+
+}
+
+/* ===================================================
+                LOADER
+=================================================== */
+
+.loader{
+
+    position:fixed;
+
+    inset:0;
+
+    background:#050B16;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    z-index:99999;
+
+    transition:.8s;
+
+}
+
+.loader h1{
+
+    font-size:78px;
+
+    letter-spacing:12px;
+
+    color:var(--gold);
+
+}
+
+.loader span{
+
+    font-size:18px;
+
+    letter-spacing:8px;
+
+    margin-top:10px;
+
+    color:var(--white);
+
+}
+
+.loader.hide{
+
+    opacity:0;
+
+    visibility:hidden;
+
+}
+
+/* ===================================================
+                NAVBAR
+=================================================== */
+
+header{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    z-index:999;
+
+    transition:.35s;
+
+}
+
+header.scrolled{
+
+    backdrop-filter:blur(16px);
+
+    -webkit-backdrop-filter:blur(16px);
+
+    background:rgba(7,17,31,.75);
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+nav{
+
+    height:90px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+/* Logo */
+
+.brand{
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+.brand h2{
+
+    color:var(--gold);
+
+    font-size:28px;
+
+    letter-spacing:2px;
+
+}
+
+.brand span{
+
+    font-size:12px;
+
+    color:var(--text);
+
+    letter-spacing:5px;
+
+}
+
+/* Navigation */
+
+.nav-links{
+
+    display:flex;
+
+    gap:45px;
+
+    list-style:none;
+
+}
+
+.nav-links a{
+
+    color:var(--white);
+
+    font-weight:500;
+
+    transition:var(--transition);
+
+    position:relative;
+
+}
+
+.nav-links a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    bottom:-8px;
+
+    width:0;
+
+    height:2px;
+
+    background:var(--gold);
+
+    transition:.35s;
+
+}
+
+.nav-links a:hover{
+
+    color:var(--gold);
+
+}
+
+.nav-links a:hover::after{
+
+    width:100%;
+
+}
+
+/* Order Button */
+
+.order-btn{
+
+    background:linear-gradient(135deg,var(--gold),var(--gold-light));
+
+    color:#111;
+
+    padding:14px 28px;
+
+    border-radius:50px;
+
+    font-weight:700;
+
+    transition:var(--transition);
+
+}
+
+.order-btn:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 15px 35px rgba(212,175,55,.3);
+
+}
+
+
+/* ===================================================
+                    HERO
+=================================================== */
+
+.hero{
+
+    min-height:100vh;
+
+    display:flex;
+
+    align-items:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:url("assets/exterior1.png");
+
+    background-size:cover;
+
+    background-position:center;
+
+    animation:heroZoom 18s ease-in-out infinite alternate;
+
+}
+
+/* Dark Overlay */
+
+.overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    linear-gradient(
+
+        rgba(0,0,0,.65),
+
+        rgba(0,0,0,.55)
+
+    );
+
+}
+
+/* Hero Content */
+
+.hero-container{
+
+    position:relative;
+
+    z-index:5;
+
+}
+
+.hero-content{
+
+    max-width:720px;
+
+}
+
+.hero-top{
+
+    color:var(--gold);
+
+    letter-spacing:5px;
+
+    font-size:15px;
+
+    margin-bottom:20px;
+
+}
+
+.hero h1{
+
+    font-size:78px;
+
+    line-height:1.05;
+
+    margin-bottom:30px;
+
+}
+
+.hero-description{
+
+    font-size:22px;
+
+    color:var(--text);
+
+    margin-bottom:45px;
+
+}
+
+/* Hero Buttons */
+
+.hero-buttons{
+
+    display:flex;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.primary-btn{
+
+    background:linear-gradient(
+
+        135deg,
+
+        var(--gold),
+
+        var(--gold-light)
+
+    );
+
+    color:#111;
+
+    padding:18px 38px;
+
+    border-radius:60px;
+
+    font-weight:700;
+
+    transition:.35s;
+
+}
+
+.primary-btn:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 18px 40px rgba(212,175,55,.4);
+
+}
+
+.secondary-btn{
+
+    border:2px solid white;
+
+    color:white;
+
+    padding:18px 38px;
+
+    border-radius:60px;
+
+    transition:.35s;
+
+}
+
+.secondary-btn:hover{
+
+    background:white;
+
+    color:#111;
+
+}
+
+/* Scroll Indicator */
+
+.scroll-indicator{
+
+    position:absolute;
+
+    bottom:30px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    z-index:5;
+
+    text-align:center;
+
+}
+
+.scroll-indicator span{
+
+    display:block;
+
+    width:2px;
+
+    height:60px;
+
+    background:var(--gold);
+
+    margin:auto;
+
+    animation:scrollMove 1.8s infinite;
+
+}
+
+.scroll-indicator p{
+
+    margin-top:12px;
+
+    font-size:12px;
+
+    letter-spacing:4px;
+
+    color:var(--gold);
+
+}
+
+/* ===================================================
+                ANIMATIONS
+=================================================== */
+
+@keyframes heroZoom{
+
+    from{
+
+        background-size:100%;
+
+    }
+
+    to{
+
+        background-size:110%;
+
+    }
+
+}
+
+@keyframes scrollMove{
+
+    0%{
+
+        opacity:0;
+
+        transform:translateY(-12px);
+
+    }
+
+    50%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        opacity:0;
+
+        transform:translateY(12px);
+
+    }
+
+}
+
+/* ===================================================
+                RESPONSIVE
+=================================================== */
+
+@media(max-width:1000px){
+
+.hero h1{
+
+font-size:60px;
+
+}
+
+.nav-links{
+
+display:none;
+
+}
+
+}
+
+@media(max-width:700px){
+
+.hero h1{
+
+font-size:46px;
+
+}
+
+.hero-description{
+
+font-size:18px;
+
+}
+
+.hero-buttons{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+}
+
+/* =========================================================
+   VINAYAK SUPERSTORE V2
+   PHASE 1 - PART 2
+   Categories • Why Us • Stats • Store • Footer • Floating
+=========================================================*/
+
+
+/* ===========================
+        SECTION SPACING
+=========================== */
+
+section{
+
+    position:relative;
+
+    padding:110px 0;
+
+}
+
+section h2{
+
+    font-size:48px;
+
+    text-align:center;
+
+    margin-bottom:18px;
+
+}
+
+section h2::after{
+
+    content:"";
+
+    width:90px;
+
+    height:4px;
+
+    background:var(--gold);
+
+    display:block;
+
+    margin:18px auto;
+
+    border-radius:100px;
+
+}
+
+/* ===========================
+        CATEGORIES
+=========================== */
+
+.categories{
+
+    background:linear-gradient(
+
+        180deg,
+
+        var(--bg),
+
+        var(--bg2)
+
+    );
+
+}
+
+.category-grid{
+
+    width:min(92%,1300px);
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:30px;
+
+    margin-top:70px;
+
+}
+
+.category{
+
+    background:var(--card);
+
+    border-radius:24px;
+
+    padding:45px 20px;
+
+    text-align:center;
+
+    transition:.35s;
+
+    cursor:pointer;
+
+    border:1px solid rgba(255,255,255,.05);
+
+}
+
+.category:hover{
+
+    transform:translateY(-12px);
+
+    border-color:var(--gold);
+
+    box-shadow:0 25px 45px rgba(212,175,55,.15);
+
+}
+
+.category{
+
+    font-size:55px;
+
+}
+
+.category span{
+
+    display:block;
+
+    margin-top:20px;
+
+    font-size:18px;
+
+    color:var(--text);
+
+}
+
+/* ===========================
+        WHY US
+=========================== */
+
+.why{
+
+    background:var(--bg2);
+
+}
+
+.why-grid{
+
+    width:min(92%,1300px);
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:35px;
+
+    margin-top:70px;
+
+}
+
+.why-grid div{
+
+    background:var(--card);
+
+    padding:45px;
+
+    border-radius:24px;
+
+    text-align:center;
+
+    transition:.35s;
+
+    border:1px solid rgba(255,255,255,.05);
+
+}
+
+.why-grid div:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+
+}
+
+.why-grid h1{
+
+    font-size:65px;
+
+    margin-bottom:20px;
+
+}
+
+.why-grid h3{
+
+    margin-bottom:15px;
+
+    font-size:22px;
+
+}
+
+.why-grid p{
+
+    color:var(--muted);
+
+}
+
+/* ===========================
+        STATS
+=========================== */
+
+.stats{
+
+    background:linear-gradient(
+
+        180deg,
+
+        var(--bg2),
+
+        var(--bg)
+
+    );
+
+}
+
+.stats{
+
+    width:min(92%,1300px);
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:25px;
+
+}
+
+.stats div{
+
+    background:var(--card);
+
+    padding:40px;
+
+    border-radius:22px;
+
+    text-align:center;
+
+    transition:.35s;
+
+}
+
+.stats div:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.stats h1{
+
+    font-size:58px;
+
+    color:var(--gold);
+
+}
+
+.stats p{
+
+    color:var(--muted);
+
+    margin-top:10px;
+
+}
+
+/* ===========================
+        STORE
+=========================== */
+
+.store{
+
+    width:min(92%,1300px);
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:70px;
+
+    align-items:center;
+
+}
+
+.store img{
+
+    border-radius:28px;
+
+    width:100%;
+
+    box-shadow:0 30px 60px rgba(0,0,0,.45);
+
+}
+
+.store h2{
+
+    text-align:left;
+
+}
+
+.store h2::after{
+
+    margin:18px 0;
+
+}
+
+.store p{
+
+    color:var(--text);
+
+    font-size:18px;
+
+    line-height:1.8;
+
+    margin-bottom:35px;
+
+}
+
+.store a{
+
+    display:inline-block;
+
+    background:linear-gradient(
+
+        135deg,
+
+        var(--gold),
+
+        var(--gold-light)
+
+    );
+
+    color:#111;
+
+    padding:18px 36px;
+
+    border-radius:60px;
+
+    font-weight:700;
+
+    transition:.35s;
+
+}
+
+.store a:hover{
+
+    transform:translateY(-5px);
+
+}
+
+/* ===========================
+        FLOATING BUTTONS
+=========================== */
+
+.floating-buttons{
+
+    position:fixed;
+
+    right:30px;
+
+    bottom:30px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+    z-index:500;
+
+}
+
+.floating-buttons a{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+
+        135deg,
+
+        var(--gold),
+
+        var(--gold-light)
+
+    );
+
+    color:#111;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:28px;
+
+    transition:.35s;
+
+    box-shadow:0 12px 25px rgba(0,0,0,.35);
+
+}
+
+.floating-buttons a:hover{
+
+    transform:scale(1.12);
+
+}
+
+/* ===========================
+        FOOTER
+=========================== */
+
+footer{
+
+    background:#040912;
+
+    padding:90px 20px;
+
+    text-align:center;
+
+    border-top:1px solid rgba(255,255,255,.06);
+
+}
+
+footer h2{
+
+    color:var(--gold);
+
+    letter-spacing:2px;
+
+    margin-bottom:18px;
+
+}
+
+footer p{
+
+    color:var(--muted);
+
+}
+
+footer small{
+
+    display:block;
+
+    margin-top:35px;
+
+    color:#6b7280;
+
+}
+
+.footer-links{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:35px;
+
+    flex-wrap:wrap;
+
+    margin-top:30px;
+
+}
+
+.footer-links a{
+
+    color:white;
+
+    transition:.3s;
+
+}
+
+.footer-links a:hover{
+
+    color:var(--gold);
+
+}
+
+/* ===========================
+        RESPONSIVE
+=========================== */
+
+@media(max-width:950px){
+
+.store{
+
+grid-template-columns:1fr;
+
+}
+
+.stats{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:650px){
+
+.stats{
+
+grid-template-columns:1fr;
+
+}
+
+section h2{
+
+font-size:38px;
+
+}
+
+.category{
+
+padding:35px 15px;
+
+}
+
+.why-grid div{
+
+padding:35px;
+
+}
+
+.store h2{
+
+text-align:center;
+
+}
+
+.store h2::after{
+
+margin:18px auto;
+
+}
+
+.store{
+
+text-align:center;
+
+}
+
+.floating-buttons{
+
+right:18px;
+
+bottom:18px;
+
+}
+
+}
+
