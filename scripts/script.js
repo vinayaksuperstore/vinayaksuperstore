@@ -1,9 +1,9 @@
-/* Vinayak Superstore interaction layer — v1.1 */
+/* Vinayak Superstore interaction layer — v2.0 */
 document.addEventListener("DOMContentLoaded", () => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const supportsFinePointer = window.matchMedia("(pointer: fine)").matches;
     const loader = document.querySelector(".loader");
-    const websiteVersion = "1.1";
+    const websiteVersion = "2.0";
     const updateOverlay = document.getElementById("updateOverlay");
 
     window.setTimeout(() => loader?.classList.add("hide"), prefersReducedMotion ? 0 : 700);
