@@ -35,6 +35,14 @@ UPLOAD_DIR = Path(os.environ.get("VINAYAK_UPLOAD_DIR", ROOT / "assets" / "upload
 HOST = os.environ.get("HOST", "127.0.0.1")
 PORT = int(os.environ.get("PORT", "8000"))
 COOKIE_SECURE = os.environ.get("COOKIE_SECURE", "0") == "1"
+ALLOWED_ORIGINS = {
+    value.strip().rstrip("/").lower()
+    for value in os.environ.get(
+        "ALLOWED_ORIGINS",
+        "https://vinayaksuperstore.com,https://www.vinayaksuperstore.com",
+    ).split(",")
+    if value.strip()
+}
 SESSION_TTL = 60 * 60 * 12
 MAX_JSON_BYTES = 512 * 1024
 MAX_UPLOAD_BYTES = 5 * 1024 * 1024
@@ -52,6 +60,18 @@ class ClosingConnection(sqlite3.Connection):
 
 def now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+
+def request_origin_allowed(origin: str | None, host: str) -> bool:
+    if not origin:
+        return True
+    parsed = urlparse(origin)
+    if (parsed.scheme not in {"http", "https"} or not parsed.netloc
+            or parsed.username or parsed.password or parsed.path not in ("", "/")
+            or parsed.params or parsed.query or parsed.fragment):
+        return False
+    normalized = f"{parsed.scheme}://{parsed.netloc}".lower()
+    return normalized in ALLOWED_ORIGINS or parsed.netloc.lower() == host.lower()
 
 
 def db() -> sqlite3.Connection:
@@ -241,11 +261,9 @@ class Handler(BaseHTTPRequestHandler):
             return None
         if csrf:
             origin = self.headers.get("Origin")
-            if origin:
-                parsed = urlparse(origin)
-                if parsed.netloc.lower() != self.headers.get("Host", "").lower():
-                    self.send_json(HTTPStatus.FORBIDDEN, {"error": "Request origin was rejected."})
-                    return None
+            if not request_origin_allowed(origin, self.headers.get("Host", "")):
+                self.send_json(HTTPStatus.FORBIDDEN, {"error": "Request origin was rejected."})
+                return None
             supplied = self.headers.get("X-CSRF-Token", "")
             if not hmac.compare_digest(supplied, session["csrf_token"]):
                 self.send_json(HTTPStatus.FORBIDDEN, {"error": "Security token expired. Reload and try again."})
@@ -351,7 +369,7 @@ class Handler(BaseHTTPRequestHandler):
                 if not isinstance(password, str) or len(password) > 512:
                     return self.send_json(400, {"error": "Enter a valid username and password."})
                 origin = self.headers.get("Origin")
-                if origin and urlparse(origin).netloc.lower() != self.headers.get("Host", "").lower():
+                if not request_origin_allowed(origin, self.headers.get("Host", "")):
                     return self.send_json(403, {"error": "Request origin was rejected."})
                 ip = self.client_address[0]
                 attempts = [stamp for stamp in LOGIN_FAILURES.get(ip, []) if time.time() - stamp < 600]
@@ -612,6 +630,10 @@ def main() -> None:
         pass
     finally:
         server.server_close()
+
+
+if __name__ == "__main__":
+    main()
 
 
 if __name__ == "__main__":
