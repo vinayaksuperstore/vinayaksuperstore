@@ -1,4 +1,4 @@
-/* Vinayak AI storefront interface. Recommendation and conversation rules live in vinayak-ai-engine.js. */
+/* Vee storefront interface. Recommendation and conversation rules live in vinayak-ai-engine.js. */
 (() => {
     const engine = window.VinayakAIEngine;
     const byId = id => document.getElementById(id);
@@ -9,6 +9,8 @@
     if (!engine || Object.values(ui).some(value => !value)) return;
 
     const STORAGE_KEY = "vinayakAiConversationV2";
+    const WELCOME_MESSAGE = "Hey! I'm Vee 👋 Your personal shopping assistant at Vinayak Superstore. Tell me what you're looking for, and I'll help you find the right products for your budget.";
+    const PREVIOUS_WELCOME_MESSAGE = "Hi! Tell me what you’re shopping for and, if you like, your budget or occasion.";
     const FALLBACK_IMAGE = "assets/images/placeholder.svg";
     const formatPrice = paise => engine.formatMoney(paise);
     let catalogCache = null;
@@ -18,7 +20,15 @@
     let launcherFocus = null;
 
     function loadState() {
-        try { return engine.sanitizeState(JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "null")); }
+        try {
+            const restored = engine.sanitizeState(JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "null"));
+            restored.history = restored.history.map(row => {
+                if (row.role !== "assistant" || typeof row.text !== "string") return row;
+                if (row.text === PREVIOUS_WELCOME_MESSAGE) return { ...row, text: WELCOME_MESSAGE };
+                return { ...row, text: row.text.replace(/\bVinayak AI\b/gi, "Vee") };
+            });
+            return restored;
+        }
         catch { return engine.createState(); }
     }
 
@@ -35,7 +45,7 @@
         const bubble = document.createElement("article");
         bubble.className = `vinayak-ai__message vinayak-ai__message--${record.role || "assistant"}${record.error ? " vinayak-ai__message--error" : ""}`;
         if (record.role === "user") bubble.setAttribute("aria-label", "You said");
-        else bubble.setAttribute("aria-label", "Vinayak AI response");
+        else bubble.setAttribute("aria-label", "Vee response");
         const copy = document.createElement("p");
         copy.className = "vinayak-ai__message-copy";
         copy.textContent = String(record.text || "");
@@ -228,7 +238,7 @@
         bubble.id = "vinayakAiTyping";
         bubble.className = "vinayak-ai__message";
         bubble.setAttribute("role", "status");
-        bubble.setAttribute("aria-label", "Vinayak AI is working");
+        bubble.setAttribute("aria-label", "Vee is thinking…");
         bubble.innerHTML = '<span class="vinayak-ai__typing" aria-hidden="true"><i></i><i></i><i></i></span>';
         ui.messages.append(bubble);
         ui.messages.scrollTop = ui.messages.scrollHeight;
@@ -254,7 +264,7 @@
         conversationEpoch += 1;
         state = engine.newConversation();
         try { sessionStorage.removeItem(STORAGE_KEY); } catch { /* Storage is optional. */ }
-        const greeting = { role: "assistant", text: "Hi! Tell me what you’re shopping for and, if you like, your budget or occasion." };
+        const greeting = { role: "assistant", text: WELCOME_MESSAGE };
         state.history.push(greeting);
         renderHistory();
         persistState();
@@ -414,7 +424,7 @@
     });
 
     if (!state.history.length) {
-        state.history.push({ role: "assistant", text: "Hi! Tell me what you’re shopping for and, if you like, your budget or occasion." });
+        state.history.push({ role: "assistant", text: WELCOME_MESSAGE });
         persistState();
     }
     renderSuggestions(engine.suggestedPrompts(state.request, []));

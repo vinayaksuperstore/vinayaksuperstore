@@ -1,5 +1,5 @@
 /*
- * Vinayak AI's deterministic conversation and catalogue engine.
+ * Vee's deterministic conversation and catalogue engine.
  * State contains only this tab's shopping conversation and proposed basket.
  * The store cart is deliberately handled by the separate, explicit cart UI.
  */
@@ -618,7 +618,7 @@
             message = "Fresh start. What would you like to shop for? Your store cart is unchanged.";
             request.lastOperation = "new-task";
         } else if (intent.type === "greeting") {
-            message = "Hi! Tell me what you’re shopping for and, if you like, your budget or occasion.";
+            message = "Hi! I'm Vee, your personal shopping assistant at Vinayak Superstore. What are you looking for today?";
         } else if (intent.type === "help") {
             message = "I can find products, plan a basket from the live catalogue, compare available items, and update a plan when your budget or preferences change.";
         } else {

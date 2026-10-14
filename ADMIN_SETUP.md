@@ -35,6 +35,10 @@ Keep the server window open while using the site. Visit `http://127.0.0.1:8000/a
 
 The SQLite catalogue is stored in `data/vinayak.sqlite3`. Uploaded product images are stored under `assets/uploads/`. Back up both locations when backing up the store.
 
+## VS Code Live Server preview
+
+VS Code Live Server serves static files and cannot run the product API. The storefront now falls back to `data/products.json` for catalogue browsing and Vee recommendations when that API is unavailable. This file is a snapshot of the current catalogue; admin edits and other server-backed features require the Python service above.
+
 ## Hosting
 
 This project previously consisted of static files, so it must now be hosted as a Python application rather than uploaded to a static-only host. Put the app behind HTTPS and a production reverse proxy, use a persistent disk for the SQLite file and uploaded images, and configure `HOST=127.0.0.1`, the provider's `PORT`, and `COOKIE_SECURE=1`. If the hosting provider requires binding the application to all interfaces, set `HOST=0.0.0.0`; HTTPS must still terminate at the provider or a reverse proxy. Never expose the local development server directly to the public internet.

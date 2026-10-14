@@ -736,7 +736,30 @@ function refreshCatalogViews(){
 }
 
 renderCollections();
-window.productsReady=fetch('/api/products',{cache:'no-store'})
-    .then(response=>{if(!response.ok) throw new Error('Could not load the product catalogue.'); return response.json();})
-    .then(records=>{if(!Array.isArray(records)) throw new Error('The product catalogue is invalid.'); products.splice(0,products.length,...records); refreshCatalogViews(); return products;})
-    .catch(error=>{console.error(error); if(grid) grid.innerHTML='<p class="catalogue-error">The product catalogue could not be loaded. Please refresh in a moment.</p>'; return [];});
+async function fetchProductCatalogue(url){
+    const response=await fetch(url,{cache:'no-store'});
+    if(!response.ok) throw new Error(`Could not load the product catalogue from ${url}.`);
+    const records=await response.json();
+    if(!Array.isArray(records)||!records.length||records.some(product=>!product||product.id===undefined||!product.name||!product.category)){
+        throw new Error(`The product catalogue from ${url} is invalid.`);
+    }
+    return records;
+}
+
+window.productsReady=(async()=>{
+    let records;
+    try{
+        records=await fetchProductCatalogue('/api/products');
+    }catch(apiError){
+        // Static preview servers such as VS Code Live Server cannot provide the API.
+        // Use the public snapshot there; the Python service remains the live source of truth.
+        records=await fetchProductCatalogue('data/products.json');
+    }
+    products.splice(0,products.length,...records);
+    refreshCatalogViews();
+    return products;
+})().catch(error=>{
+    console.error(error);
+    if(grid) grid.innerHTML='<p class="catalogue-error">The product catalogue could not be loaded. Please refresh in a moment.</p>';
+    return [];
+});

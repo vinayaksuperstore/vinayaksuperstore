@@ -28,6 +28,11 @@ def main() -> None:
         if source.is_file():
             shutil.copy2(source, DIST / name)
 
+    static_catalogue = ROOT / "data" / "products.json"
+    if static_catalogue.is_file():
+        (DIST / "data").mkdir(parents=True, exist_ok=True)
+        shutil.copy2(static_catalogue, DIST / "data" / "products.json")
+
     for name in ("admin", "assets", "scripts", "styles"):
         source = ROOT / name
         if source.is_dir():

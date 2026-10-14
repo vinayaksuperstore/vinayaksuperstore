@@ -120,7 +120,7 @@ test("an unrelated category starts a clean request without old budget or occasio
 
 test("unknown products are not invented and every displayed result belongs to the live catalogue", () => {
     const result = say(ai.createState(), "Do you stock a moon mango truffle?");
-    assert.match(result.response.text, /couldn’t find that exact item/i);
+    assert.match(result.response.text, /couldn’t (?:find that exact item|match .+ to an available product in the catalogue)/i);
     const catalogIds = new Set(catalog.map(product => String(product.id)));
     assert.ok(result.response.productCards.every(card => catalogIds.has(String(card.product.id))));
     let state = say(ai.createState(), "Find chocolates").state;
@@ -185,4 +185,20 @@ test("the assistant controls and layout have mobile and keyboard support", () =>
     assert.match(css, /100dvh/);
     assert.match(ui, /event\.key === "Escape"/);
     assert.match(ui, /queue = queue\.then/);
+});
+
+test("customer-facing assistant branding consistently uses Vee", () => {
+    const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
+    const ui = fs.readFileSync(path.join(root, "scripts/vinayak-ai.js"), "utf8");
+    assert.match(html, /aria-label="Open Vee shopping assistant"/);
+    assert.match(html, /title="Chat with Vee"/);
+    assert.match(html, /<strong id="vinayakAiTitle">Vee<\/strong>/);
+    assert.match(html, /Your personal shopping assistant/);
+    assert.doesNotMatch(html, /Vinayak AI/i);
+    assert.match(ui, /Hey! I'm Vee/);
+    assert.match(ui, /aria-label", "Vee response"/);
+    assert.match(ui, /aria-label", "Vee is thinking…"/);
+    assert.match(ui, /row\.text\.replace\(\/\\bVinayak AI\\b\/gi, "Vee"\)/);
+    assert.match(ui, /vinayakAiConversationV2/);
+    assert.match(say(ai.createState(), "Hi").response.text, /I'm Vee, your personal shopping assistant/);
 });
