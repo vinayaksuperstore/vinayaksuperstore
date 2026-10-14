@@ -23,6 +23,28 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(progress);
     const sections = [...document.querySelectorAll("main section[id]")];
     const navLinks = [...document.querySelectorAll(".nav-links a")];
+    const navMenuButton = document.querySelector(".menu-btn");
+    const mobileNavigation = document.getElementById("primary-navigation");
+    const menuIcon = navMenuButton?.querySelector("i");
+    function closeMobileNavigation() {
+        mobileNavigation?.classList.remove("is-open");
+        navMenuButton?.setAttribute("aria-expanded", "false");
+        navMenuButton?.setAttribute("aria-label", "Open navigation menu");
+        menuIcon?.classList.remove("fa-xmark");
+        menuIcon?.classList.add("fa-bars");
+    }
+    navMenuButton?.addEventListener("click", () => {
+        const willOpen = navMenuButton.getAttribute("aria-expanded") !== "true";
+        mobileNavigation?.classList.toggle("is-open", willOpen);
+        navMenuButton.setAttribute("aria-expanded", String(willOpen));
+        navMenuButton.setAttribute("aria-label", willOpen ? "Close navigation menu" : "Open navigation menu");
+        menuIcon?.classList.toggle("fa-bars", !willOpen);
+        menuIcon?.classList.toggle("fa-xmark", willOpen);
+    });
+    mobileNavigation?.querySelectorAll("a").forEach(link => link.addEventListener("click", closeMobileNavigation));
+    document.addEventListener("click", event => {
+        if (header && !header.contains(event.target)) closeMobileNavigation();
+    });
     const heroImage = document.querySelector(".hero-right img");
     let scrollFrame = null;
 
@@ -90,9 +112,9 @@ document.addEventListener("DOMContentLoaded", () => {
             card.dataset.tiltBound = "true";
             card.addEventListener("pointermove", event => {
                 const rect = card.getBoundingClientRect();
-                const rotateY = ((event.clientX - rect.left) / rect.width - .5) * 8;
-                const rotateX = ((event.clientY - rect.top) / rect.height - .5) * -8;
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+                const rotateY = ((event.clientX - rect.left) / rect.width - .5) * 4;
+                const rotateX = ((event.clientY - rect.top) / rect.height - .5) * -4;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
             });
             card.addEventListener("pointerleave", () => { card.style.transform = ""; });
         });
@@ -102,6 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.addEventListener("keydown", event => {
         if (event.key !== "Escape") return;
+        closeMobileNavigation();
         if (document.getElementById("popupOverlay")?.classList.contains("show")) closePopup();
         else if (document.getElementById("cartDrawer")?.classList.contains("show")) closeCart();
         else if (document.getElementById("wishlistDrawer")?.classList.contains("show")) closeWishlist();

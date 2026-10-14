@@ -213,7 +213,7 @@ background:
 
 radial-gradient(circle,
 
-rgba(212,175,55,.10),
+rgba(109,40,217,.08),
 
 transparent 70%
 
@@ -251,7 +251,7 @@ width:12px;
 
 ::-webkit-scrollbar-track{
 
-background:#07111F;
+background:var(--bg2);
 
 }
 

@@ -1,120 +1,57 @@
-/* ==================================================
-   RESET
-================================================== */
-
-:root{
-
-    --bg:#07111F;
-    --bg2:#0C1627;
-    --card:#111827;
-
-    --gold:#D4AF37;
-    --gold-light:#F5D97E;
-
-    --white:#ffffff;
-    --text:#d4d8df;
-    --muted:#94A3B8;
-
-    --radius:22px;
-
-    --transition:.35s ease;
-
-    --shadow:0 20px 50px rgba(0,0,0,.35);
-
-    --container:1300px;
-
+/* Shared storefront palette, sampled from the purple and yellow shop signage. */
+:root {
+    --primary: #6D28D9;
+    --primary-hover: #5B21B6;
+    --primary-light: #A78BFA;
+    --primary-soft: #F3EDFF;
+    --deep-plum: #24113F;
+    --gold: #D4AF37;
+    --gold-light: #F2D67C;
+    --bg: #FFFDF7;
+    --bg2: #F5F0FF;
+    --card: #FFFFFF;
+    --text: #24113F;
+    --muted: #675D72;
+    --border: #E7DDF2;
+    --success: #16803D;
+    --warning: #B45309;
+    --promo: #F97360;
+    --radius: 22px;
+    --transition: .24s ease;
+    --shadow: 0 16px 42px rgba(36, 17, 63, .10);
+    --container: 1300px;
 }
 
-*{
-
-margin:0;
-
-padding:0;
-
-box-sizing:border-box;
-
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+body {
+    min-width: 320px;
+    overflow-x: hidden;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Poppins, sans-serif;
+    line-height: 1.55;
 }
-
-html{
-
-scroll-behavior:smooth;
-
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+.container { width: min(92%, var(--container)); margin-inline: auto; }
+section { padding: 104px 0; }
+section h2 { color: var(--text); }
+.section-tag {
+    margin-bottom: 16px;
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
-
-body{
-
-background:var(--bg);
-
-font-family:Poppins,sans-serif;
-
-color:white;
-
-overflow-x:hidden;
-
-}
-
-img{
-
-display:block;
-
-max-width:100%;
-
-}
-
-a{
-
-text-decoration:none;
-
-color:inherit;
-
-}
-
-button{
-
-font-family:inherit;
-
-cursor:pointer;
-
-}
-
-.container{
-
-width:min(92%,var(--container));
-
-margin:auto;
-
-}
-
-section{
-
-padding:120px 0;
-
-}
-
-.section-tag{
-
-color:var(--gold);
-
-font-size:14px;
-
-letter-spacing:5px;
-
-margin-bottom:20px;
-
-text-transform:uppercase;
-
-}
-
-.section-description{
-
-max-width:700px;
-
-margin:20px auto 0;
-
-color:var(--muted);
-
-text-align:center;
-
-line-height:1.7;
-
+.section-description {
+    max-width: 700px;
+    margin: 16px auto 0;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.7;
 }

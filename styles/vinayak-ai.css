@@ -1,122 +1,92 @@
-/* Vinayak AI: accessible, viewport-safe shopping assistant. */
-.floating-buttons{
-    position:fixed;
-    right:30px;
-    bottom:30px;
-    z-index:500;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:15px;
+/* Vee keeps the existing conversation and product controls on the store palette. */
+.floating-buttons { position: fixed; z-index: 500; right: 24px; bottom: 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.floating-buttons a, .vinayak-ai-launch { display: grid; width: 56px; height: 56px; place-items: center; border: 1px solid rgba(255, 255, 255, .7); border-radius: 50%; color: #fff; background: linear-gradient(135deg, var(--primary), var(--deep-plum)); box-shadow: 0 10px 26px rgba(36, 17, 63, .22); transition: transform .2s ease, box-shadow .2s ease; }
+.floating-buttons a { color: #fff; font-size: 23px; }
+.vinayak-ai-launch { border-color: rgba(212, 175, 55, .68); font-size: 22px; }
+.floating-buttons a:hover, .vinayak-ai-launch:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 14px 30px rgba(36, 17, 63, .28); }
+.vinayak-ai-launch:focus-visible { outline: 3px solid var(--gold-light); outline-offset: 4px; }
+.vinayak-ai {
+    position: fixed;
+    z-index: 100001;
+    right: 24px;
+    bottom: 24px;
+    display: grid;
+    width: min(440px, calc(100vw - 32px));
+    height: min(700px, calc(100dvh - 32px));
+    grid-template-rows: auto minmax(0, 1fr) auto auto;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    color: var(--text);
+    background: #fff;
+    box-shadow: 0 24px 70px rgba(36, 17, 63, .24);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(14px);
+    transition: opacity .2s ease, transform .2s ease, visibility .2s;
 }
-.floating-buttons a{
-    width:60px;
-    height:60px;
-    border-radius:50%;
-    display:grid;
-    place-items:center;
-    color:#111;
-    background:linear-gradient(135deg,var(--gold),var(--gold-light));
-    font-size:24px;
-    box-shadow:0 12px 25px rgba(0,0,0,.35);
-    transition:transform .2s ease;
+.vinayak-ai.is-open { opacity: 1; visibility: visible; transform: translateY(0); }
+.vinayak-ai__header, .vinayak-ai__composer { display: flex; align-items: center; gap: 10px; padding: 13px 15px; background: #fff; }
+.vinayak-ai__header { justify-content: space-between; border-bottom: 1px solid var(--border); }
+.vinayak-ai__brand { display: flex; min-width: 0; align-items: center; gap: 10px; }
+.vinayak-ai__mark { display: grid; width: 38px; height: 38px; flex: 0 0 auto; place-items: center; border-radius: 12px; color: #fff; background: linear-gradient(135deg, var(--primary), var(--deep-plum)); }
+.vinayak-ai__brand strong, .vinayak-ai__brand small { display: block; }
+.vinayak-ai__brand strong { color: var(--primary); font-size: 16px; line-height: 1.2; }
+.vinayak-ai__brand small { margin-top: 3px; color: var(--muted); font-size: 11px; }
+.vinayak-ai__header-actions { display: flex; align-items: center; gap: 7px; }
+.vinayak-ai__header-actions button, .vinayak-ai__composer button { min-width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 11px; color: var(--primary); background: var(--primary-soft); cursor: pointer; }
+.vinayak-ai__header-actions .vinayak-ai__new { width: auto; padding: 0 11px; color: var(--primary); font-size: 12px; font-weight: 700; }
+.vinayak-ai__messages { display: flex; min-height: 0; flex-direction: column; gap: 12px; overflow-y: auto; overscroll-behavior: contain; padding: 16px; background: #fff; -webkit-overflow-scrolling: touch; }
+.vinayak-ai__message { max-width: 96%; min-width: 0; align-self: flex-start; padding: 11px 13px; border: 1px solid var(--border); border-radius: 15px 15px 15px 4px; color: var(--text); background: var(--primary-soft); font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }
+.vinayak-ai__message--user { max-width: 88%; align-self: flex-end; border-color: var(--primary); border-radius: 15px 15px 4px 15px; color: #fff; background: var(--primary); }
+.vinayak-ai__message-copy { margin: 0; white-space: pre-line; }
+.vinayak-ai__message--error { border-color: rgba(185, 50, 33, .35); color: #8F2C20; background: #FFF0ED; }
+.vinayak-ai__retry { margin-top: 9px; padding: 7px 10px; border: 1px solid rgba(185, 50, 33, .35); border-radius: 9px; color: #8F2C20; background: #fff; cursor: pointer; }
+.vinayak-ai__product-list { display: grid; grid-template-columns: 1fr; gap: 9px; margin-top: 10px; }
+.vinayak-ai__product { display: grid; min-width: 0; grid-template-columns: 64px minmax(0, 1fr); gap: 10px; padding: 9px; border: 1px solid var(--border); border-radius: 12px; background: #fff; }
+.vinayak-ai__product img { width: 64px; height: 64px; border-radius: 8px; object-fit: contain; background: var(--primary-soft); }
+.vinayak-ai__product-body { min-width: 0; }
+.vinayak-ai__product h3 { margin: 1px 0 3px; color: var(--text); font-size: 13px; line-height: 1.35; overflow-wrap: anywhere; }
+.vinayak-ai__product-price { display: block; color: var(--primary); font-size: 13px; font-weight: 700; }
+.vinayak-ai__product-reason { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; line-height: 1.4; }
+.vinayak-ai__product-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 8px; }
+.vinayak-ai__product-controls button { min-height: 32px; padding: 5px 8px; border: 1px solid rgba(109, 40, 217, .32); border-radius: 8px; color: var(--primary); background: #fff; font: inherit; font-size: 11px; cursor: pointer; }
+.vinayak-ai__product-controls button:hover { background: var(--primary-soft); }
+.vinayak-ai__product-controls .vinayak-ai__add { border-color: var(--primary); color: #fff; background: var(--primary); font-weight: 700; }
+.vinayak-ai__product-controls .vinayak-ai__qty { min-width: 28px; color: var(--text); font-size: 12px; text-align: center; }
+.vinayak-ai__basket-summary { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; margin-top: 10px; padding: 10px; border: 1px solid var(--border); border-radius: 10px; color: var(--text); background: var(--primary-soft); font-size: 12px; }
+.vinayak-ai__basket-summary strong { color: var(--primary); }
+.vinayak-ai__budget-track { grid-column: 1 / -1; height: 5px; margin-top: 5px; overflow: hidden; border-radius: 5px; background: #E1D7EF; }
+.vinayak-ai__budget-track span { display: block; height: 100%; background: var(--primary); }
+.vinayak-ai__suggestions { display: flex; min-height: 0; max-height: 56px; align-items: center; gap: 7px; overflow-x: auto; padding: 0 14px 11px; overscroll-behavior-x: contain; scrollbar-width: thin; }
+.vinayak-ai__suggestions:empty { display: none; }
+.vinayak-ai__suggestions button { flex: 0 0 auto; min-height: 34px; padding: 6px 10px; border: 1px solid var(--border); border-radius: 999px; color: var(--primary); background: var(--primary-soft); font: inherit; font-size: 11px; white-space: nowrap; cursor: pointer; }
+.vinayak-ai__suggestions button:hover { border-color: var(--primary); color: #fff; background: var(--primary); }
+.vinayak-ai__composer { border-top: 1px solid var(--border); padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
+.vinayak-ai__composer input { min-width: 0; min-height: 44px; flex: 1; padding: 10px 12px; border: 1px solid var(--border); border-radius: 12px; color: var(--text); background: #fff; font: inherit; font-size: 14px; }
+.vinayak-ai__composer input::placeholder { color: var(--muted); }
+.vinayak-ai__composer button { width: 46px; height: 44px; flex: 0 0 auto; color: #fff; background: var(--primary); font-size: 16px; }
+.vinayak-ai__composer button:disabled { cursor: wait; opacity: .65; }
+.vinayak-ai__typing { display: inline-flex; min-height: 18px; align-items: center; gap: 4px; }
+.vinayak-ai__typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--primary); animation: vinayak-ai-bounce .8s infinite alternate; }
+.vinayak-ai__typing i:nth-child(2) { animation-delay: .15s; }
+.vinayak-ai__typing i:nth-child(3) { animation-delay: .3s; }
+.vinayak-ai__sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@keyframes vinayak-ai-bounce { to { transform: translateY(-4px); opacity: .45; } }
+@media(max-width:600px) {
+    .floating-buttons { right: 12px; bottom: 12px; gap: 9px; }
+    .floating-buttons a { display: none; }
+    .vinayak-ai-launch { width: 50px; height: 50px; font-size: 20px; }
+    .vinayak-ai { right: 0; bottom: 0; width: 100vw; height: 100dvh; max-height: 100dvh; border-radius: 18px 18px 0 0; padding-bottom: env(safe-area-inset-bottom); }
+    .vinayak-ai__header, .vinayak-ai__composer { padding-right: 12px; padding-left: 12px; }
+    .vinayak-ai__messages { padding: 12px; }
+    .vinayak-ai__message { max-width: 100%; }
+    .vinayak-ai__product { grid-template-columns: 56px minmax(0, 1fr); gap: 8px; padding: 8px; }
+    .vinayak-ai__product img { width: 56px; height: 56px; }
+    .vinayak-ai__product-controls button { min-height: 36px; }
 }
-.floating-buttons a:hover{transform:translateY(-2px) scale(1.04)}
-.vinayak-ai-launch{
-    width:60px;
-    height:60px;
-    border:0;
-    border-radius:50%;
-    display:grid;
-    place-items:center;
-    color:#111;
-    background:linear-gradient(135deg,var(--gold),var(--gold-light));
-    font-size:23px;
-    cursor:pointer;
-    box-shadow:0 12px 25px rgba(0,0,0,.35);
-    transition:transform .2s ease;
-}
-.vinayak-ai-launch:hover{transform:translateY(-2px) scale(1.04)}
-.vinayak-ai-launch:focus-visible{outline:3px solid var(--gold-light);outline-offset:4px}
+@media (prefers-reduced-motion: reduce) { .vinayak-ai, .vinayak-ai-launch { transition: none; } .vinayak-ai__typing i { animation: none; } }
 
-.vinayak-ai{
-    position:fixed;
-    right:30px;
-    bottom:30px;
-    z-index:100001;
-    width:min(440px,calc(100vw - 32px));
-    height:min(700px,calc(100dvh - 32px));
-    display:grid;
-    grid-template-rows:auto minmax(0,1fr) auto auto;
-    overflow:hidden;
-    border:1px solid rgba(212,175,55,.34);
-    border-radius:22px;
-    color:#e5e7eb;
-    background:#0f172a;
-    box-shadow:0 26px 80px rgba(0,0,0,.55);
-    opacity:0;
-    visibility:hidden;
-    transform:translateY(18px);
-    transition:opacity .2s ease,transform .2s ease,visibility .2s;
-}
-.vinayak-ai.is-open{opacity:1;visibility:visible;transform:translateY(0)}
-.vinayak-ai__header,.vinayak-ai__composer{display:flex;align-items:center;gap:10px;padding:14px 16px;background:#09111f}
-.vinayak-ai__header{justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08)}
-.vinayak-ai__brand{display:flex;align-items:center;gap:10px;min-width:0}
-.vinayak-ai__mark{width:38px;height:38px;flex:0 0 auto;display:grid;place-items:center;border-radius:12px;color:#111;background:linear-gradient(135deg,var(--gold),var(--gold-light))}
-.vinayak-ai__brand strong,.vinayak-ai__brand small{display:block}
-.vinayak-ai__brand strong{color:var(--gold);font-size:16px;line-height:1.2}
-.vinayak-ai__brand small{margin-top:3px;color:#9ca3af;font-size:11px}
-.vinayak-ai__header-actions{display:flex;align-items:center;gap:7px}
-.vinayak-ai__header-actions button,.vinayak-ai__composer button{min-width:40px;height:40px;border:0;border-radius:11px;color:#fff;background:#1f2937;cursor:pointer}
-.vinayak-ai__header-actions .vinayak-ai__new{width:auto;padding:0 11px;color:#f3d778;font-size:12px;font-weight:600}
-.vinayak-ai__messages{min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:16px;display:flex;flex-direction:column;gap:12px;-webkit-overflow-scrolling:touch}
-.vinayak-ai__message{max-width:96%;align-self:flex-start;min-width:0;padding:11px 12px;border-radius:15px;border-bottom-left-radius:4px;color:#e5e7eb;background:#1e293b;line-height:1.45;font-size:13px;overflow-wrap:anywhere}
-.vinayak-ai__message--user{max-width:88%;align-self:flex-end;border-bottom-left-radius:15px;border-bottom-right-radius:4px;color:#171717;background:linear-gradient(135deg,#f2d67c,#d4af37)}
-.vinayak-ai__message-copy{margin:0;white-space:pre-line}
-.vinayak-ai__message--error{border:1px solid rgba(248,113,113,.5)}
-.vinayak-ai__retry{margin-top:10px;border:1px solid rgba(248,113,113,.5);border-radius:9px;padding:7px 10px;color:#fecaca;background:#3b1720;cursor:pointer}
-.vinayak-ai__product-list{display:grid;grid-template-columns:1fr;gap:9px;margin-top:10px}
-.vinayak-ai__product{min-width:0;display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px;padding:9px;border:1px solid rgba(255,255,255,.09);border-radius:12px;background:#111c2d}
-.vinayak-ai__product img{width:64px;height:64px;object-fit:contain;border-radius:8px;background:#fff}
-.vinayak-ai__product-body{min-width:0}
-.vinayak-ai__product h3{margin:1px 0 3px;color:#fff;font-size:13px;line-height:1.3;overflow-wrap:anywhere}
-.vinayak-ai__product-price{display:block;color:#f2d67c;font-size:13px;font-weight:700}
-.vinayak-ai__product-reason{display:block;margin-top:3px;color:#aeb9c8;font-size:10px;line-height:1.35}
-.vinayak-ai__product-controls{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:8px}
-.vinayak-ai__product-controls button{min-height:32px;border:1px solid rgba(212,175,55,.45);border-radius:8px;padding:5px 8px;color:#f2d67c;background:#0c1625;font:inherit;font-size:11px;cursor:pointer}
-.vinayak-ai__product-controls button:hover{background:#263449}
-.vinayak-ai__product-controls .vinayak-ai__add{border-color:var(--gold);color:#111;background:var(--gold);font-weight:700}
-.vinayak-ai__product-controls .vinayak-ai__qty{min-width:28px;text-align:center;color:#fff;font-size:12px}
-.vinayak-ai__basket-summary{display:grid;grid-template-columns:1fr auto;gap:2px 8px;margin-top:10px;padding:10px;border-radius:10px;color:#f8fafc;background:#0b1321;font-size:12px}
-.vinayak-ai__basket-summary strong{color:#f2d67c}
-.vinayak-ai__budget-track{grid-column:1/-1;height:5px;margin-top:5px;overflow:hidden;border-radius:5px;background:#263449}
-.vinayak-ai__budget-track span{display:block;height:100%;background:var(--gold)}
-.vinayak-ai__suggestions{display:flex;gap:7px;overflow-x:auto;padding:0 14px 11px;scrollbar-width:thin;overscroll-behavior-x:contain}
-.vinayak-ai__suggestions:empty{display:none}
-.vinayak-ai__suggestions button{flex:0 0 auto;min-height:34px;border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:6px 10px;color:#d1d5db;background:#172033;font:inherit;font-size:11px;cursor:pointer;white-space:nowrap}
-.vinayak-ai__suggestions button:hover{color:#111;border-color:var(--gold);background:var(--gold)}
-.vinayak-ai__composer{border-top:1px solid rgba(255,255,255,.08);padding-bottom:calc(12px + env(safe-area-inset-bottom))}
-.vinayak-ai__composer input{min-width:0;min-height:44px;flex:1;border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:10px 12px;color:#fff;background:#172033;font:inherit;font-size:14px}
-.vinayak-ai__composer input::placeholder{color:#9ca3af}
-.vinayak-ai__composer button{width:46px;height:44px;flex:0 0 auto;color:#111;background:var(--gold);font-size:16px}
-.vinayak-ai__composer button:disabled{cursor:wait;opacity:.65}
-.vinayak-ai__typing{display:inline-flex;gap:4px;align-items:center;min-height:18px}
-.vinayak-ai__typing i{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:vinayak-ai-bounce .8s infinite alternate}
-.vinayak-ai__typing i:nth-child(2){animation-delay:.15s}.vinayak-ai__typing i:nth-child(3){animation-delay:.3s}
-.vinayak-ai__sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-@keyframes vinayak-ai-bounce{to{transform:translateY(-4px);opacity:.45}}
 
-@media(max-width:600px){
-    .floating-buttons{right:12px;bottom:12px;gap:10px}
-    .floating-buttons a{width:48px;height:48px;font-size:20px}
-    .vinayak-ai-launch{width:52px;height:52px;font-size:21px}
-    .vinayak-ai{right:0;bottom:0;width:100vw;height:100dvh;max-height:100dvh;border-radius:16px 16px 0 0;padding-bottom:env(safe-area-inset-bottom)}
-    .vinayak-ai__header,.vinayak-ai__composer{padding-right:12px;padding-left:12px}
-    .vinayak-ai__messages{padding:12px}
-    .vinayak-ai__message{max-width:100%}
-    .vinayak-ai__product{grid-template-columns:56px minmax(0,1fr);gap:8px;padding:8px}
-    .vinayak-ai__product img{width:56px;height:56px}
-    .vinayak-ai__product-controls button{min-height:36px}
-}
-@media(prefers-reduced-motion:reduce){.vinayak-ai,.vinayak-ai-launch{transition:none}.vinayak-ai__typing i{animation:none}}
+
+
