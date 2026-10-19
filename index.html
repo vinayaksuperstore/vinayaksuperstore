@@ -53,6 +53,7 @@
 <link rel="stylesheet" href="styles/wishlist.css">
 <link rel="stylesheet" href="styles/accessibility.css">
 <link rel="stylesheet" href="styles/progress.css">
+<link rel="stylesheet" href="styles/checkout.css">
 
 </head>
 
@@ -257,7 +258,7 @@ aria-label="Open wishlist">
 
                     <i class="fa-solid fa-truck-fast"></i>
 
-                    Free Delivery ₹500+
+                    Free Delivery ₹500+ in service area
 
                 </div>
 
@@ -557,8 +558,9 @@ aria-label="Open wishlist">
         <input
             type="text"
             id="searchInput"
+            aria-label="Search products"
             placeholder="🔍 Search for products..."
-            onkeyup="searchProducts(this.value)"
+            oninput="searchProducts(this.value)"
         >
 
     </div>
@@ -593,23 +595,23 @@ aria-label="Open wishlist">
 
         <p class="section-tag">
 
-            CUSTOMER FAVOURITES
+            CURRENT CATALOGUE
 
         </p>
 
         <h2>
 
-            Trending Products
+            Shop Products
 
         </h2>
 
         <p class="section-description">
 
-            Some of our most popular picks.
+            Browse the current catalogue, search by name, or choose a category.
 
         </p>
 
-        <div class="product-grid">
+        <div class="product-grid" aria-live="polite" aria-busy="true">
 
         </div>
 
@@ -1205,19 +1207,17 @@ onclick="closeDrawer()">
 
 <span>Delivery</span>
 
-<strong style="color:#22C55E;">
-
-FREE
-
-</strong>
+<strong class="delivery-pending">Check service area at checkout</strong>
 
 </div>
 
 </div>
+
+<p class="cart-delivery-note">The store will check your address and confirm delivery eligibility and any charge.</p>
 
         <button
             class="checkout-btn"
-            onclick="checkoutWhatsApp()">
+            onclick="beginCheckout()">
 
             Checkout
 
@@ -1225,6 +1225,75 @@ FREE
 
     </div>
 
+</div>
+
+<!-- ==========================================
+            CUSTOMER CHECKOUT
+========================================== -->
+
+<div class="checkout-overlay" id="checkoutOverlay" hidden>
+    <section class="checkout-modal" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle" aria-describedby="checkoutDescription" tabindex="-1">
+        <header class="checkout-header">
+            <div class="checkout-brand" aria-hidden="true"><span>VS</span><strong>VINAYAK SUPERSTORE</strong></div>
+            <button class="checkout-close" type="button" data-close-checkout aria-label="Close checkout">×</button>
+        </header>
+
+        <div class="checkout-step" id="checkoutDetailsStep">
+            <p class="checkout-eyebrow">CHECKOUT</p>
+            <h2 id="checkoutTitle">Complete Your Order</h2>
+            <p class="checkout-intro" id="checkoutDescription">Tell us where to deliver your order.</p>
+            <form id="customerDetailsForm" novalidate>
+                <div class="checkout-field">
+                    <label for="customerName">Full name</label>
+                    <input id="customerName" name="name" type="text" autocomplete="name" maxlength="120" required aria-describedby="customerNameError">
+                    <small class="field-error" id="customerNameError" hidden></small>
+                </div>
+                <div class="checkout-field">
+                    <label for="customerPhone">Phone number</label>
+                    <div class="phone-input"><span aria-hidden="true">+91</span><input id="customerPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" maxlength="18" placeholder="98765 43210" required aria-describedby="customerPhoneHint customerPhoneError"></div>
+                    <small class="field-hint" id="customerPhoneHint">Indian mobile number</small>
+                    <small class="field-error" id="customerPhoneError" hidden></small>
+                </div>
+                <div class="checkout-field">
+                    <label for="customerAddress">Delivery address</label>
+                    <textarea id="customerAddress" name="address" rows="4" maxlength="600" autocomplete="street-address" placeholder="House or flat, street, locality, landmark, city and PIN code" required aria-describedby="customerAddressError"></textarea>
+                    <small class="field-error" id="customerAddressError" hidden></small>
+                </div>
+                <p class="checkout-privacy">We use these details to prepare and deliver this order.</p>
+                <p class="checkout-error" id="detailsCheckoutError" role="alert" hidden></p>
+                <div class="checkout-actions">
+                    <button class="checkout-secondary" type="button" data-back-to-cart>Back to Cart</button>
+                    <button class="checkout-primary" type="submit" id="continueToReview">Continue</button>
+                </div>
+            </form>
+        </div>
+
+        <section class="checkout-step" id="checkoutReviewStep" aria-labelledby="reviewTitle" hidden>
+            <p class="checkout-eyebrow">PLEASE CHECK BEFORE PLACING YOUR ORDER</p>
+            <h2 id="reviewTitle">Review your order</h2>
+            <div class="review-customer" id="reviewCustomer"></div>
+            <div class="review-items" id="reviewItems"></div>
+            <div class="review-totals" id="reviewTotals"></div>
+            <p class="review-note" id="reviewNote">The store will confirm delivery charges and payment method.</p>
+            <p class="checkout-error" id="reviewCheckoutError" role="alert" hidden></p>
+            <div class="checkout-actions checkout-actions-wrap">
+                <button class="checkout-secondary" type="button" data-edit-details>Edit details</button>
+                <button class="checkout-secondary" type="button" data-edit-cart>Edit cart</button>
+                <button class="checkout-primary" type="button" id="placeOrderButton">Place order</button>
+            </div>
+        </section>
+
+        <section class="checkout-step" id="checkoutConfirmationStep" aria-labelledby="confirmationTitle" aria-live="polite" hidden>
+            <div class="confirmation-mark" aria-hidden="true">✓</div>
+            <p class="checkout-eyebrow">ORDER RECEIVED</p>
+            <h2 id="confirmationTitle">Your order is confirmed</h2>
+            <p class="confirmation-copy" id="confirmationCopy">Vinayak Superstore has received your order.</p>
+            <dl class="confirmation-details" id="confirmationDetails"></dl>
+            <div class="review-items confirmation-items" id="confirmationItems"></div>
+            <a class="checkout-whatsapp" id="confirmationWhatsApp" href="https://wa.me/919779562555" target="_blank" rel="noopener noreferrer">Message the store on WhatsApp</a>
+            <button class="checkout-primary confirmation-done" type="button" data-checkout-done>Done</button>
+        </section>
+    </section>
 </div>
 
 <!-- ===========================================
@@ -1296,8 +1365,6 @@ Wishlist
 
 <div class="cursor-glow"></div>
 <img id="flyingProduct" src="" alt="">
-
-<script src="https://unpkg.com/scrollreveal"></script>
 
 <script src="scripts/products.js"></script>
 <script src="scripts/cart.js"></script>

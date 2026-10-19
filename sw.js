@@ -1,7 +1,10 @@
-self.addEventListener("install", (event) => {
-    console.log("Service Worker Installed");
+self.addEventListener("install", event => {
+    event.waitUntil(self.skipWaiting());
 });
 
-self.addEventListener("fetch", (event) => {
-    // Optional for now
+self.addEventListener("activate", event => {
+    event.waitUntil(self.clients.claim());
 });
+
+// Deliberately network-only: the catalogue and API responses must not go stale.
+self.addEventListener("fetch", () => {});

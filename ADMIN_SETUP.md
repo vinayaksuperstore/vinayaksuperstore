@@ -1,6 +1,6 @@
 # Vinayak Superstore admin setup
 
-The storefront and admin panel now use a small same-origin Python service with a SQLite product catalogue. The first run copies the original 200 product records from `data/products.legacy-backup.json`, preserving product IDs, images, descriptions, categories, stock fields, and prices. The backup is kept intact.
+The storefront and admin panel use a small same-origin Python service with a SQLite product catalogue. On a fresh database, the server seeds the current catalogue from `data/products.json`; it falls back to `data/products.legacy-backup.json` only when the current snapshot is absent. Existing product databases are not overwritten.
 
 ## Start the site
 
@@ -13,10 +13,10 @@ Use Python 3.9 or newer from the project folder:
 
 ### Windows Command Prompt
 
-Change into the project folder (the `.lnk` on the Desktop is a shortcut, not a folder):
+Change into this project folder (the `.lnk` on the Desktop is a shortcut, not a folder):
 
 ```bat
-cd /d "C:\Users\RAJAN SHARMA\Documents\Codex\2026-10-08\VinayakSuperstore"
+cd /d "C:\Users\RAJAN SHARMA\Documents\Codex\2026-10-19\vinayak-superstore-checkout-upgrade-product-loading"
 ```
 
 If Command Prompt says `python` is not recognized, use the Python runtime bundled with Codex:
@@ -50,8 +50,10 @@ For local development, the default host is `127.0.0.1` and the admin cookie is n
 - `/admin` requires the server-side admin login.
 - Product changes, price batches, category management, availability, and image uploads require an authenticated session and CSRF token.
 - Price updates are recorded in `price_history`; deleted products' history remains available in the database.
-- Customer checkout asks the server for a current quote before opening WhatsApp, so stale cart prices and unavailable items are rejected.
-- The checkout in this project sends an order request through WhatsApp; it does not create or store orders, so there is no Orders dashboard.
-- The admin panel does not include order processing or inventory counts because the original project has no order or inventory backend.
+- Checkout asks the server to accept and store an order after the customer reviews the current server-priced items. The server creates the order ID, normalises the phone number, recalculates item prices, records status, and uses an idempotency key so a safe retry returns the same order.
+- Accepted orders appear in the signed-in **Orders** area. Customer name, phone number, and delivery address are returned only to the customer who placed the order and authenticated admins; there is no public order lookup route.
+- The website advertises free delivery above ₹500 within the store's service area, but the covered area is not configured in the project. Every accepted order leaves delivery eligibility and the final amount pending until an admin checks the address and confirms the delivery charge (enter ₹0 only when free delivery is confirmed). The storefront lists UPI, cards, and cash; no payment is taken at checkout, and the specific method remains to be confirmed with the customer.
+- The confirmation offers an optional WhatsApp link containing only the order ID. It does not send customer details automatically. Set an order-data retention policy before production use.
+- Orders are stored in the configured database. Use the persistent PostgreSQL setup below for production; SQLite on an ephemeral host can lose order records when its disk is replaced.
 
 The catalogue contains the store owner's supplied price, name, offer, and availability updates. Prices that have not been supplied remain at their prior values; do not infer or apply prices for those products. Their prices can be entered later through Price Management.

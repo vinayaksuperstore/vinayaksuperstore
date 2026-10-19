@@ -19,6 +19,11 @@
     const parsed = new Date(value);
     return Number.isNaN(parsed.valueOf()) ? '—' : parsed.toLocaleDateString('en-IN', {day:'numeric',month:'short',year:'numeric'});
   };
+  const dateTime = value => {
+    if (!value) return '—';
+    const parsed = new Date(value);
+    return Number.isNaN(parsed.valueOf()) ? '—' : parsed.toLocaleString('en-IN', {day:'numeric',month:'short',year:'numeric',hour:'numeric',minute:'2-digit'});
+  };
   const image = value => `/${esc(value || 'assets/images/placeholder.svg')}`;
 
   function toast(message) {
@@ -94,10 +99,11 @@
     activeView = view;
     $('#sidebar').classList.remove('open');
     document.querySelectorAll('.nav-link[data-view]').forEach(button => button.classList.toggle('active', button.dataset.view === view));
-    const titles = {dashboard:'Dashboard',products:'Products',prices:'Price management',categories:'Categories',settings:'Settings'};
+    const titles = {dashboard:'Dashboard',orders:'Orders',products:'Products',prices:'Price management',categories:'Categories',settings:'Settings'};
     $('#viewTitle').textContent = titles[view] || 'Dashboard';
     try {
       if (view === 'dashboard') await renderDashboard();
+      else if (view === 'orders') await renderOrders();
       else if (view === 'products') await renderProducts();
       else if (view === 'prices') await renderPrices();
       else if (view === 'categories') await renderCategories();
@@ -120,6 +126,56 @@
   function recentRows(products) {
     if (!products.length) return '<p class="empty-placeholder">No products yet.</p>';
     return products.map(product => `<div class="recent-row"><img class="mini-image" src="${image(product.image)}" alt="" onerror="this.src='/assets/images/placeholder.svg'"><div class="recent-info"><strong>${esc(product.name)}</strong><span>${esc(product.category)} · ${money(product.price)}</span></div><span class="pill ${product.available ? '' : 'off'}">${product.available ? 'Available' : 'Unavailable'}</span></div>`).join('');
+  }
+
+  async function renderOrders() {
+    const orders = await api('/api/admin/orders');
+    const orderCard = order => {
+      const items = Array.isArray(order.items) ? order.items : [];
+      const statusOptions = ['received','processing','completed','cancelled'].map(status => `<option value="${status}" ${order.status===status?'selected':''}>${status[0].toUpperCase()+status.slice(1)}</option>`).join('');
+      return `<article class="panel admin-order">
+        <header class="admin-order-head"><div><strong>${esc(order.orderId)}</strong><small>${esc(dateTime(order.createdAt))}</small></div><span class="pill ${order.status==='cancelled'?'off':''}">${esc(order.status)}</span></header>
+        <div class="admin-order-customer"><strong>${esc(order.customer?.name)}</strong><a href="tel:${esc(order.customer?.phone)}">${esc(order.customer?.phone)}</a><address>${esc(order.customer?.address)}</address></div>
+        <div class="admin-order-items">${items.map(item=>`<div><span>${esc(item.name)} × ${Number(item.quantity)||0}</span><strong>${money(item.subtotal)}</strong></div>`).join('')}</div>
+        <div class="admin-order-total"><span>Products subtotal</span><strong>${money(order.subtotal)}</strong></div>
+        <div class="admin-order-total"><span>Delivery</span><strong>${order.deliveryStatus==='confirmed'?money(order.deliveryCharge):order.deliveryStatus==='area_check_pending'?'Service area check pending':'Charge to be confirmed'}</strong></div>
+        <div class="admin-order-total"><span>Final amount</span><strong>${order.total===null?'To be confirmed':money(order.total)}</strong></div>
+        <p class="admin-order-note">The storefront lists UPI, cards, and cash; confirm which method the customer will use. No payment was taken online.</p>
+        <form class="delivery-charge-form" data-delivery-form="${esc(order.orderId)}">
+          <label>Confirm delivery charge after checking the address <span>(enter 0 if confirmed free)</span>
+            <div><span>₹</span><input type="number" name="deliveryCharge" min="0" max="100000" step="0.01" inputmode="decimal" aria-label="Confirmed delivery charge for order ${esc(order.orderId)}" value="${order.deliveryCharge===null?'':esc(order.deliveryCharge)}" required><button class="button secondary" type="submit">Save charge</button></div>
+          </label>
+        </form>
+        <label class="order-status-control">Order status<select data-order-status="${esc(order.orderId)}">${statusOptions}</select></label>
+      </article>`;
+    };
+    content.innerHTML = `${viewHeading('Customer orders','Orders accepted by the store server. Customer details are visible in this signed-in admin area only.')}
+      ${orders.length ? `<div class="admin-orders">${orders.map(orderCard).join('')}</div>` : '<section class="panel empty-state">No orders have been received yet.</section>'}`;
+    content.querySelectorAll('[data-order-status]').forEach(select => select.addEventListener('change', async () => {
+      const orderId = select.dataset.orderStatus;
+      select.disabled = true;
+      try {
+        await api(`/api/admin/orders/${encodeURIComponent(orderId)}`, {method:'PUT', body:JSON.stringify({status:select.value})});
+        toast('Order status updated.');
+        await renderOrders();
+      } catch (error) {
+        toast(error.message);
+        await renderOrders();
+      }
+    }));
+    content.querySelectorAll('[data-delivery-form]').forEach(form => form.addEventListener('submit', async event => {
+      event.preventDefault();
+      const button = form.querySelector('button[type="submit"]');
+      button.disabled = true;
+      try {
+        await api(`/api/admin/orders/${encodeURIComponent(form.dataset.deliveryForm)}`, {method:'PUT', body:JSON.stringify({deliveryCharge:form.elements.deliveryCharge.value})});
+        toast('Delivery charge and final amount confirmed.');
+        await renderOrders();
+      } catch (error) {
+        toast(error.message);
+        button.disabled = false;
+      }
+    }));
   }
 
   async function renderDashboard() {
@@ -380,7 +436,7 @@
 
   function renderSettings() {
     content.innerHTML = `${viewHeading('Settings','Account and catalogue setup information.')}
-      <section class="panel settings-card"><h3>Signed in as ${esc(username)}</h3><p>Your admin session is protected by a server-side login and expires after 12 hours. Product changes are stored in the local SQLite catalogue and price changes are recorded in the internal history log.</p><p>To manage the storefront, open <a href="/">the customer website</a>. To end this session on this device, log out.</p><button type="button" class="button secondary" id="settingsLogout">Log out</button></section>`;
+      <section class="panel settings-card"><h3>Signed in as ${esc(username)}</h3><p>Your admin session expires after 12 hours. Product changes and customer orders are stored in the store database; order details are only shown in the signed-in admin area.</p><p>Order records include the customer’s name, phone number, delivery address, selected products, and item totals. Set a retention policy before production use.</p><p>To manage the storefront, open <a href="/">the customer website</a>. To end this session on this device, log out.</p><button type="button" class="button secondary" id="settingsLogout">Log out</button></section>`;
     $('#settingsLogout').addEventListener('click', logout);
   }
 

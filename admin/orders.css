@@ -1,0 +1,30 @@
+.admin-orders { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.admin-order { min-width: 0; padding: 17px; }
+.admin-order-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid #eef0f3; }
+.admin-order-head strong, .admin-order-head small { display: block; }
+.admin-order-head strong { color: var(--navy); font-size: 12px; }
+.admin-order-head small { margin-top: 4px; color: var(--muted); font-size: 10px; }
+.admin-order-head .pill { text-transform: capitalize; }
+.admin-order-customer { display: grid; gap: 4px; padding: 13px 0; color: #344258; font-size: 11px; }
+.admin-order-customer strong { color: var(--navy); font-size: 12px; }
+.admin-order-customer a { width: fit-content; color: #3e628f; text-decoration: underline; text-underline-offset: 2px; }
+.admin-order-customer address { margin-top: 3px; color: #536176; font-style: normal; line-height: 1.55; overflow-wrap: anywhere; white-space: pre-line; }
+.admin-order-items { display: grid; gap: 7px; padding: 12px 0; border-top: 1px solid #eef0f3; border-bottom: 1px solid #eef0f3; }
+.admin-order-items div, .admin-order-total { display: flex; justify-content: space-between; gap: 12px; font-size: 10px; }
+.admin-order-items span { min-width: 0; color: #536176; overflow-wrap: anywhere; }
+.admin-order-items strong { flex: 0 0 auto; color: var(--navy); }
+.admin-order-total { align-items: baseline; margin-top: 11px; color: #536176; font-size: 11px; }
+.admin-order-total strong { color: var(--navy); font-size: 14px; }
+.admin-order-note { margin-top: 9px; color: var(--muted); font-size: 10px; line-height: 1.5; }
+.delivery-charge-form { margin-top: 12px; padding: 11px; border: 1px solid #e8ebef; border-radius: 9px; background: #fafbfc; }
+.delivery-charge-form label { display: grid; gap: 7px; color: #536176; font-size: 10px; font-weight: 700; }
+.delivery-charge-form label > span { font-weight: 500; }
+.delivery-charge-form label > div { display: flex; align-items: center; gap: 7px; }
+.delivery-charge-form label > div > span { color: #536176; }
+.delivery-charge-form input { min-width: 0; width: 100px; min-height: 38px; border: 1px solid #dce2ea; border-radius: 8px; padding: 7px 9px; background: white; color: #182234; }
+.delivery-charge-form input:focus-visible { outline: 3px solid #d7aa3825; border-color: #b99032; }
+.delivery-charge-form button { min-height: 38px; padding-inline: 10px; }
+.order-status-control { display: grid; gap: 6px; margin-top: 13px; color: #536176; font-size: 10px; font-weight: 700; }
+.order-status-control select { min-height: 38px; border: 1px solid #dce2ea; border-radius: 8px; padding: 7px 10px; background: #fff; color: #182234; }
+.order-status-control select:focus-visible { outline: 3px solid #d7aa3825; border-color: #b99032; }
+@media (max-width: 950px) { .admin-orders { grid-template-columns: 1fr; } }

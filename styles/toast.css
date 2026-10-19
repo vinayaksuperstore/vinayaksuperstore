@@ -1,6 +1,8 @@
 .toast { position: fixed; z-index: 99999; right: 24px; bottom: 24px; display: flex; min-width: min(320px, calc(100vw - 32px)); align-items: center; gap: 14px; padding: 15px 18px; border: 1px solid var(--border); border-left: 4px solid var(--success); border-radius: 16px; color: var(--text); background: #fff; box-shadow: 0 14px 38px rgba(36, 17, 63, .16); opacity: 0; transform: translateY(16px); transition: opacity .25s ease, transform .25s ease; }
 .toast.show { opacity: 1; transform: translateY(0); }
+.toast.is-error { border-left-color: #b42318; }
 .toast-icon { display: flex; width: 44px; height: 44px; flex: 0 0 auto; align-items: center; justify-content: center; border-radius: 50%; color: var(--success); background: rgba(22, 128, 61, .1); font-size: 20px; font-weight: 700; }
+.toast.is-error .toast-icon { color: #b42318; background: rgba(180, 35, 24, .1); }
 .toast-content { flex: 1; }
 .toast-content h4 { margin-bottom: 3px; color: var(--text); font-size: 15px; }
 .toast-content p { color: var(--muted); font-size: 13px; }

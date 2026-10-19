@@ -8,12 +8,22 @@ const escapeProductHTML=value=>String(value??'').replace(/[&<>"']/g, ch => ({'&'
 ============================================================ */
 
 const grid=document.querySelector(".product-grid");
-const productImageFallback="assets/images/placeholder.svg";
+const productsScriptURL=document.currentScript?.src || new URL("scripts/products.js", document.baseURI).href;
+const productsRootURL=new URL("../", productsScriptURL);
+const productImageFallback=new URL("assets/images/placeholder.svg", productsRootURL).href;
 let currentProduct=null;
+let activeCategory="All";
+let activeQuery="";
+
+function resolveProductImage(path){
+    if(!path) return productImageFallback;
+    try { return new URL(String(path), productsRootURL).href; }
+    catch { return productImageFallback; }
+}
 
 function getProductImage(product){
 
-    return product.image || productImageFallback;
+    return resolveProductImage(product.image);
 
 }
 
@@ -29,6 +39,22 @@ function getProductOffer(product){
 function loadProducts(list=products){
 
     if(!grid) return;
+    grid.setAttribute("aria-busy","false");
+
+    if(!list.length){
+        const searching=Boolean(activeQuery);
+        const filtering=activeCategory!=="All";
+        const message=searching
+            ? `No products matched “${activeQuery}”.`
+            : filtering
+                ? `No products are listed in ${activeCategory} right now.`
+                : "No products are available in the catalogue right now.";
+        const action=searching||filtering
+            ? `<button type="button" class="catalogue-action" data-clear-product-filters>Show all products</button>`
+            : `<button type="button" class="catalogue-action" data-retry-products>Try again</button>`;
+        grid.innerHTML=`<div class="catalogue-state" role="status"> <p>${escapeProductHTML(message)}</p>${action}</div>`;
+        return;
+    }
 
     grid.innerHTML=list.map(product=>`
 
@@ -78,7 +104,7 @@ onclick="event.stopPropagation(); toggleWishlist(${product.id})">
             ${
                 product.available===false
                 ? "Currently unavailable"
-                : (product.stock>10 ? "In Stock" : (product.stock>0 ? `Only ${product.stock} Left` : "In Stock"))
+                : (Number(product.stock)>10 ? "In Stock" : (Number(product.stock)>0 ? `Only ${product.stock} Left` : "Available"))
             }
 
         </span>
@@ -202,47 +228,8 @@ input.value=value;
 
 function searchProducts(query){
 
-query=query.toLowerCase().trim();
-
-if(query===""){
-
-loadProducts(
-
-products.filter(
-
-p=>p.featured
-
-)
-
-);
-
-return;
-
-}
-
-const filtered=products.filter(product=>{
-
-return(
-
-product.name.toLowerCase().includes(query)||
-
-product.brand.toLowerCase().includes(query)||
-
-product.category.toLowerCase().includes(query)||
-
-product.subcategory.toLowerCase().includes(query)||
-
-product.keywords.some(keyword=>
-
-keyword.includes(query)
-
-)
-
-);
-
-});
-
-loadProducts(filtered);
+activeQuery=String(query??"").toLocaleLowerCase().trim();
+renderCatalogFilters();
 
 }
 /* ============================================================
@@ -257,31 +244,114 @@ document
 
 if(button) button.classList.add("active-filter");
 
-if(category==="All"){
-
-loadProducts(
-
-products.filter(
-
-product=>product.featured
-
-)
-
-);
-
-return;
+activeCategory=category||"All";
+renderCatalogFilters();
 
 }
 
-const filtered=products.filter(product=>
-
-product.category===category || product.subcategory===category
-
-);
-
-loadProducts(filtered);
-
+function renderCatalogFilters(){
+    const query=activeQuery;
+    const filtered=products.filter(product=>{
+        const categoryMatches=activeCategory==="All"
+            || product.category===activeCategory
+            || product.subcategory===activeCategory;
+        const searchText=[product.name,product.brand,product.category,product.subcategory,...(Array.isArray(product.keywords)?product.keywords:[])]
+            .filter(Boolean).join(" ").toLocaleLowerCase();
+        return categoryMatches&&(!query||searchText.includes(query));
+    });
+    loadProducts(filtered);
 }
+
+function showCatalogueState(kind,message){
+    if(!grid) return;
+    grid.setAttribute("aria-busy",String(kind==="loading"));
+    const action=kind==="error"?`<button type="button" class="catalogue-action" data-retry-products>Try again</button>`:"";
+    grid.innerHTML=`<div class="catalogue-state" role="${kind==="loading"?"status":"alert"}" aria-live="polite"><p>${escapeProductHTML(message)}</p>${action}</div>`;
+}
+
+function normalizeProductRecords(records){
+    if(!Array.isArray(records)) throw new Error("The product catalogue response is not a list.");
+    return records.map(product=>{
+        if(!product||!Number.isInteger(Number(product.id))||!product.name||!product.category||!Number.isFinite(Number(product.price))){
+            throw new Error("The product catalogue contains an incomplete product record.");
+        }
+        return {
+            ...product,
+            id:Number(product.id),
+            name:String(product.name),
+            brand:String(product.brand||""),
+            category:String(product.category),
+            subcategory:String(product.subcategory||product.category),
+            keywords:Array.isArray(product.keywords)?product.keywords.map(value=>String(value).toLocaleLowerCase()):[],
+            price:Number(product.price),
+            image:String(product.image||""),
+            description:String(product.description||""),
+            available:product.available!==false
+        };
+    });
+}
+
+async function fetchProductCatalogue(url,timeoutMs=5000){
+    const controller=typeof AbortController==="function"?new AbortController():null;
+    let timer;
+    try{
+        const request=fetch(url,{cache:"no-store",...(controller?{signal:controller.signal}:{})});
+        const timeout=new Promise((_,reject)=>{
+            timer=window.setTimeout(()=>{
+                controller?.abort();
+                reject(new Error("The catalogue request timed out."));
+            },timeoutMs);
+        });
+        const response=await Promise.race([request,timeout]);
+        if(!response.ok) throw new Error(`Catalogue request failed (${response.status}).`);
+        return normalizeProductRecords(await response.json());
+    }finally{
+        window.clearTimeout(timer);
+    }
+}
+
+async function loadProductCatalogue(){
+    showCatalogueState("loading","Loading the product catalogue…");
+    const apiURL=new URL("../api/products",productsScriptURL);
+    const snapshotURL=new URL("../data/products.json",productsScriptURL);
+    let records;
+    try{
+        records=await fetchProductCatalogue(apiURL.href);
+        if(!records.length){
+            products.splice(0,products.length);
+            refreshCatalogViews();
+            return products;
+        }
+    }catch(apiError){
+        try{
+            records=await fetchProductCatalogue(snapshotURL.href);
+            if(!records.length) throw new Error("The saved product catalogue is empty.");
+        }catch(snapshotError){
+            showCatalogueState("error","We couldn’t load products. Check your connection and try again.");
+            return products;
+        }
+    }
+    products.splice(0,products.length,...records);
+    refreshCatalogViews();
+    return products;
+}
+
+function retryProductCatalogue(){
+    window.productsReady=loadProductCatalogue();
+    return window.productsReady;
+}
+
+grid?.addEventListener("click",event=>{
+    if(event.target.closest("[data-retry-products]")) retryProductCatalogue();
+    if(event.target.closest("[data-clear-product-filters]")){
+        activeCategory="All";
+        activeQuery="";
+        const searchInput=document.getElementById("searchInput");
+        if(searchInput) searchInput.value="";
+        document.querySelectorAll(".filters button").forEach(button=>button.classList.toggle("active-filter",button.textContent.trim()==="All"));
+        renderCatalogFilters();
+    }
+});
 
 function getProductsByCategory(category){
 
@@ -505,15 +575,7 @@ window.open(
 ============================================================ */
 
 
-loadProducts(
-
-products.filter(
-
-p=>p.featured
-
-)
-
-);
+showCatalogueState("loading","Loading the product catalogue…");
 
 updateCategoryCounts();
 
@@ -728,7 +790,7 @@ function addDynamicCategoryCards(){
 }
 
 function refreshCatalogViews(){
-    loadProducts(products.filter(product=>product.featured));
+    renderCatalogFilters();
     addDynamicCategoryCards();
     updateCategoryCounts();
     renderCollections();
@@ -736,30 +798,5 @@ function refreshCatalogViews(){
 }
 
 renderCollections();
-async function fetchProductCatalogue(url){
-    const response=await fetch(url,{cache:'no-store'});
-    if(!response.ok) throw new Error(`Could not load the product catalogue from ${url}.`);
-    const records=await response.json();
-    if(!Array.isArray(records)||!records.length||records.some(product=>!product||product.id===undefined||!product.name||!product.category)){
-        throw new Error(`The product catalogue from ${url} is invalid.`);
-    }
-    return records;
-}
-
-window.productsReady=(async()=>{
-    let records;
-    try{
-        records=await fetchProductCatalogue('/api/products');
-    }catch(apiError){
-        // Static preview servers such as VS Code Live Server cannot provide the API.
-        // Use the public snapshot there; the Python service remains the live source of truth.
-        records=await fetchProductCatalogue('data/products.json');
-    }
-    products.splice(0,products.length,...records);
-    refreshCatalogViews();
-    return products;
-})().catch(error=>{
-    console.error(error);
-    if(grid) grid.innerHTML='<p class="catalogue-error">The product catalogue could not be loaded. Please refresh in a moment.</p>';
-    return [];
-});
+window.retryProducts=retryProductCatalogue;
+window.productsReady=loadProductCatalogue();

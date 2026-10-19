@@ -22,6 +22,7 @@ import sys
 import time
 import uuid
 from datetime import datetime, timezone
+from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 from http import HTTPStatus
 from http.cookies import SimpleCookie
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -47,6 +48,7 @@ ALLOWED_ORIGINS = {
 SESSION_TTL = 60 * 60 * 12
 MAX_JSON_BYTES = 512 * 1024
 MAX_UPLOAD_BYTES = 5 * 1024 * 1024
+FREE_DELIVERY_THRESHOLD = Decimal("500.00")
 PBKDF2_ROUNDS = 310_000
 LOGIN_FAILURES: dict[str, list[float]] = {}
 
@@ -205,19 +207,39 @@ def init_db(seed_legacy: bool = True) -> None:
                 content_type TEXT NOT NULL,
                 created_at TEXT NOT NULL
             );
+            CREATE TABLE IF NOT EXISTS orders (
+                order_id TEXT PRIMARY KEY,
+                idempotency_hash TEXT NOT NULL UNIQUE,
+                request_hash TEXT NOT NULL,
+                created_at TEXT NOT NULL,
+                customer_name TEXT NOT NULL,
+                customer_phone TEXT NOT NULL,
+                customer_address TEXT NOT NULL,
+                items_json TEXT NOT NULL,
+                subtotal REAL NOT NULL CHECK(subtotal >= 0),
+                delivery_status TEXT NOT NULL,
+                delivery_charge REAL,
+                total REAL CHECK(total IS NULL OR total >= 0),
+                payment_method TEXT NOT NULL,
+                payment_status TEXT NOT NULL,
+                status TEXT NOT NULL
+            );
+            CREATE INDEX IF NOT EXISTS orders_created_at_idx ON orders(created_at DESC);
             CREATE TABLE IF NOT EXISTS catalog_sequence (
                 singleton INTEGER PRIMARY KEY CHECK(singleton=1),
                 next_id INTEGER NOT NULL
             );
         """)
         if seed_legacy and con.execute("SELECT COUNT(*) FROM products").fetchone()[0] == 0:
-            backup = ROOT / "data" / "products.legacy-backup.json"
-            if backup.exists():
-                records = json.loads(backup.read_text(encoding="utf-8"))
+            catalog = ROOT / "data" / "products.json"
+            if not catalog.is_file():
+                catalog = ROOT / "data" / "products.legacy-backup.json"
+            if catalog.exists():
+                records = json.loads(catalog.read_text(encoding="utf-8"))
                 stamp = now()
                 for product in records:
                     product = dict(product)
-                    available = bool(int(product.get("stock", 0) or 0) > 0)
+                    available = bool(product.get("available", int(product.get("stock", 0) or 0) > 0))
                     product["available"] = available
                     con.execute(
                         "INSERT INTO products(id,name,category,price,available,product_json,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?)",
@@ -274,6 +296,41 @@ def require_text(value, label: str, maximum: int, allow_empty: bool = False) -> 
     return value
 
 
+def normalize_indian_phone(value) -> str:
+    if not isinstance(value, str) or len(value) > 32:
+        raise ValueError("Please enter a valid Indian mobile number.")
+    digits = re.sub(r"\D", "", value)
+    if digits.startswith("0091") and len(digits) == 14:
+        digits = digits[4:]
+    elif digits.startswith("91") and len(digits) == 12:
+        digits = digits[2:]
+    elif digits.startswith("0") and len(digits) == 11:
+        digits = digits[1:]
+    if not re.fullmatch(r"[6-9]\d{9}", digits):
+        raise ValueError("Please enter a valid Indian mobile number.")
+    return f"+91{digits}"
+
+
+def order_from_row(row) -> dict:
+    return {
+        "orderId": row["order_id"],
+        "createdAt": row["created_at"],
+        "customer": {
+            "name": row["customer_name"],
+            "phone": row["customer_phone"],
+            "address": row["customer_address"],
+        },
+        "items": json.loads(row["items_json"]),
+        "subtotal": float(row["subtotal"]),
+        "deliveryStatus": row["delivery_status"],
+        "deliveryCharge": float(row["delivery_charge"]) if row["delivery_charge"] is not None else None,
+        "total": float(row["total"]) if row["total"] is not None else None,
+        "paymentMethod": row["payment_method"],
+        "paymentStatus": row["payment_status"],
+        "status": row["status"],
+    }
+
+
 def valid_image_path(value) -> str:
     value = require_text(value, "Image", 300, allow_empty=True)
     if not value:
@@ -298,7 +355,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Cache-Control", "no-store")
         self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header("Referrer-Policy", "same-origin")
-        self.send_header("Content-Security-Policy", "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'")
+        self.send_header("Content-Security-Policy", "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'")
         for key, value in (extra_headers or {}).items():
             self.send_header(key, value)
         self.end_headers()
@@ -361,6 +418,8 @@ class Handler(BaseHTTPRequestHandler):
                 with db() as con:
                     rows = con.execute("SELECT * FROM products ORDER BY id").fetchall()
                 return self.send_json(200, [product_from_row(row) for row in rows])
+            if path == "/data/products.json":
+                return self.send_file(ROOT / "data" / "products.json")
             if path == "/api/categories":
                 with db() as con:
                     rows = con.execute("SELECT name FROM categories ORDER BY name COLLATE NOCASE").fetchall()
@@ -399,6 +458,10 @@ class Handler(BaseHTTPRequestHandler):
                         recent = con.execute("SELECT * FROM products ORDER BY updated_at DESC LIMIT 6").fetchall()
                         added = con.execute("SELECT * FROM products ORDER BY created_at DESC LIMIT 6").fetchall()
                     return self.send_json(200, {"total": total, "available": available or 0, "unavailable": total - (available or 0), "categories": category_count, "recentlyUpdated": [product_from_row(r) for r in recent], "recentlyAdded": [product_from_row(r) for r in added]})
+                if path == "/api/admin/orders":
+                    with db() as con:
+                        rows = con.execute("SELECT * FROM orders ORDER BY created_at DESC LIMIT 100").fetchall()
+                    return self.send_json(200, [order_from_row(row) for row in rows])
                 if path == "/api/admin/products":
                     term = query.get("q", [""])[0].strip().lower()
                     category = query.get("category", [""])[0]
@@ -451,9 +514,9 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header("Referrer-Policy", "same-origin")
         admin_file = target.is_relative_to(ROOT / "admin")
-        policy = ("default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'" if admin_file else "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'")
+        policy = ("default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'" if admin_file else "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'")
         self.send_header("Content-Security-Policy", policy)
-        if target.suffix.lower() in (".html", ".js", ".css"):
+        if target.suffix.lower() in (".html", ".js", ".css", ".json"):
             self.send_header("Cache-Control", "no-cache")
         self.end_headers()
         self.wfile.write(body)
@@ -507,19 +570,119 @@ class Handler(BaseHTTPRequestHandler):
                 items = data.get("items")
                 if not isinstance(items, list) or not items or len(items) > 100:
                     return self.send_json(400, {"error": "Add at least one item to checkout."})
-                quote, total = [], 0
+                quote, total, seen_ids = [], Decimal("0.00"), set()
                 with db() as con:
                     for item in items:
-                        if not isinstance(item, dict) or not isinstance(item.get("id"), int) or not isinstance(item.get("quantity"), int) or item["quantity"] < 1 or item["quantity"] > 99:
+                        if (not isinstance(item, dict) or isinstance(item.get("id"), bool) or not isinstance(item.get("id"), int)
+                                or isinstance(item.get("quantity"), bool) or not isinstance(item.get("quantity"), int)
+                                or item["id"] < 1 or item["quantity"] < 1 or item["quantity"] > 99):
                             return self.send_json(400, {"error": "Cart quantities must be between 1 and 99."})
+                        if item["id"] in seen_ids:
+                            return self.send_json(400, {"error": "Each product can appear only once in your cart."})
+                        seen_ids.add(item["id"])
                         row = con.execute("SELECT * FROM products WHERE id=?", (item["id"],)).fetchone()
                         if not row or not row["available"]:
                             return self.send_json(409, {"error": "A product in your cart is currently unavailable. Please refresh your cart."})
-                        product = product_from_row(row)
-                        subtotal = round(float(row["price"]) * item["quantity"], 2)
+                        price = Decimal(str(row["price"])).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+                        subtotal = (price * item["quantity"]).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
                         total += subtotal
-                        quote.append({"id": row["id"], "name": row["name"], "quantity": item["quantity"], "price": row["price"], "subtotal": subtotal})
-                return self.send_json(200, {"items": quote, "total": round(total, 2), "currency": "INR"})
+                        quote.append({"id": row["id"], "name": row["name"], "quantity": item["quantity"], "price": float(price), "subtotal": float(subtotal)})
+                subtotal = total.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+                delivery_status = "area_check_pending" if subtotal >= FREE_DELIVERY_THRESHOLD else "charge_pending"
+                return self.send_json(200, {
+                    "items": quote,
+                    "subtotal": float(subtotal),
+                    "total": None,
+                    "delivery": {"status": delivery_status, "charge": None},
+                    "currency": "INR",
+                })
+            if path == "/api/checkout/order":
+                data = self.read_json()
+                if not request_origin_allowed(self.headers.get("Origin"), self.headers.get("Host", "")):
+                    return self.send_json(403, {"error": "Request origin was rejected."})
+                request_key = require_text(data.get("idempotencyKey"), "Checkout request key", 64)
+                if not re.fullmatch(r"[a-f0-9]{32}", request_key):
+                    return self.send_json(400, {"error": "Refresh checkout and try placing your order again."})
+                customer = data.get("customer")
+                if not isinstance(customer, dict):
+                    return self.send_json(400, {"error": "Enter your name, phone number, and delivery address."})
+                customer_name = " ".join(require_text(customer.get("name"), "Full name", 120).split())
+                if any(ord(character) < 32 for character in customer_name):
+                    return self.send_json(400, {"error": "Enter a valid full name."})
+                customer_phone = normalize_indian_phone(customer.get("phone"))
+                customer_address = require_text(customer.get("address"), "Delivery address", 600).replace("\r\n", "\n").replace("\r", "\n")
+                if any(ord(character) < 32 and character not in "\n\t" for character in customer_address):
+                    return self.send_json(400, {"error": "Enter a valid delivery address."})
+                items = data.get("items")
+                if not isinstance(items, list) or not items or len(items) > 100:
+                    return self.send_json(400, {"error": "Add at least one item to checkout."})
+                expected_total = data.get("expectedSubtotal", data.get("expectedTotal"))
+                try:
+                    expected_total = Decimal(str(expected_total)).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+                except (InvalidOperation, ValueError, TypeError):
+                    return self.send_json(400, {"error": "Review the current order total before placing your order."})
+                if not expected_total.is_finite() or expected_total < 0:
+                    return self.send_json(400, {"error": "Review the current order total before placing your order."})
+
+                normalized_items, seen_ids = [], set()
+                for item in items:
+                    if (not isinstance(item, dict) or isinstance(item.get("id"), bool) or not isinstance(item.get("id"), int)
+                            or isinstance(item.get("quantity"), bool) or not isinstance(item.get("quantity"), int)
+                            or item["id"] < 1 or item["quantity"] < 1 or item["quantity"] > 99):
+                        return self.send_json(400, {"error": "Cart quantities must be between 1 and 99."})
+                    if item["id"] in seen_ids:
+                        return self.send_json(400, {"error": "Each product can appear only once in your cart."})
+                    seen_ids.add(item["id"])
+                    normalized_items.append({"id": item["id"], "quantity": item["quantity"]})
+
+                canonical_request = {
+                    "customer": {"name": customer_name, "phone": customer_phone, "address": customer_address},
+                    "items": sorted(normalized_items, key=lambda item: item["id"]),
+                }
+                request_hash = hashlib.sha256(json.dumps(canonical_request, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
+                idempotency_hash = hashlib.sha256(request_key.encode("ascii")).hexdigest()
+                try:
+                    with db() as con:
+                        con.execute("BEGIN IMMEDIATE")
+                        existing = con.execute("SELECT * FROM orders WHERE idempotency_hash=?", (idempotency_hash,)).fetchone()
+                        if existing:
+                            if not hmac.compare_digest(existing["request_hash"], request_hash):
+                                return self.send_json(409, {"error": "This checkout request was already received with different details. Contact the store before starting another order."})
+                            return self.send_json(200, order_from_row(existing))
+
+                        quoted_items, total = [], Decimal("0.00")
+                        for item in normalized_items:
+                            row = con.execute("SELECT * FROM products WHERE id=?", (item["id"],)).fetchone()
+                            if not row or not row["available"]:
+                                return self.send_json(409, {"error": "A product in your cart is currently unavailable. Return to your cart and update it."})
+                            price = Decimal(str(row["price"])).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+                            line_total = (price * item["quantity"]).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+                            total += line_total
+                            quoted_items.append({"id": row["id"], "name": row["name"], "quantity": item["quantity"], "price": float(price), "subtotal": float(line_total)})
+                        total = total.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+                        if total != expected_total:
+                            return self.send_json(409, {
+                                "error": "A product price changed. Review the updated amount before placing your order.",
+                                "quote": {"items": quoted_items, "subtotal": float(total), "total": None, "delivery": {"status": "area_check_pending" if total >= FREE_DELIVERY_THRESHOLD else "charge_pending", "charge": None}, "currency": "INR"},
+                            })
+
+                        created_at = now()
+                        order_id = f"VS-{datetime.now(timezone.utc):%Y%m%d}-{uuid.uuid4().hex[:8].upper()}"
+                        delivery_status = "area_check_pending" if total >= FREE_DELIVERY_THRESHOLD else "charge_pending"
+                        con.execute(
+                            "INSERT INTO orders(order_id,idempotency_hash,request_hash,created_at,customer_name,customer_phone,customer_address,items_json,subtotal,delivery_status,delivery_charge,total,payment_method,payment_status,status) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                            (order_id, idempotency_hash, request_hash, created_at, customer_name, customer_phone, customer_address,
+                             json.dumps(quoted_items, ensure_ascii=False), float(total), delivery_status, None, None,
+                             "to_confirm", "not_taken", "received"),
+                        )
+                        order = con.execute("SELECT * FROM orders WHERE order_id=?", (order_id,)).fetchone()
+                    return self.send_json(201, order_from_row(order))
+                except sqlite3.IntegrityError:
+                    with db() as con:
+                        existing = con.execute("SELECT * FROM orders WHERE idempotency_hash=?", (idempotency_hash,)).fetchone()
+                    if existing and hmac.compare_digest(existing["request_hash"], request_hash):
+                        return self.send_json(200, order_from_row(existing))
+                    return self.send_json(409, {"error": "This order request was already received. Please review it before trying again."})
             if path.startswith("/api/admin/"):
                 session = self.require_admin(csrf=True)
                 if not session: return
@@ -619,6 +782,31 @@ class Handler(BaseHTTPRequestHandler):
         if not session: return
         try:
             data = self.read_json()
+            order_match = re.fullmatch(r"/api/admin/orders/([A-Z0-9-]+)", path)
+            if order_match:
+                if "deliveryCharge" in data:
+                    try:
+                        delivery_charge = Decimal(str(data.get("deliveryCharge"))).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+                    except (InvalidOperation, ValueError, TypeError):
+                        return self.send_json(400, {"error": "Enter a valid delivery charge."})
+                    if not delivery_charge.is_finite() or delivery_charge < 0 or delivery_charge > Decimal("100000.00"):
+                        return self.send_json(400, {"error": "Enter a delivery charge between ₹0 and ₹100,000."})
+                    with db() as con:
+                        order = con.execute("SELECT order_id,subtotal FROM orders WHERE order_id=?", (order_match.group(1),)).fetchone()
+                        if not order:
+                            return self.send_json(404, {"error": "Order not found."})
+                        total = (Decimal(str(order["subtotal"])) + delivery_charge).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+                        con.execute("UPDATE orders SET delivery_status='confirmed',delivery_charge=?,total=? WHERE order_id=?", (float(delivery_charge), float(total), order_match.group(1)))
+                    return self.send_json(200, {"orderId": order_match.group(1), "deliveryStatus": "confirmed", "deliveryCharge": float(delivery_charge), "total": float(total)})
+                status = require_text(data.get("status"), "Order status", 20)
+                if status not in {"received", "processing", "completed", "cancelled"}:
+                    return self.send_json(400, {"error": "Choose a valid order status."})
+                with db() as con:
+                    order = con.execute("SELECT order_id FROM orders WHERE order_id=?", (order_match.group(1),)).fetchone()
+                    if not order:
+                        return self.send_json(404, {"error": "Order not found."})
+                    con.execute("UPDATE orders SET status=? WHERE order_id=?", (status, order_match.group(1)))
+                return self.send_json(200, {"orderId": order_match.group(1), "status": status})
             if path == "/api/admin/prices":
                 entries = data.get("prices")
                 if not isinstance(entries, list) or not entries or len(entries) > 500:

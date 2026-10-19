@@ -1,7 +1,8 @@
 /* Vinayak Superstore interaction layer — v2.0 */
 document.addEventListener("DOMContentLoaded", () => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const supportsFinePointer = window.matchMedia("(pointer: fine)").matches;
+    const mediaMatches = query => window.matchMedia ? window.matchMedia(query).matches : false;
+    const prefersReducedMotion = mediaMatches("(prefers-reduced-motion: reduce)");
+    const supportsFinePointer = mediaMatches("(pointer: fine)");
     const loader = document.querySelector(".loader");
     const websiteVersion = "2.0";
     const updateOverlay = document.getElementById("updateOverlay");
@@ -9,12 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
     window.setTimeout(() => loader?.classList.add("hide"), prefersReducedMotion ? 0 : 700);
 
     function closeUpdateLog() {
-        localStorage.setItem("websiteVersion", websiteVersion);
+        try { localStorage.setItem("websiteVersion", websiteVersion); } catch {}
         updateOverlay?.style.setProperty("display", "none");
     }
 
     document.getElementById("startShoppingBtn")?.addEventListener("click", closeUpdateLog);
-    if (updateOverlay && localStorage.getItem("websiteVersion") !== websiteVersion) updateOverlay.style.display = "flex";
+    let savedVersion = "";
+    try { savedVersion = localStorage.getItem("websiteVersion") || ""; } catch {}
+    if (updateOverlay && savedVersion !== websiteVersion) updateOverlay.style.display = "flex";
 
     const header = document.querySelector("header");
     const progress = document.createElement("div");
@@ -89,21 +92,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const counters = document.querySelectorAll(".counter");
-    const counterObserver = new IntersectionObserver(entries => entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const counter = entry.target;
-        const target = Number(counter.dataset.target) || 0;
-        const start = performance.now();
-        const duration = prefersReducedMotion ? 1 : 900;
-        const update = now => {
-            const ratio = Math.min((now - start) / duration, 1);
-            counter.textContent = `${Math.ceil(target * ratio)}${ratio === 1 ? "+" : ""}`;
-            if (ratio < 1) requestAnimationFrame(update);
-        };
-        requestAnimationFrame(update);
-        counterObserver.unobserve(counter);
-    }), { threshold: .6 });
-    counters.forEach(counter => counterObserver.observe(counter));
+    if ("IntersectionObserver" in window) {
+        const counterObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const counter = entry.target;
+            const target = Number(counter.dataset.target) || 0;
+            const start = performance.now();
+            const duration = prefersReducedMotion ? 1 : 900;
+            const update = now => {
+                const ratio = Math.min((now - start) / duration, 1);
+                counter.textContent = `${Math.ceil(target * ratio)}${ratio === 1 ? "+" : ""}`;
+                if (ratio < 1) requestAnimationFrame(update);
+            };
+            requestAnimationFrame(update);
+            counterObserver.unobserve(counter);
+        }), { threshold: .6 });
+        counters.forEach(counter => counterObserver.observe(counter));
+    } else {
+        counters.forEach(counter => { counter.textContent = `${Number(counter.dataset.target) || 0}+`; });
+    }
 
     function bindProductCardTilt() {
         if (!supportsFinePointer || prefersReducedMotion) return;
@@ -132,6 +139,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {}), { once: true });
+        window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}), { once: true });
     }
 });

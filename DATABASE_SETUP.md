@@ -28,6 +28,8 @@ The Render free service has a temporary local disk. This project can use a free 
 
 Render's service will then read and write the hosted database. Uploaded images are stored in that database too. The migration carries over products, categories, price history, the admin password hash, and local uploaded images; you will need to sign in again after switching.
 
+The previous checkout did not store customer orders, so there are no historical orders to migrate. The updated server creates its `orders` table when it starts. New orders are visible only in the signed-in admin Orders area. Delivery eligibility and the final amount remain pending until an admin checks the address and confirms the delivery charge. Protect database backups and choose an order-data retention policy before production use.
+
 ## What the migration does
 
 - It does not modify or remove the local SQLite catalogue.
