@@ -1,10 +1,10 @@
-/* Vinayak Superstore interaction layer — v2.0 */
+/* Vinayak Superstore interaction layer — v2.2 */
 document.addEventListener("DOMContentLoaded", () => {
     const mediaMatches = query => window.matchMedia ? window.matchMedia(query).matches : false;
     const prefersReducedMotion = mediaMatches("(prefers-reduced-motion: reduce)");
     const supportsFinePointer = mediaMatches("(pointer: fine)");
     const loader = document.querySelector(".loader");
-    const websiteVersion = "2.0";
+    const websiteVersion = "2.2";
     const updateOverlay = document.getElementById("updateOverlay");
 
     window.setTimeout(() => loader?.classList.add("hide"), prefersReducedMotion ? 0 : 700);
@@ -14,10 +14,14 @@ document.addEventListener("DOMContentLoaded", () => {
         updateOverlay?.style.setProperty("display", "none");
     }
 
-    document.getElementById("startShoppingBtn")?.addEventListener("click", closeUpdateLog);
+    const startShoppingButton = document.getElementById("startShoppingBtn");
+    startShoppingButton?.addEventListener("click", closeUpdateLog);
     let savedVersion = "";
     try { savedVersion = localStorage.getItem("websiteVersion") || ""; } catch {}
-    if (updateOverlay && savedVersion !== websiteVersion) updateOverlay.style.display = "flex";
+    if (updateOverlay && savedVersion !== websiteVersion) {
+        updateOverlay.style.display = "flex";
+        startShoppingButton?.focus();
+    }
 
     const header = document.querySelector("header");
     const progress = document.createElement("div");

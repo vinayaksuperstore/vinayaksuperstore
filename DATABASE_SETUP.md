@@ -22,7 +22,7 @@ The Render free service has a temporary local disk. This project can use a free 
 
 1. In Render, open the **vinayak-superstore-api** service.
 2. Open **Settings**. Set **Build Command** to `pip install -r requirements.txt` and **Start Command** to `python server.py`.
-3. Open **Environment** and add `DATABASE_URL`, using the same Neon connection string. Add or keep `HOST` as `0.0.0.0` and `COOKIE_SECURE` as `1`. Keep the existing `ALLOWED_ORIGINS` setting if you added one.
+3. Open **Environment** and add `DATABASE_URL`, using the same Neon connection string. Add or keep `HOST` as `0.0.0.0` and `COOKIE_SECURE` as `1`. Keep the existing `ALLOWED_ORIGINS` setting if you added one. To receive automatic WhatsApp order alerts, also add the private WhatsApp Cloud API variables described in `ADMIN_SETUP.md`; never commit the access token.
 4. Save the settings and let Render deploy.
 5. Sign in to `/admin`, change a product, and reload the page to confirm it saved.
 

@@ -19,6 +19,7 @@ import re
 import secrets
 import sqlite3
 import sys
+import threading
 import time
 import uuid
 from datetime import datetime, timezone
@@ -28,6 +29,8 @@ from http.cookies import SimpleCookie
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, unquote, urlparse
+from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 
 
 ROOT = Path(__file__).resolve().parent
@@ -225,6 +228,18 @@ def init_db(seed_legacy: bool = True) -> None:
                 status TEXT NOT NULL
             );
             CREATE INDEX IF NOT EXISTS orders_created_at_idx ON orders(created_at DESC);
+            CREATE TABLE IF NOT EXISTS order_alert_outbox (
+                order_id TEXT PRIMARY KEY,
+                created_at TEXT NOT NULL,
+                status TEXT NOT NULL,
+                attempts INTEGER NOT NULL DEFAULT 0,
+                next_attempt_at REAL NOT NULL,
+                updated_at REAL NOT NULL,
+                sent_at TEXT,
+                last_error TEXT,
+                FOREIGN KEY(order_id) REFERENCES orders(order_id) ON DELETE CASCADE
+            );
+            CREATE INDEX IF NOT EXISTS order_alert_outbox_ready_idx ON order_alert_outbox(status, next_attempt_at, created_at);
             CREATE TABLE IF NOT EXISTS catalog_sequence (
                 singleton INTEGER PRIMARY KEY CHECK(singleton=1),
                 next_id INTEGER NOT NULL
@@ -329,6 +344,174 @@ def order_from_row(row) -> dict:
         "paymentStatus": row["payment_status"],
         "status": row["status"],
     }
+
+
+def whatsapp_alert_settings() -> tuple[dict | None, list[str]]:
+    settings = {
+        "access_token": os.environ.get("WHATSAPP_ACCESS_TOKEN", "").strip(),
+        "phone_number_id": os.environ.get("WHATSAPP_PHONE_NUMBER_ID", "").strip(),
+        "recipient": os.environ.get("WHATSAPP_ALERT_RECIPIENT", "").strip(),
+        "template": os.environ.get("WHATSAPP_ORDER_ALERT_TEMPLATE", "").strip(),
+        "language": os.environ.get("WHATSAPP_TEMPLATE_LANGUAGE", "en_US").strip() or "en_US",
+        "api_version": os.environ.get("WHATSAPP_GRAPH_API_VERSION", "v25.0").strip() or "v25.0",
+    }
+    missing = [env_name for env_name, setting_name in (
+        ("WHATSAPP_ACCESS_TOKEN", "access_token"),
+        ("WHATSAPP_PHONE_NUMBER_ID", "phone_number_id"),
+        ("WHATSAPP_ALERT_RECIPIENT", "recipient"),
+        ("WHATSAPP_ORDER_ALERT_TEMPLATE", "template"),
+    ) if not settings[setting_name]]
+    if settings["phone_number_id"] and not re.fullmatch(r"\d{5,30}", settings["phone_number_id"]):
+        missing.append("WHATSAPP_PHONE_NUMBER_ID")
+    if settings["recipient"] and not re.fullmatch(r"\d{8,15}", settings["recipient"]):
+        missing.append("WHATSAPP_ALERT_RECIPIENT (digits with country code)")
+    if settings["template"] and not re.fullmatch(r"[a-z0-9_]{1,512}", settings["template"]):
+        missing.append("WHATSAPP_ORDER_ALERT_TEMPLATE (lowercase letters, digits, underscores)")
+    if not re.fullmatch(r"[a-zA-Z]{2,3}(?:_[A-Z]{2})?", settings["language"]):
+        missing.append("WHATSAPP_TEMPLATE_LANGUAGE")
+    if not re.fullmatch(r"v\d+\.\d+", settings["api_version"]):
+        missing.append("WHATSAPP_GRAPH_API_VERSION")
+    return (settings if not missing else None), missing
+
+
+class WhatsAppAlertError(Exception):
+    """Sanitized failure returned by the WhatsApp alert sender."""
+
+
+def send_whatsapp_order_alert(order: dict, settings: dict | None = None) -> str:
+    if settings is None:
+        settings, missing = whatsapp_alert_settings()
+        if not settings:
+            raise WhatsAppAlertError("not_configured")
+
+    try:
+        items = json.loads(order["items_json"])
+        item_count = sum(int(item["quantity"]) for item in items)
+        subtotal = Decimal(str(order["subtotal"])).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+    except (KeyError, TypeError, ValueError, InvalidOperation, json.JSONDecodeError):
+        raise WhatsAppAlertError("invalid_order_summary") from None
+
+    payload = {
+        "messaging_product": "whatsapp",
+        "to": settings["recipient"],
+        "type": "template",
+        "template": {
+            "name": settings["template"],
+            "language": {"code": settings["language"]},
+            "components": [{
+                "type": "body",
+                "parameters": [
+                    {"type": "text", "text": str(order["order_id"])},
+                    {"type": "text", "text": str(item_count)},
+                    {"type": "text", "text": f"{subtotal:.2f}"},
+                ],
+            }],
+        },
+    }
+    endpoint = f"https://graph.facebook.com/{settings['api_version']}/{settings['phone_number_id']}/messages"
+    request = Request(
+        endpoint,
+        data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
+        headers={
+            "Authorization": f"Bearer {settings['access_token']}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+    try:
+        with urlopen(request, timeout=10) as response:
+            result = json.loads(response.read().decode("utf-8"))
+    except HTTPError as error:
+        raise WhatsAppAlertError(f"http_{error.code}") from None
+    except (URLError, TimeoutError, OSError):
+        raise WhatsAppAlertError("network_error") from None
+    except (UnicodeDecodeError, json.JSONDecodeError):
+        raise WhatsAppAlertError("invalid_api_response") from None
+
+    message_ids = result.get("messages") if isinstance(result, dict) else None
+    message_id = message_ids[0].get("id") if isinstance(message_ids, list) and message_ids and isinstance(message_ids[0], dict) else None
+    if not isinstance(message_id, str) or not message_id:
+        raise WhatsAppAlertError("message_not_accepted")
+    return message_id
+
+
+def claim_whatsapp_order_alert() -> dict | None:
+    current_time = time.time()
+    with db() as con:
+        con.execute("BEGIN IMMEDIATE")
+        row = con.execute(
+            "SELECT order_id, attempts FROM order_alert_outbox WHERE status IN ('pending','retry') AND next_attempt_at<=? ORDER BY created_at LIMIT 1",
+            (current_time,),
+        ).fetchone()
+        if not row:
+            return None
+        claimed = con.execute(
+            "UPDATE order_alert_outbox SET status='sending',attempts=attempts+1,updated_at=? WHERE order_id=? AND status IN ('pending','retry')",
+            (current_time, row["order_id"]),
+        )
+        if claimed.rowcount != 1:
+            return None
+        order = con.execute(
+            "SELECT order_id,subtotal,items_json FROM orders WHERE order_id=?",
+            (row["order_id"],),
+        ).fetchone()
+        if not order:
+            con.execute("DELETE FROM order_alert_outbox WHERE order_id=?", (row["order_id"],))
+            return None
+        return {**dict(order), "attempts": int(row["attempts"]) + 1}
+
+
+def complete_whatsapp_order_alert(order_id: str) -> None:
+    stamp = time.time()
+    with db() as con:
+        con.execute(
+            "UPDATE order_alert_outbox SET status='sent',sent_at=?,updated_at=?,last_error=NULL WHERE order_id=? AND status='sending'",
+            (now(), stamp, order_id),
+        )
+
+
+def retry_whatsapp_order_alert(order_id: str, attempts: int, error_code: str) -> None:
+    delay = min(30 * (2 ** min(max(attempts - 1, 0), 10)), 21_600)
+    stamp = time.time()
+    with db() as con:
+        con.execute(
+            "UPDATE order_alert_outbox SET status='retry',next_attempt_at=?,updated_at=?,last_error=? WHERE order_id=? AND status='sending'",
+            (stamp + delay, stamp, error_code[:80], order_id),
+        )
+
+
+def whatsapp_order_alert_worker(stop_event: threading.Event) -> None:
+    stale_before = time.time() - 120
+    with db() as con:
+        con.execute(
+            "UPDATE order_alert_outbox SET status='retry',next_attempt_at=?,updated_at=?,last_error='worker_restart' WHERE status='sending' AND updated_at<=?",
+            (time.time(), time.time(), stale_before),
+        )
+    while not stop_event.is_set():
+        try:
+            order = claim_whatsapp_order_alert()
+        except Exception:
+            print("WhatsApp order alert queue could not be read; retrying shortly.")
+            stop_event.wait(5)
+            continue
+        if not order:
+            stop_event.wait(3)
+            continue
+        try:
+            send_whatsapp_order_alert(order)
+            complete_whatsapp_order_alert(order["order_id"])
+        except WhatsAppAlertError as error:
+            try:
+                retry_whatsapp_order_alert(order["order_id"], order["attempts"], str(error))
+            except Exception:
+                print(f"WhatsApp alert state could not be saved for {order['order_id']}.")
+            print(f"WhatsApp order alert for {order['order_id']} failed ({error}); retry scheduled.")
+        except Exception:
+            try:
+                retry_whatsapp_order_alert(order["order_id"], order["attempts"], "unexpected_error")
+            except Exception:
+                print(f"WhatsApp alert state could not be saved for {order['order_id']}.")
+            print(f"WhatsApp order alert for {order['order_id']} failed; retry scheduled.")
 
 
 def valid_image_path(value) -> str:
@@ -675,6 +858,13 @@ class Handler(BaseHTTPRequestHandler):
                              json.dumps(quoted_items, ensure_ascii=False), float(total), delivery_status, None, None,
                              "to_confirm", "not_taken", "received"),
                         )
+                        alert_settings, _ = whatsapp_alert_settings()
+                        if alert_settings:
+                            stamp = time.time()
+                            con.execute(
+                                "INSERT INTO order_alert_outbox(order_id,created_at,status,attempts,next_attempt_at,updated_at) VALUES(?,?,'pending',0,?,?)",
+                                (order_id, created_at, stamp, stamp),
+                            )
                         order = con.execute("SELECT * FROM orders WHERE order_id=?", (order_id,)).fetchone()
                     return self.send_json(201, order_from_row(order))
                 except sqlite3.IntegrityError:
@@ -916,12 +1106,30 @@ def main() -> None:
     server = ThreadingHTTPServer((HOST, PORT), Handler)
     print(f"Vinayak Superstore running at http://{HOST}:{PORT}")
     print("Open /admin to sign in. Press Ctrl+C to stop.")
+    alert_stop = threading.Event()
+    alert_worker = None
+    alert_settings, alert_missing = whatsapp_alert_settings()
+    if alert_settings:
+        alert_worker = threading.Thread(
+            target=whatsapp_order_alert_worker,
+            args=(alert_stop,),
+            name="whatsapp-order-alerts",
+            daemon=True,
+        )
+        alert_worker.start()
+        print("WhatsApp order alerts are enabled.")
+    else:
+        missing = ", ".join(alert_missing) if alert_missing else "invalid WhatsApp alert settings"
+        print(f"WhatsApp order alerts are disabled; configure {missing} to enable them.")
     try:
         server.serve_forever()
     except KeyboardInterrupt:
         pass
     finally:
+        alert_stop.set()
         server.server_close()
+        if alert_worker:
+            alert_worker.join(timeout=5)
 
 
 if __name__ == "__main__":

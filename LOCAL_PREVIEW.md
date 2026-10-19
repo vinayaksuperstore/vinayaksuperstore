@@ -17,6 +17,8 @@ python -B server.py
 
 Open `http://127.0.0.1:8766/`. The server stays in the PowerShell window; press **Ctrl+C** to stop it. If `python` is not on PATH, use `py -3 -B server.py` instead. Use test details when trying checkout. Orders submitted here are stored only in this local database.
 
+WhatsApp owner alerts are disabled in this local preview unless you explicitly configure Cloud API environment variables. Keep production credentials in Render only; do not use real owner alert credentials when placing local test orders.
+
 To preview the admin Orders area, stop the server and run `server.py --init-admin` with the same environment values above. Choose a local admin username and password, then start `server.py` again and open `http://127.0.0.1:8766/admin`. The project copy does not include the original admin database or credentials.
 
 The local preview does not place real orders, send WhatsApp messages automatically, or change the live website. Production order storage starts only after the updated server is deployed with a persistent database and the existing API routing is kept in place.

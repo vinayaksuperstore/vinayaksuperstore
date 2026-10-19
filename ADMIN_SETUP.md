@@ -16,7 +16,7 @@ Use Python 3.9 or newer from the project folder:
 Change into this project folder (the `.lnk` on the Desktop is a shortcut, not a folder):
 
 ```bat
-cd /d "C:\Users\RAJAN SHARMA\Documents\Codex\2026-10-19\vinayak-superstore-checkout-upgrade-product-loading"
+cd /d "C:\Users\RAJAN SHARMA\Documents\Codex\2026-10-08\VinayakSuperstore"
 ```
 
 If Command Prompt says `python` is not recognized, use the Python runtime bundled with Codex:
@@ -55,5 +55,22 @@ For local development, the default host is `127.0.0.1` and the admin cookie is n
 - The website advertises free delivery above ₹500 within the store's service area, but the covered area is not configured in the project. Every accepted order leaves delivery eligibility and the final amount pending until an admin checks the address and confirms the delivery charge (enter ₹0 only when free delivery is confirmed). The storefront lists UPI, cards, and cash; no payment is taken at checkout, and the specific method remains to be confirmed with the customer.
 - The confirmation offers an optional WhatsApp link containing only the order ID. It does not send customer details automatically. Set an order-data retention policy before production use.
 - Orders are stored in the configured database. Use the persistent PostgreSQL setup below for production; SQLite on an ephemeral host can lose order records when its disk is replaced.
+
+## Automatic WhatsApp owner alerts
+
+The API can send an automatic WhatsApp alert after it accepts and stores a new order. It queues the alert in the same database transaction as the order, retries temporary send failures with backoff, and does not queue another alert when the same checkout request is retried. The alert includes only the order ID, item quantity, and product subtotal; customer contact details and address stay in the authenticated admin Orders area.
+
+This uses the official WhatsApp Business Platform Cloud API. The existing `wa.me` link is not an automatic notification. Configure these variables on the **Render API service** under **Environment**; never put the access token in GitHub, HTML, JavaScript, or a public `.env` file:
+
+- `WHATSAPP_ACCESS_TOKEN` — a server-side access token with WhatsApp message-sending permission.
+- `WHATSAPP_PHONE_NUMBER_ID` — the Cloud API sender's phone number ID.
+- `WHATSAPP_ALERT_RECIPIENT` — the owner's WhatsApp number, country code plus digits and no `+` (for example, `919876543210`).
+- `WHATSAPP_ORDER_ALERT_TEMPLATE` — the approved template name.
+- `WHATSAPP_TEMPLATE_LANGUAGE` — the approved language code; defaults to `en_US`.
+- `WHATSAPP_GRAPH_API_VERSION` — the Graph API version; defaults to `v25.0` and can be changed when Meta's supported version changes.
+
+Create and get approval for a Utility template in WhatsApp Manager. The template body must have three body parameters, in this order: order ID, total item quantity, product subtotal. Suggested body: `New website order {{1}} received. Items: {{2}}. Product subtotal: INR {{3}}. Open the admin Orders page to review the order.` Set the exact approved template name and language in Render. The owner must opt in and be able to receive messages from the configured Cloud API sender. Meta requires approved templates for business-initiated messages outside the 24-hour customer service window; see [WhatsApp Business Platform policy](https://whatsappbusiness.com/policy/). Meta may charge per delivered message; check [current WhatsApp Business Platform pricing](https://whatsappbusiness.com/products/platform-pricing/) before enabling it.
+
+After saving the variables, redeploy/restart the Render service. Its startup log reports whether the alert configuration is enabled. Place a sandbox/test order first and confirm the message arrives. An API acceptance is not a handset delivery receipt; the project does not currently configure WhatsApp delivery-status webhooks. If the variables or approved template are missing, the site can still accept orders, but no WhatsApp alert is queued.
 
 The catalogue contains the store owner's supplied price, name, offer, and availability updates. Prices that have not been supplied remain at their prior values; do not infer or apply prices for those products. Their prices can be entered later through Price Management.

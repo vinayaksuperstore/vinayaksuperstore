@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import secrets
 import sys
 import tempfile
@@ -15,6 +16,7 @@ import uuid
 from decimal import Decimal, ROUND_HALF_UP
 from http.server import ThreadingHTTPServer
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import server as store
@@ -156,6 +158,45 @@ class CheckoutApiTests(unittest.TestCase):
         self.assertEqual(confirmed["deliveryStatus"], "confirmed")
         self.assertEqual(confirmed["deliveryCharge"], 0)
         self.assertEqual(confirmed["total"], order["subtotal"])
+
+    def test_whatsapp_order_alert_is_queued_once_for_a_new_order(self):
+        product = self.available_product()
+        payload = self.order_payload(product)
+        settings = {
+            "WHATSAPP_ACCESS_TOKEN": "test-token",
+            "WHATSAPP_PHONE_NUMBER_ID": "123456789012345",
+            "WHATSAPP_ALERT_RECIPIENT": "919876543210",
+            "WHATSAPP_ORDER_ALERT_TEMPLATE": "new_website_order",
+        }
+        with patch.dict(os.environ, settings):
+            status, order, _ = self.request("/api/checkout/order", payload)
+            self.assertEqual(status, 201)
+            with store.db() as con:
+                alert = con.execute("SELECT status,attempts FROM order_alert_outbox WHERE order_id=?", (order["orderId"],)).fetchone()
+            self.assertIsNotNone(alert)
+            self.assertEqual(alert["status"], "pending")
+            self.assertEqual(alert["attempts"], 0)
+
+            retry_status, retry, _ = self.request("/api/checkout/order", payload)
+            self.assertEqual(retry_status, 200)
+            self.assertEqual(retry["orderId"], order["orderId"])
+            with store.db() as con:
+                alert_count = con.execute("SELECT COUNT(*) FROM order_alert_outbox WHERE order_id=?", (order["orderId"],)).fetchone()[0]
+            self.assertEqual(alert_count, 1)
+
+            stop_event = threading.Event()
+            def accept_alert(_order):
+                stop_event.set()
+                return "wamid.test-alert"
+            with patch.object(store, "send_whatsapp_order_alert", side_effect=accept_alert):
+                worker = threading.Thread(target=store.whatsapp_order_alert_worker, args=(stop_event,), daemon=True)
+                worker.start()
+                worker.join(timeout=5)
+            self.assertFalse(worker.is_alive())
+            with store.db() as con:
+                alert = con.execute("SELECT status,attempts FROM order_alert_outbox WHERE order_id=?", (order["orderId"],)).fetchone()
+            self.assertEqual(alert["status"], "sent")
+            self.assertEqual(alert["attempts"], 1)
 
     def test_checkout_rejects_empty_cart_bad_phone_and_manipulated_total(self):
         empty_payload = {"idempotencyKey": uuid.uuid4().hex, "customer": {"name": "Test", "phone": "9876543210", "address": "Test address"}, "items": [], "expectedSubtotal": 0}

@@ -1,5 +1,22 @@
 # Changelog
 
+## v2.2 — Automatic WhatsApp Order Alerts (2026-10-19)
+
+### Storefront update notice
+
+- Updated the existing first-visit update popup to show the current v2.2 customer-facing highlights. It appears once per browser profile after this release version is introduced and can be dismissed with “Start Shopping.”
+- The popup describes the product-browsing and checkout improvements without implying that optional WhatsApp owner alerts are configured.
+
+### Added
+
+- Added a persistent notification queue that sends a WhatsApp Business Cloud API template alert after a new order is accepted and stored.
+- Alerts contain the order ID, item quantity, and product subtotal only; temporary API failures are retried with backoff, and idempotent checkout retries do not queue duplicate alerts.
+- Added Render setup instructions for the API credentials, owner recipient, and approved message template.
+
+### Setup required
+
+- WhatsApp alerts stay disabled until the production API has valid server-side Cloud API settings and an approved template. WhatsApp Business Platform message fees may apply.
+
 ## v2.1 — Checkout and Product Loading Reliability (2026-10-19)
 
 ### Added
